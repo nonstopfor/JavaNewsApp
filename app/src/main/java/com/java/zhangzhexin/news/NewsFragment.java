@@ -1,4 +1,4 @@
-package com.java.zhangzhexin;
+package com.java.zhangzhexin.news;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,12 +13,14 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.java.zhangzhexin.newslist.NewsListFragment;
+import com.java.zhangzhexin.news.newslist.NewsListFragment;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import com.java.zhangzhexin.R;
 
 public class NewsFragment extends Fragment {
     private TabLayout tabLayout;

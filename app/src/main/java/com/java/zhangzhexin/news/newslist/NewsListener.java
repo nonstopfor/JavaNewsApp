@@ -1,4 +1,4 @@
-package com.java.zhangzhexin.newslist;
+package com.java.zhangzhexin.news.newslist;
 
 import android.content.Context;
 import android.view.GestureDetector;

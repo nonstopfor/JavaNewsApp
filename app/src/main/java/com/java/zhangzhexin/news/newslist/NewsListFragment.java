@@ -1,4 +1,4 @@
-package com.java.zhangzhexin.newslist;
+package com.java.zhangzhexin.news.newslist;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
