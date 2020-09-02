@@ -13,10 +13,16 @@ import com.java.zhangzhexin.R;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private String[] data;
 
-    public NewsAdapter(String[] data){
-        this.data = data;
+    public NewsAdapter(){
     }
 
+    //设置newslist显示的新闻
+    public void setData(String[] data){
+        this.data = data;
+        notifyDataSetChanged();//刷新显示数据
+    }
+
+    //FIXME：用户拖拽屏幕过程中算点击吗?
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView news_title;
         public ViewHolder(@NonNull View itemView) {
