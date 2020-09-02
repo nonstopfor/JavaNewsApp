@@ -1,26 +1,60 @@
 package com.java.zhangzhexin;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.java.zhangzhexin.news.NewsFragment;
+import com.java.zhangzhexin.news.newslist.NewsListFragment;
 
+
+//FIXME: 模拟器上 切换时会崩掉
 public class MainActivity extends AppCompatActivity {
     private NewsFragment newsFragment;
+    private NewsListFragment historyFragment;
     private SearchView searchView;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //显示新闻列表页
+        //创建首页
         if(newsFragment==null)
             newsFragment = NewsFragment.newInstance();
-        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,newsFragment).commit();
+
+        if(historyFragment==null)
+            historyFragment = NewsListFragment.newInstance();
+
+        bottomNavigationView = findViewById(R.id.nav_view);
+
+        //监听点击切换
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                if(menuItem.getItemId() == R.id.home) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, newsFragment).commit();
+                    System.out.println("切换到首页");
+                    return true; //不return true切换时没有动画效果
+                }
+                else if(menuItem.getItemId() == R.id.history) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, historyFragment).commit();
+                    System.out.println("切换到浏览历史");
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        bottomNavigationView.setSelectedItemId(R.id.home);//设置default的item
+        //getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,newsFragment).commit();
         //setContentView(R.layout.news_page);
     }
 
