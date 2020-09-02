@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">JavaNewsApp</string>
+    <string name="search_title">搜索框</string>
 </resources>
