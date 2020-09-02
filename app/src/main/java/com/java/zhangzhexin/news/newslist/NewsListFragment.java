@@ -71,6 +71,7 @@ public class NewsListFragment extends Fragment {
                 super.onScrollStateChanged(recyclerView, newState);
                 int lastItemPosition = layoutManager.findLastVisibleItemPosition();
                 if(newState == RecyclerView.SCROLL_STATE_IDLE && lastItemPosition == layoutManager.getItemCount()-1){
+
                     System.out.println("arrive last item!");
                     //TODO:获取更多新闻->显示
                 }

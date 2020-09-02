@@ -6,6 +6,8 @@ import androidx.appcompat.widget.SearchView;
 import android.os.Bundle;
 import android.view.Menu;
 
+import com.java.zhangzhexin.news.NewsFragment;
+
 public class MainActivity extends AppCompatActivity {
     private NewsFragment newsFragment;
     private SearchView searchView;
