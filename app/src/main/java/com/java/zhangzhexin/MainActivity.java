@@ -6,7 +6,11 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -23,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private SearchView searchView;
     private BottomNavigationView bottomNavigationView;
     private Fragment currentFragment;
+    private SearchHistoryProvider searchHistoryProvider;
 
     public void switchFragment(Fragment target){
         if(currentFragment != target){
@@ -55,28 +60,35 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        Intent intent = getIntent();
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            System.out.println("intent get query = "+query);
+            SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
+                    SearchHistoryProvider.AUTHORITY, SearchHistoryProvider.MODE);
+            suggestions.saveRecentQuery(query, null);
+        }
+
         initFragment();//创建fragment
 
         bottomNavigationView = findViewById(R.id.nav_view);
-
         //监听点击切换
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                if(menuItem.getItemId() == R.id.home) {
-                    switchFragment(newsFragment);
-                    //getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, newsFragment).commit();
-                    System.out.println("切换到首页");
-                    return true; //不return true切换时没有动画效果
-                }
-                else if(menuItem.getItemId() == R.id.history) {
-                    switchFragment(historyFragment);
-                    //getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, historyFragment).commit();
-                    System.out.println("切换到浏览历史");
-                    return true;
-                }
-                return false;
+        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
+            if(menuItem.getItemId() == R.id.home) {
+                switchFragment(newsFragment);
+                //getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, newsFragment).commit();
+                System.out.println("切换到首页");
+                return true; //不return true切换时没有动画效果
             }
+            else if(menuItem.getItemId() == R.id.history) {
+                switchFragment(historyFragment);
+                //getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, historyFragment).commit();
+                System.out.println("切换到浏览历史");
+                return true;
+            }
+            return false;
         });
         //bottomNavigationView.setSelectedItemId(R.id.home);//设置default的item
         //getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,newsFragment).commit();
@@ -89,31 +101,36 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.search,menu);
         searchView = (SearchView) menu.findItem(R.id.searchView).getActionView();
 
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        // Assumes current activity is the searchable activity
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+
+        searchView.setSubmitButtonEnabled(true); //添加提交按钮
         //监听搜索框关闭
         //FIXME: X点第一次是清空 第二次是退出
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                System.out.println("关闭搜索框");
-                //TODO:
-                return false;
-            }
-        });
+//        searchView.setOnCloseListener(() -> {
+//            System.out.println("关闭搜索框");
+//            //TODO:
+//            return false;
+//        });
+//
+//        //监听搜索框内容变化
+//        //TODO：搜索记录实现
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                System.out.println("搜索关键字="+query);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                //System.out.println("搜索newText="+newText);
+//                return false;
+//            }
+//        });
 
-        //监听搜索框内容变化
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                System.out.println("搜索关键字="+query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                //System.out.println("搜索newText="+newText);
-                return false;
-            }
-        });
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 }
