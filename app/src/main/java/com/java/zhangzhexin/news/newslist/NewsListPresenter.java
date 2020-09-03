@@ -18,7 +18,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     }
 
     public List<NewsCard> getMoreNews(int size){
-        List<NewsCard> result = dataManager.getNews(size);
+        List<NewsCard> result = dataManager.getMoreNews(size);
         assert(result!=null);
         return result;
         //return dataManager.getNews(size);
@@ -26,7 +26,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
     public List<NewsCard> refreshNews(int size){
         //TODO:
-        List<NewsCard> result = dataManager.getNews(size);
+        List<NewsCard> result = dataManager.RefreshNews(size);
         System.out.println(result);
         assert(result!=null);
         return result;
