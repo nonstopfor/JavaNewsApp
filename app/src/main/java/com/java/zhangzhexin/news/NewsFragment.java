@@ -72,6 +72,7 @@ public class NewsFragment extends Fragment {
         @NonNull
         @Override
         public Fragment getItem(int position) {
+            System.out.println("getItem: type = "+categories.get(position)+" keyword = "+"");
             return NewsListFragment.newInstance(categories.get(position),"");
             //TODO: 传搜索的关键字
         }

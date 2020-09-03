@@ -31,14 +31,14 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         adapter = new NewsAdapter();
         layoutManager = new LinearLayoutManager(getContext());
         System.out.println("newslistfragment arguments = "+getArguments());
         assert getArguments() != null;
         type = getArguments().getString("type");
         keyword = getArguments().getString("keyword");
-
+        super.onCreate(savedInstanceState);
+        System.out.println("newslistfragment type = "+type+", keyword = "+keyword);
         try {
             myPresenter.refreshNews(20);
         } catch (InterruptedException e) {
@@ -131,6 +131,8 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
 
     @Override
     public NewsListPresenter createPresenter() {
+
+        System.out.println("in createPresenter, type = "+type+", keyword = "+keyword);
         return new NewsListPresenter(type,keyword);
     }
 }
