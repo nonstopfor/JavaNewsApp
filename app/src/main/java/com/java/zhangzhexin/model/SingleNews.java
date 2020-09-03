@@ -8,7 +8,7 @@ public class SingleNews {
     public String type;
     public String title;
     public String source;
-    public int id;
+    public long id;
 
     public SingleNews(JsonObject obj) {
         content = obj.get("content").toString();
@@ -16,7 +16,7 @@ public class SingleNews {
         type = obj.get("type").toString();
         title = obj.get("title").toString();
         source = obj.get("source").toString();
-        id = obj.get("_id").getAsInt();
+        id = obj.get("_id").getAsLong();
 
     }
 }

@@ -38,7 +38,11 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
         assert getArguments() != null;
         type = getArguments().getString("type");
         keyword = getArguments().getString("keyword");
-        resetNewsList(20);
+        try {
+            resetNewsList(20);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         //adapter.setData(new String[]{"news1", "news2", "news3","news4","news1", "news2", "news3","news4","news1", "news2", "news3","news4","news1", "news2", "news3","news4","news1","news2","news3","news4"});
 
     }
@@ -101,14 +105,18 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
             System.out.println("refresh!");
             swipeRefreshLayout.setRefreshing(true);
             //adapter.setData(new String[]{"news4", "news5", "news6","news7","news4", "news5", "news6","news7","news4", "news5", "news6","news7","news4", "news5", "news6","news7"});
-            resetNewsList(20);
+            try {
+                resetNewsList(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             swipeRefreshLayout.setRefreshing(false); //FIXME:需要手动关闭动画
         });
         return view;
     }
 
     @Override
-    public void resetNewsList(int size) {
+    public void resetNewsList(int size) throws InterruptedException {
         adapter.resetData(myPresenter.refreshNews(size));
     }
 
