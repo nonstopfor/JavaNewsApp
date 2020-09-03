@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public abstract class BaseActivity<V extends BaseView, P extends BasePresenter<V>> extends AppCompatActivity implements BaseView {
-    private P myPresenter;
+    protected P myPresenter;
+    protected String type;
+    protected String keyword;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,7 +33,4 @@ public abstract class BaseActivity<V extends BaseView, P extends BasePresenter<V
 
     public abstract P createPresenter();
 
-    public P getPresenter(){
-        return myPresenter;
-    }
 }

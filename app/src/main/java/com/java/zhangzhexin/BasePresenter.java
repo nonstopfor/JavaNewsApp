@@ -1,7 +1,17 @@
 package com.java.zhangzhexin;
 
-abstract public class BasePresenter<V extends BaseView> {
-    private V myView;
+import com.java.zhangzhexin.model.DataManager;
+import com.java.zhangzhexin.model.UrlManager;
+
+public class BasePresenter<V extends BaseView> {
+    protected V myView;
+    protected String type;
+    protected String keyword;
+
+    public BasePresenter(String type,String keyword){
+        this.type = type;
+        this.keyword = keyword;
+    }
 
     public void attach(V view) {
         myView = view;
@@ -9,10 +19,6 @@ abstract public class BasePresenter<V extends BaseView> {
 
     public void detach() {
         myView = null;
-    }
-
-    public V getView(){
-        return myView;
     }
 
 }

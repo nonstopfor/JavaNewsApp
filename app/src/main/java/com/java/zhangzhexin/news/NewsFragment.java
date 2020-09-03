@@ -72,7 +72,8 @@ public class NewsFragment extends Fragment {
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            return NewsListFragment.newInstance();
+            return NewsListFragment.newInstance(categories.get(position),"");
+            //TODO: 传搜索的关键字
         }
 
         @Override

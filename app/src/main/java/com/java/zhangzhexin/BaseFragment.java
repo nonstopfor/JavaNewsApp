@@ -6,10 +6,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V>> extends Fragment implements BaseView {
-    private P myPresenter;
+    protected P myPresenter;
+    protected String type;
+    protected String keyword;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        System.out.println("enter basefragment constructor");
         super.onCreate(savedInstanceState);
         if (myPresenter == null) {
             myPresenter = createPresenter();
@@ -18,6 +21,7 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V
             throw new NullPointerException("presenter can't be null!");
         }
         myPresenter.attach((V) this);
+        System.out.println("finish contructing BaseFragment");
     }
 
     @Override
@@ -30,7 +34,4 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V
 
     public abstract P createPresenter();
 
-    public P getPresenter(){
-        return myPresenter;
-    }
 }

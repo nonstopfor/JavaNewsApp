@@ -18,6 +18,7 @@ public class DataManager {
     }
 
     public List<NewsCard> getNews(int size) {
+        System.out.println("size = "+size);
         int len = allNews.size();
         int to = Math.min(len, idx + size);
         List<NewsCard> result = new ArrayList<>();
@@ -25,6 +26,7 @@ public class DataManager {
             result.add(allNews.get(i));
         }
         idx = to;
+        System.out.println("result = "+result);
         return result;
     }
 

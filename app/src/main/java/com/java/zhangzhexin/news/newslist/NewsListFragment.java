@@ -14,53 +14,62 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.java.zhangzhexin.BaseFragment;
+import com.java.zhangzhexin.BasePresenter;
 import com.java.zhangzhexin.R;
+import com.java.zhangzhexin.model.NewsCard;
 
-public class NewsListFragment extends Fragment {
+import java.util.List;
+
+public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresenter> implements NewsListView {
     private RecyclerView recyclerView;
     private NewsAdapter adapter;
     private LinearLayoutManager layoutManager;
     private SwipeRefreshLayout swipeRefreshLayout; //下拉刷新
 
+    public NewsListFragment(){}
 
-    public NewsListFragment(){
-
-    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter = new NewsAdapter();
-        adapter.setData(new String[]{"news1", "news2", "news3","news4","news1", "news2", "news3","news4","news1", "news2", "news3","news4","news1", "news2", "news3","news4","news1","news2","news3","news4"});
         layoutManager = new LinearLayoutManager(getContext());
+        System.out.println("newslistfragment arguments = "+getArguments());
+        assert getArguments() != null;
+        type = getArguments().getString("type");
+        keyword = getArguments().getString("keyword");
+        resetNewsList(20);
+        //adapter.setData(new String[]{"news1", "news2", "news3","news4","news1", "news2", "news3","news4","news1", "news2", "news3","news4","news1", "news2", "news3","news4","news1","news2","news3","news4"});
+
     }
 
-    public static NewsListFragment newInstance() {
+    public static NewsListFragment newInstance(String type, String keyword) {
+        System.out.println("newInstance NewsListFragment, type = "+type+" keyword = "+keyword);
         Bundle args = new Bundle();
         NewsListFragment fragment = new NewsListFragment();
+        args.putString("type",type);
+        args.putString("keyword",keyword);
         fragment.setArguments(args);
         return fragment;
     }
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_newslist,container,false);
 
-        //设置newslist
+
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
         //点击事件
         recyclerView.addOnItemTouchListener(new NewsListener(getContext(),recyclerView, (view1, position) -> {
-            //TODO:点击事件的处理
             TextView title = view1.findViewById(R.id.news_title);
             title.setTextColor(getResources().getColor(R.color.colorClickedNews));
-            //title.setTextColor(getResources().getColor(R.color.colorTabSelected));//TODO:灰色不太明显
             System.out.println("点击位置"+position);
-
-            //TODO:startActivity到详情页
-            //intent的参数等缓存方式确定以后再决定
+            //TODO:startActivity到详情页, intent的参数等缓存方式确定以后再决定
         }));
 
         //上拉获取更多
@@ -73,6 +82,7 @@ public class NewsListFragment extends Fragment {
                 if(newState == RecyclerView.SCROLL_STATE_IDLE && lastItemPosition == layoutManager.getItemCount()-1){
 
                     System.out.println("arrive last item!");
+                    appendNewsList(20);
                     //TODO:获取更多新闻->显示
                 }
                 //当前在滚动的recyclerView,  当前滚动状态
@@ -88,13 +98,27 @@ public class NewsListFragment extends Fragment {
         //下拉刷新
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(() -> {
-            //System.out.println("catch refresh!");
+            System.out.println("refresh!");
             swipeRefreshLayout.setRefreshing(true);
-            adapter.setData(new String[]{"news4", "news5", "news6","news7","news4", "news5", "news6","news7","news4", "news5", "news6","news7","news4", "news5", "news6","news7"});
-            //TODO:改为统一的接口setNews： 得到新数据->adapter.setData
-            swipeRefreshLayout.setRefreshing(false); //需要手动关闭动画
+            //adapter.setData(new String[]{"news4", "news5", "news6","news7","news4", "news5", "news6","news7","news4", "news5", "news6","news7","news4", "news5", "news6","news7"});
+            resetNewsList(20);
+            swipeRefreshLayout.setRefreshing(false); //FIXME:需要手动关闭动画
         });
         return view;
-        // return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void resetNewsList(int size) {
+        adapter.resetData(myPresenter.refreshNews(size));
+    }
+
+    @Override
+    public void appendNewsList(int size) {
+        adapter.appendData(myPresenter.getMoreNews(size));
+    }
+
+    @Override
+    public NewsListPresenter createPresenter() {
+        return new NewsListPresenter(type,keyword);
     }
 }

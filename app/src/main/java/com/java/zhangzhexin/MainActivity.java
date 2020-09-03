@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             //transaction.hide(newsFragment); //default显示新闻首页
         }
         if(historyFragment==null){
-            historyFragment = NewsListFragment.newInstance();
+            historyFragment = NewsListFragment.newInstance("",""); //TODO:要给history一种类型
             transaction.add(R.id.frameLayout,historyFragment);
             transaction.hide(historyFragment);
         }
@@ -60,9 +60,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         Intent intent = getIntent();
-
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             System.out.println("intent get query = "+query);
@@ -73,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
         initFragment();//创建fragment
 
-        bottomNavigationView = findViewById(R.id.nav_view);
         //监听点击切换
+        bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             if(menuItem.getItemId() == R.id.home) {
                 switchFragment(newsFragment);
@@ -90,9 +88,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
-        //bottomNavigationView.setSelectedItemId(R.id.home);//设置default的item
-        //getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,newsFragment).commit();
-        //setContentView(R.layout.news_page);
     }
 
     @Override
@@ -102,10 +97,8 @@ public class MainActivity extends AppCompatActivity {
         searchView = (SearchView) menu.findItem(R.id.searchView).getActionView();
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        // Assumes current activity is the searchable activity
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
-
         searchView.setSubmitButtonEnabled(true); //添加提交按钮
         //监听搜索框关闭
         //FIXME: X点第一次是清空 第二次是退出

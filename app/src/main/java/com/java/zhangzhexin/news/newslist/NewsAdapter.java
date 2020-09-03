@@ -9,17 +9,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.java.zhangzhexin.R;
+import com.java.zhangzhexin.model.NewsCard;
+
+import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
-    private String[] data;
+    private List<NewsCard> data;
 
     public NewsAdapter(){
     }
 
     //设置newslist显示的新闻
-    public void setData(String[] data){
+    public void resetData(List<NewsCard> data){
         this.data = data;
         notifyDataSetChanged();//刷新显示数据
+    }
+
+    public void appendData(List<NewsCard> data){
+        this.data.addAll(data);
+        notifyDataSetChanged();
     }
 
     //FIXME：用户拖拽屏幕过程中算点击吗?
@@ -41,11 +49,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull NewsAdapter.ViewHolder holder, int position) {
-        holder.news_title.setText(data[position]);
+        holder.news_title.setText(data.get(position).title);
+        //TODO:把newsitem修改一下
     }
 
     @Override
     public int getItemCount() {
-        return data.length;
+        return data.size();
     }
 }
