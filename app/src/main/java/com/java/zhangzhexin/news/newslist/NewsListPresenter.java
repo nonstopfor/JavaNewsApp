@@ -17,19 +17,17 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         dataManager = new DataManager(type);
     }
 
-    public List<NewsCard> getMoreNews(int size){
+    public void getMoreNews(int size){
         List<NewsCard> result = dataManager.getMoreNews(size);
         assert(result!=null);
-        return result;
-        //return dataManager.getNews(size);
+        myView.appendNewsList(result);
     }
 
-    public List<NewsCard> refreshNews(int size) throws InterruptedException {
-        //TODO:
+
+    public void refreshNews(int size) throws InterruptedException {
         List<NewsCard> result = dataManager.RefreshNews(size);
-        System.out.println(result);
         assert(result!=null);
-        return result;
+        myView.resetNewsList(result);
     }
 
 
