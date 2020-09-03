@@ -43,12 +43,14 @@ public class MainActivity extends AppCompatActivity {
         if(newsFragment==null){
             newsFragment = NewsFragment.newInstance();
             transaction.add(R.id.frameLayout,newsFragment);
+            System.out.println("finish construct newsFragment");
             //transaction.hide(newsFragment); //default显示新闻首页
         }
         if(historyFragment==null){
-            historyFragment = NewsListFragment.newInstance("",""); //TODO:要给history一种类型
+            historyFragment = NewsListFragment.newInstance("news",""); //TODO:要给history一种类型
             transaction.add(R.id.frameLayout,historyFragment);
             transaction.hide(historyFragment);
+            System.out.println("finish construct historyFragment");
         }
 
         transaction.commit();

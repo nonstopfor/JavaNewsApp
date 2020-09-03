@@ -14,6 +14,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
     public NewsListPresenter(String type,String keyword){
         super(type,keyword);
+        System.out.println("presenter type = "+type+", keyword = "+keyword);
         dataManager = new DataManager(type);
     }
 
