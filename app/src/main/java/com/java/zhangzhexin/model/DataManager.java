@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataManager {
+
     List<NewsCard> allNews;
     String type;
     int idx = 0;
@@ -17,8 +18,7 @@ public class DataManager {
         idx = 0;
     }
 
-    public List<NewsCard> getNews(int size) {
-        System.out.println("size = "+size);
+    public List<NewsCard> getMoreNews(int size) {
         int len = allNews.size();
         int to = Math.min(len, idx + size);
         List<NewsCard> result = new ArrayList<>();
@@ -26,8 +26,11 @@ public class DataManager {
             result.add(allNews.get(i));
         }
         idx = to;
-        System.out.println("result = "+result);
         return result;
     }
 
+    public List<NewsCard> RefreshNews(int size){
+        refresh();
+        return getMoreNews(size);
+    }
 }
