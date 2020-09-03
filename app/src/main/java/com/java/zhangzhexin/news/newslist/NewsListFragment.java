@@ -38,7 +38,7 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
         assert getArguments() != null;
         type = getArguments().getString("type");
         keyword = getArguments().getString("keyword");
-        resetNewsList(20);
+        myPresenter.refreshNews(20);
         //adapter.setData(new String[]{"news1", "news2", "news3","news4","news1", "news2", "news3","news4","news1", "news2", "news3","news4","news1", "news2", "news3","news4","news1","news2","news3","news4"});
 
     }
@@ -82,7 +82,8 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
                 if(newState == RecyclerView.SCROLL_STATE_IDLE && lastItemPosition == layoutManager.getItemCount()-1){
 
                     System.out.println("arrive last item!");
-                    appendNewsList(20);
+                    myPresenter.getMoreNews(20);
+                    //appendNewsList(20);
                     //TODO:获取更多新闻->显示
                 }
                 //当前在滚动的recyclerView,  当前滚动状态
@@ -101,20 +102,20 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
             System.out.println("refresh!");
             swipeRefreshLayout.setRefreshing(true);
             //adapter.setData(new String[]{"news4", "news5", "news6","news7","news4", "news5", "news6","news7","news4", "news5", "news6","news7","news4", "news5", "news6","news7"});
-            resetNewsList(20);
+            myPresenter.refreshNews(20);
             swipeRefreshLayout.setRefreshing(false); //FIXME:需要手动关闭动画
         });
         return view;
     }
 
     @Override
-    public void resetNewsList(int size) {
-        adapter.resetData(myPresenter.refreshNews(size));
+    public void resetNewsList(List<NewsCard> data) {
+        adapter.resetData(data);
     }
 
     @Override
-    public void appendNewsList(int size) {
-        adapter.appendData(myPresenter.getMoreNews(size));
+    public void appendNewsList(List<NewsCard> data) {
+        adapter.appendData(data);
     }
 
     @Override
