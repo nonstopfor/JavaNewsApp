@@ -8,6 +8,7 @@ import java.util.List;
 public interface NewsListView extends BaseView {
 
     //重置newslist(初始化/refresh)
+
     void resetNewsList(List<NewsCard>data);
 
     //追加newslist
