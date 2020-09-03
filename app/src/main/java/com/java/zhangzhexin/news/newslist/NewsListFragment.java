@@ -52,15 +52,15 @@ public class NewsListFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         //点击事件
-        recyclerView.addOnItemTouchListener(new NewsListener(getContext(),recyclerView, new NewsListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                //TODO:点击事件的处理
-                TextView title = view.findViewById(R.id.news_title);
-                title.setTextColor(getResources().getColor(R.color.colorClickedNews));
-                //title.setTextColor(getResources().getColor(R.color.colorTabSelected));//TODO:灰色不太明显
-                System.out.println("点击位置"+position);
-            }
+        recyclerView.addOnItemTouchListener(new NewsListener(getContext(),recyclerView, (view1, position) -> {
+            //TODO:点击事件的处理
+            TextView title = view1.findViewById(R.id.news_title);
+            title.setTextColor(getResources().getColor(R.color.colorClickedNews));
+            //title.setTextColor(getResources().getColor(R.color.colorTabSelected));//TODO:灰色不太明显
+            System.out.println("点击位置"+position);
+
+            //TODO:startActivity到详情页
+            //intent的参数等缓存方式确定以后再决定
         }));
 
         //上拉获取更多
@@ -87,15 +87,12 @@ public class NewsListFragment extends Fragment {
 
         //下拉刷新
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                //System.out.println("catch refresh!");
-                swipeRefreshLayout.setRefreshing(true);
-                adapter.setData(new String[]{"news4", "news5", "news6","news7","news4", "news5", "news6","news7","news4", "news5", "news6","news7","news4", "news5", "news6","news7"});
-                //TODO:改为统一的接口setNews： 得到新数据->adapter.setData
-                swipeRefreshLayout.setRefreshing(false); //需要手动关闭动画
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            //System.out.println("catch refresh!");
+            swipeRefreshLayout.setRefreshing(true);
+            adapter.setData(new String[]{"news4", "news5", "news6","news7","news4", "news5", "news6","news7","news4", "news5", "news6","news7","news4", "news5", "news6","news7"});
+            //TODO:改为统一的接口setNews： 得到新数据->adapter.setData
+            swipeRefreshLayout.setRefreshing(false); //需要手动关闭动画
         });
         return view;
         // return super.onCreateView(inflater, container, savedInstanceState);
