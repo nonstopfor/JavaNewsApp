@@ -26,7 +26,7 @@ public class NewsFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private MyPagerAdapter adapter;
-    private List<String>categories = new ArrayList<>(Arrays.asList("推荐","news","paper","疫情数据","知疫学者"));
+    private List<String>categories = new ArrayList<>(Arrays.asList("news","paper"));
     public NewsFragment(){}
 
     public static NewsFragment newInstance(){

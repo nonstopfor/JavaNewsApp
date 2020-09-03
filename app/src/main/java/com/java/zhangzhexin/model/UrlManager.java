@@ -48,18 +48,21 @@ public class UrlManager {
     public static List<NewsCard> getAllNews(String type) throws InterruptedException {
         String url="https://covid-dashboard.aminer.cn/api/dist/events.json";
         String data = readUrl(url);
-        System.out.println(data);
+//        System.out.println(data);
         JsonObject jsonData = new JsonParser().parse(data).getAsJsonObject();
         JsonArray jsonArray = jsonData.getAsJsonArray("datas");
         List<NewsCard>result = new ArrayList<>();
-//        System.out.println("type:"+type);
+        System.out.println("type:"+type);
+        System.out.println("jsonArray.size:"+jsonArray.size());
         for (int i = 0; i < jsonArray.size(); ++i) {
             JsonObject obj = (JsonObject) jsonArray.get(i);
-
-            if(!obj.get("type").toString().equals(type)) continue;
+//            System.out.println(obj.get("type").getAsString());
+            if(!(obj.get("type").getAsString().equals(type))) continue;
+//            System.out.println(obj.get("type").getAsString());
             result.add(new NewsCard(obj));
 //            System.out.println(obj.get("source"));
         }
+        System.out.println("in getAllNews result size:"+result.size());
         return result;
     }
 
