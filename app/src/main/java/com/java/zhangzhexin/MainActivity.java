@@ -26,10 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void switchFragment(Fragment target){
         if(currentFragment != target){
+            System.out.println("current fragment = "+currentFragment+", target fragment = "+target);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.hide(currentFragment).show(target);
+            transaction.hide(currentFragment).show(target).commit();
             currentFragment = target;
-            transaction.commit();
         }
     }
 
@@ -37,12 +37,15 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if(newsFragment==null){
             newsFragment = NewsFragment.newInstance();
-            transaction.add(R.id.frameLayout,newsFragment).commit();
+            transaction.add(R.id.frameLayout,newsFragment);
+            //transaction.hide(newsFragment); //default显示新闻首页
         }
         if(historyFragment==null){
             historyFragment = NewsListFragment.newInstance();
-            transaction.add(R.id.frameLayout,historyFragment).commit();
+            transaction.add(R.id.frameLayout,historyFragment);
+            transaction.hide(historyFragment);
         }
+
         transaction.commit();
         currentFragment = newsFragment; //default是新闻首页
     }
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initFragment();//创建fragment
-        System.out.println("finish initFragment");
+
         bottomNavigationView = findViewById(R.id.nav_view);
 
         //监听点击切换
@@ -75,8 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        bottomNavigationView.setSelectedItemId(R.id.home);//设置default的item
+        //bottomNavigationView.setSelectedItemId(R.id.home);//设置default的item
         //getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,newsFragment).commit();
         //setContentView(R.layout.news_page);
     }
