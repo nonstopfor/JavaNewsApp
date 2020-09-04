@@ -97,4 +97,11 @@ public class UrlManager {
 //        System.out.println("result[0]:"+result[0]);
         return result[0];
     }
+
+    public static SingleNews getSingleNewsById(String id) throws InterruptedException {
+        String url = "https://covid-dashboard-api.aminer.cn/event/" + id;
+        String data = readUrl(url);
+        JsonObject jsonData = new JsonParser().parse(data).getAsJsonObject();
+        return new SingleNews(jsonData.getAsJsonObject("data"));
+    }
 }
