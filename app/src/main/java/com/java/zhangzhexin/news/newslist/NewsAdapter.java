@@ -61,7 +61,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull NewsAdapter.ViewHolder holder, int position) {
         holder.news_title.setText(data.get(position).title);
-        if(data.get(position).visited)
+        if(data.get(position).visited())
             holder.news_title.setTextColor(myContext.getResources().getColor(R.color.colorReadNews));
         holder.news_date.setText(data.get(position).time);
         holder.news_source.setText(data.get(position).source);

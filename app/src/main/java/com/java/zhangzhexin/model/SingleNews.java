@@ -32,6 +32,7 @@ public class SingleNews {
         type = obj.get("type").getAsString();
         title = obj.get("title").getAsString();
         source = obj.get("source").getAsString();
+        if (source.length() == 0) source = "来源未知";
         id = obj.get("_id").getAsString();
     }
 
@@ -55,8 +56,7 @@ public class SingleNews {
         if (singleNewsDao.queryBuilder().where(SingleNewsDao.Properties.Id.eq(id)).list().isEmpty()) {
 //            System.out.println("Saving SingleNews");
             singleNewsDao.insert(this);
-        }
-        else{
+        } else {
 //            System.out.println("SingleNews has already existed");
         }
 //        System.out.println("SingleNews saved!");
