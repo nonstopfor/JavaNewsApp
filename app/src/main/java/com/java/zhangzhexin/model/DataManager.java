@@ -13,6 +13,8 @@ public class DataManager {
     int idx = 0;
     int page = 0;
 
+    public DataManager(){}
+
     public DataManager(String type) {
         this.type = type;
         allNews = new ArrayList<>();

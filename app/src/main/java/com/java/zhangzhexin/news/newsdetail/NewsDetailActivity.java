@@ -30,8 +30,8 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
-        //setContentView(R.layout.news_detail);
+       // setContentView(R.layout.activity_detail);
+        setContentView(R.layout.news_detail);
         //TODO:news_detail.xml完善
         news_title = findViewById(R.id.news_title);
         news_content = findViewById(R.id.news_content);
@@ -62,9 +62,10 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
 
     @Override
     public void setNews(SingleNews news) {
-        news_title.setText("这是一条新闻标题");
-        news_content.setText("这是一条新闻正文");
-
+        //news_title.setText("这是一条新闻标题");
+        //news_content.setText("这是一条新闻正文");
+        news_title.setText(news.title);
+        news_content.setText(news.content);
         System.out.println("detail setNews finish!");
         //FIXME:没显示
     }

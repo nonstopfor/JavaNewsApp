@@ -1,6 +1,7 @@
 package com.java.zhangzhexin.news.newsdetail;
 
 import com.java.zhangzhexin.BasePresenter;
+import com.java.zhangzhexin.model.DataManager;
 
 
 /*
@@ -9,11 +10,16 @@ import com.java.zhangzhexin.BasePresenter;
 2. 标记已读（数据库）
  */
 public class NewsDetailPresenter extends BasePresenter<NewsDetailView> {
+    private DataManager dataManager;
+    public NewsDetailPresenter(){
+        dataManager = new DataManager();
+    }
 
-    public NewsDetailPresenter(){}
-
-    public void setNews(String news_id){
-        myView.setNews(null);
-        //TODO:调用接口
+    public void setNews(String news_id)  {
+        try {
+            myView.setNews(dataManager.getContent(news_id));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
