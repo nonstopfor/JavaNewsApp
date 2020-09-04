@@ -27,6 +27,7 @@ public class NewsFragment extends Fragment {
     private ViewPager viewPager;
     private MyPagerAdapter adapter;
     private List<String>categories = new ArrayList<>(Arrays.asList("news","paper"));
+    //TODO: 分类的增加/删除
     public NewsFragment(){}
 
     public static NewsFragment newInstance(){

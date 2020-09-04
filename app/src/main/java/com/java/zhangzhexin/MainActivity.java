@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+        //searchView.setIconifiedByDefault(true); // Do not iconify the widget; expand it by default
         searchView.setSubmitButtonEnabled(true); //添加提交按钮
         //监听搜索框关闭
         //FIXME: X点第一次是清空 第二次是退出
