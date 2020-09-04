@@ -6,7 +6,8 @@ public class NewsCard {
     public String title;
     public String time;
     public String source; //for test
-    public long id;
+    public String id;
+    public boolean visited = false;
 
     //for test
     public NewsCard(String title, String time, String source){
@@ -16,11 +17,11 @@ public class NewsCard {
     }
 
     public NewsCard(JsonObject obj) {
-        time = obj.get("time").toString();
+        time = obj.get("date").toString();
         title = obj.get("title").toString();
-//        source = obj.get("source").toString();
+        source = obj.get("source").toString();
 //        System.out.println("string:"+obj.get("_id").getAsString());
-//        id = Long.valueOf(obj.get("_id").getAsString(),16);
+        id = obj.get("_id").getAsString();
     }
 
 }

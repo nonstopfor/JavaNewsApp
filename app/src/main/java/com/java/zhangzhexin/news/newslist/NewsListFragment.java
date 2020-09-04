@@ -87,7 +87,11 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
                 if(newState == RecyclerView.SCROLL_STATE_IDLE && lastItemPosition == layoutManager.getItemCount()-1){
 
                     System.out.println("arrive last item!");
-                    myPresenter.getMoreNews(20);
+                    try {
+                        myPresenter.getMoreNews(20);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     //appendNewsList(20);
                     //TODO:获取更多新闻->显示
                 }
