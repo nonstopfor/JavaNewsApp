@@ -3,11 +3,14 @@ package com.java.zhangzhexin.news.newsdetail;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.java.zhangzhexin.BaseActivity;
+import com.java.zhangzhexin.MainActivity;
 import com.java.zhangzhexin.R;
 import com.java.zhangzhexin.model.SingleNews;
 
@@ -32,6 +35,7 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_detail);
         //setContentView(R.layout.news_detail);
         //TODO:news_detail.xml完善
@@ -47,6 +51,16 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
         myPresenter.setNews(news_id);
         //TODO:调用presenter接口实现 返回一个SingleNews
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

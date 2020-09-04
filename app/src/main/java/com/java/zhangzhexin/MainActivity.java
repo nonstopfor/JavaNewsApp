@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             tabObject = new Tab();
             tabObject.addTab("news");
             tabObject.addTab("paper");
-            System.out.println("tabs = "+tabObject.tabs);
+            //System.out.println("tabs = "+tabObject.tabs);
             newsFragment = NewsFragment.newInstance(tabObject);
             transaction.add(R.id.frameLayout,newsFragment);
             System.out.println("finish construct newsFragment");
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("enter MainActivity onCreate!");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
