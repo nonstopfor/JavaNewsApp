@@ -10,7 +10,7 @@ public class NewsCard {
     public boolean visited = false;
 
     //for test
-    public NewsCard(String title, String time, String source){
+    public NewsCard(String title, String time, String source) {
         this.time = time;
         this.title = title;
         this.source = source;
@@ -20,8 +20,10 @@ public class NewsCard {
         time = obj.get("date").getAsString();
         title = obj.get("title").getAsString();
         source = obj.get("source").getAsString();
+        if (source.length() == 0) source = "来源未知";
 //        System.out.println("string:"+obj.get("_id").getAsString());
         id = obj.get("_id").getAsString();
     }
+
 
 }
