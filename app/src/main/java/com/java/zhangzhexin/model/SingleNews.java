@@ -51,15 +51,15 @@ public class SingleNews {
     public void save() {
         DaoSession daoSession = App.getDaoSession();
         SingleNewsDao singleNewsDao = daoSession.getSingleNewsDao();
-        // TODO: 检查如果this已在数据库中，再调insert是否会有问题
+        // TODO: 检查如果this已在数据库中，再调insert是否会有问题？ 会！
         if (singleNewsDao.queryBuilder().where(SingleNewsDao.Properties.Id.eq(id)).list().isEmpty()) {
-            System.out.println("Saving SingleNews");
+//            System.out.println("Saving SingleNews");
             singleNewsDao.insert(this);
         }
         else{
-            System.out.println("SingleNews has already existed");
+//            System.out.println("SingleNews has already existed");
         }
-        System.out.println("SingleNews saved!");
+//        System.out.println("SingleNews saved!");
     }
 
     @Generated(hash = 1516530826)

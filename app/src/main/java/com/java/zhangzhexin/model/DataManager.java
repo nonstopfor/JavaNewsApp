@@ -1,5 +1,6 @@
 package com.java.zhangzhexin.model;
 
+import com.java.zhangzhexin.App;
 import com.java.zhangzhexin.BuildConfig;
 
 import java.util.ArrayList;
@@ -13,7 +14,8 @@ public class DataManager {
     int idx = 0;
     int page = 0;
 
-    public DataManager(){}
+    public DataManager() {
+    }
 
     public DataManager(String type) {
         this.type = type;
@@ -64,7 +66,17 @@ public class DataManager {
         return getMoreNews(size);
     }
 
+    public SingleNews tryGetSingleNews(String id) {
+        DaoSession daoSession = App.getDaoSession();
+        SingleNewsDao singleNewsDao = daoSession.getSingleNewsDao();
+        List<SingleNews> singleNews = singleNewsDao.queryBuilder().where(SingleNewsDao.Properties.Id.eq(id)).list();
+        if (singleNews.isEmpty()) return null;
+        return singleNews.get(0);
+    }
+
     public SingleNews getContent(String id) throws InterruptedException {
+        SingleNews news = tryGetSingleNews(id);
+        if (news != null) return news;
         SingleNews singleNews = UrlManager.getSingleNewsById(id);
         singleNews.save();
         return singleNews;
