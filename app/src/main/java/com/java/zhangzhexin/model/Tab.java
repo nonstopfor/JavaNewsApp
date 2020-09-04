@@ -8,6 +8,7 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,7 +46,10 @@ public class Tab {
     }
 
     private void load() {
-        if (!inDataBase()) return;
+        if (!inDataBase()) {
+            tabs = new ArrayList<>();
+            return;
+        }
         DaoSession daoSession = App.getDaoSession();
         TabDao tabDao = daoSession.getTabDao();
         this.tabs = tabDao.load(id).tabs;
