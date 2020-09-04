@@ -1,5 +1,6 @@
 package com.java.zhangzhexin.news.newslist;
 
+import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,16 +34,20 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     //FIXME：用户拖拽屏幕过程中算点击吗?
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView news_title;
+        TextView news_source;
+        TextView news_date;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            news_title =itemView.findViewById(R.id.news_title);
+            news_title = itemView.findViewById(R.id.news_title);
+            news_source = itemView.findViewById(R.id.news_source);
+            news_date = itemView.findViewById(R.id.news_date);
         }
     }
 
     @NonNull
     @Override
     public NewsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.newsitem, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -50,6 +55,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull NewsAdapter.ViewHolder holder, int position) {
         holder.news_title.setText(data.get(position).title);
+        holder.news_date.setText(data.get(position).time);
+        holder.news_source.setText(data.get(position).source);
         //TODO:把newsitem修改一下
     }
 
