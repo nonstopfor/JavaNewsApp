@@ -73,7 +73,7 @@ public class NewsFragment extends Fragment {
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
-            System.out.println("category = "+categories.get(position));
+            //System.out.println("category = "+categories.get(position));
             return categories.get(position);
         }
 

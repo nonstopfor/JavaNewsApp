@@ -12,7 +12,7 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        System.out.println("enter basefragment constructor");
+        //System.out.println("enter basefragment constructor");
         super.onCreate(savedInstanceState);
         if (myPresenter == null) {
             myPresenter = createPresenter();
@@ -21,7 +21,7 @@ public abstract class BaseFragment<V extends BaseView, P extends BasePresenter<V
             throw new NullPointerException("presenter can't be null!");
         }
         myPresenter.attach((V) this);
-        System.out.println("finish contructing BaseFragment");
+        //System.out.println("finish contructing BaseFragment");
     }
 
     @Override

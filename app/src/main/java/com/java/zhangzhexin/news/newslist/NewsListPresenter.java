@@ -18,7 +18,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     public NewsListPresenter(String type,String keyword){
         this.type = type;
         this.keyword = keyword;
-        System.out.println("presenter type = "+type+", keyword = "+keyword);
+        //System.out.println("presenter type = "+type+", keyword = "+keyword);
         dataManager = new DataManager(type);
     }
 
@@ -31,28 +31,6 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
     public void getMoreNews(int size) throws InterruptedException {
         List<NewsCard> result = dataManager.getMoreNews(size);
-//        List<NewsCard> result = new ArrayList<>();
-//        result.add(new NewsCard("新闻5","2020-2-1","清新时报"));
-//        result.add(new NewsCard("新闻6","2020-2-2","清新时报"));
-//        result.add(new NewsCard("新闻7","2020-2-3","清新时报"));
-//        result.add(new NewsCard("新闻8","2020-2-4","清新时报"));
-//        result.add(new NewsCard("新闻5","2020-2-1","清新时报"));
-//        result.add(new NewsCard("新闻6","2020-2-2","清新时报"));
-//        result.add(new NewsCard("新闻7","2020-2-3","清新时报"));
-//        result.add(new NewsCard("新闻8","2020-2-4","清新时报"));
-//        result.add(new NewsCard("新闻5","2020-2-1","清新时报"));
-//        result.add(new NewsCard("新闻6","2020-2-2","清新时报"));
-//        result.add(new NewsCard("新闻7","2020-2-3","清新时报"));
-//        result.add(new NewsCard("新闻8","2020-2-4","清新时报"));
-//        result.add(new NewsCard("新闻5","2020-2-1","清新时报"));
-//        result.add(new NewsCard("新闻6","2020-2-2","清新时报"));
-//        result.add(new NewsCard("新闻7","2020-2-3","清新时报"));
-//        result.add(new NewsCard("新闻8","2020-2-4","清新时报"));
-//        result.add(new NewsCard("新闻5","2020-2-1","清新时报"));
-//        result.add(new NewsCard("新闻6","2020-2-2","清新时报"));
-//        result.add(new NewsCard("新闻7","2020-2-3","清新时报"));
-//        result.add(new NewsCard("新闻8","2020-2-4","清新时报"));
-//        System.out.println("result = "+result);
         assert(result!=null);
         myView.appendNewsList(result);
     }
@@ -60,28 +38,6 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
     public void refreshNews(int size) throws InterruptedException {
         List<NewsCard> result = dataManager.RefreshNews(size);
-//        List<NewsCard> result = new ArrayList<>();
-//        result.add(new NewsCard("新闻1","2020-2-1","清新时报"));
-//        result.add(new NewsCard("新闻2","2020-2-2","清新时报"));
-//        result.add(new NewsCard("新闻3","2020-2-3","清新时报"));
-//        result.add(new NewsCard("新闻4","2020-2-4","清新时报"));
-//        result.add(new NewsCard("新闻1","2020-2-1","清新时报"));
-//        result.add(new NewsCard("新闻2","2020-2-2","清新时报"));
-//        result.add(new NewsCard("新闻3","2020-2-3","清新时报"));
-//        result.add(new NewsCard("新闻4","2020-2-4","清新时报"));
-//        result.add(new NewsCard("新闻1","2020-2-1","清新时报"));
-//        result.add(new NewsCard("新闻2","2020-2-2","清新时报"));
-//        result.add(new NewsCard("新闻3","2020-2-3","清新时报"));
-//        result.add(new NewsCard("新闻4","2020-2-4","清新时报"));
-//        result.add(new NewsCard("新闻1","2020-2-1","清新时报"));
-//        result.add(new NewsCard("新闻2","2020-2-2","清新时报"));
-//        result.add(new NewsCard("新闻3","2020-2-3","清新时报"));
-//        result.add(new NewsCard("新闻4","2020-2-4","清新时报"));
-//        result.add(new NewsCard("新闻1","2020-2-1","清新时报"));
-//        result.add(new NewsCard("新闻2","2020-2-2","清新时报"));
-//        result.add(new NewsCard("新闻3","2020-2-3","清新时报"));
-//        result.add(new NewsCard("新闻4","2020-2-4","清新时报"));
-//        System.out.println("result = "+result);
         assert(result!=null);
         myView.resetNewsList(result);
     }

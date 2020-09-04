@@ -100,7 +100,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        System.out.println("main activity is destroy");
+        super.onDestroy();
+    }
+
+    @Override
     public void finish() {
+        System.out.println("main activity is finish");
         moveTaskToBack(true);
     }
 

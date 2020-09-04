@@ -35,12 +35,12 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
     public void onCreate(@Nullable Bundle savedInstanceState) {
         adapter = new NewsAdapter(getContext());
         layoutManager = new LinearLayoutManager(getContext());
-        System.out.println("newslistfragment arguments = "+getArguments());
+        //System.out.println("newslistfragment arguments = "+getArguments());
         assert getArguments() != null;
         type = getArguments().getString("type");
         keyword = getArguments().getString("keyword");
         super.onCreate(savedInstanceState);
-        System.out.println("newslistfragment type = "+type+", keyword = "+keyword);
+        //System.out.println("newslistfragment type = "+type+", keyword = "+keyword);
         try {
             myPresenter.refreshNews(20);
         } catch (InterruptedException e) {
@@ -51,7 +51,7 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
     }
 
     public static NewsListFragment newInstance(String type, String keyword) {
-        System.out.println("newInstance NewsListFragment, type = "+type+" keyword = "+keyword);
+        //System.out.println("newInstance NewsListFragment, type = "+type+" keyword = "+keyword);
         Bundle args = new Bundle();
         NewsListFragment fragment = new NewsListFragment();
         args.putString("type",type);
@@ -140,8 +140,7 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
 
     @Override
     public NewsListPresenter createPresenter() {
-
-        System.out.println("in createPresenter, type = "+type+", keyword = "+keyword);
+        //System.out.println("in createPresenter, type = "+type+", keyword = "+keyword);
         return new NewsListPresenter(type,keyword);
     }
 
