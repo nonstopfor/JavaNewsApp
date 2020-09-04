@@ -11,12 +11,12 @@ public class SingleNews {
     public long id;
 
     public SingleNews(JsonObject obj) {
-        content = obj.get("content").toString();
-        date = obj.get("date").toString();
-        type = obj.get("type").toString();
-        title = obj.get("title").toString();
-        source = obj.get("source").toString();
-        id = obj.get("_id").getAsLong();
+        content = obj.get("content").getAsString();
+        date = obj.get("date").getAsString();
+        type = obj.get("type").getAsString();
+        title = obj.get("title").getAsString();
+        source = obj.get("source").getAsString();
+//        id = obj.get("_id").getAsLong();
 
     }
 }

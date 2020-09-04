@@ -17,9 +17,9 @@ public class NewsCard {
     }
 
     public NewsCard(JsonObject obj) {
-        time = obj.get("date").toString();
-        title = obj.get("title").toString();
-        source = obj.get("source").toString();
+        time = obj.get("date").getAsString();
+        title = obj.get("title").getAsString();
+        source = obj.get("source").getAsString();
 //        System.out.println("string:"+obj.get("_id").getAsString());
         id = obj.get("_id").getAsString();
     }
