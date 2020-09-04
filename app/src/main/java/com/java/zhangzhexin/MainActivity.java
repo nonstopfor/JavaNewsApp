@@ -100,6 +100,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void finish() {
+        moveTaskToBack(true);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.search,menu);
