@@ -9,7 +9,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/padding_newsdetail_H"
+        android:paddingVertical="@dimen/padding_newsdetail_V">
+
         <TextView
             android:id="@+id/news_title"
             android:layout_width="wrap_content"
