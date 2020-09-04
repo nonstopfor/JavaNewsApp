@@ -26,15 +26,19 @@ FIXME:
 public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPresenter> implements NewsDetailView  {
     private TextView news_title;
     private TextView news_content;
+    private TextView news_source;
+    private TextView news_date;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_detail);
-        setContentView(R.layout.news_detail);
+        setContentView(R.layout.activity_detail);
+        //setContentView(R.layout.news_detail);
         //TODO:news_detail.xml完善
         news_title = findViewById(R.id.news_title);
         news_content = findViewById(R.id.news_content);
+        news_source = findViewById(R.id.news_source);
+        news_date = findViewById(R.id.news_date);
 //        news_title = findViewById(R.id.text_detail);
 //        news_content = findViewById(R.id.text_content);
 
@@ -66,7 +70,7 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
         //news_content.setText("这是一条新闻正文");
         news_title.setText(news.title);
         news_content.setText(news.content);
-//        System.out.println("detail setNews finish!");
-        //FIXME:没显示
+        news_date.setText(news.time);
+        news_source.setText(news.source);
     }
 }

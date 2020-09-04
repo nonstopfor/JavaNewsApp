@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="buttonWidth">40dp</dimen>
+    <dimen name="title_textsize">25sp</dimen>
+    <dimen name="content_textsize">20sp</dimen>
+    <dimen name="source_textsize">15sp</dimen>
+    <dimen name="date_textsize">15sp</dimen>
+    <dimen name="margin_detailbottom">45dp</dimen>
+</resources>
