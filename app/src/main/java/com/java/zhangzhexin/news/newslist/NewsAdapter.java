@@ -1,5 +1,6 @@
 package com.java.zhangzhexin.news.newslist;
 
+import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,14 +17,19 @@ import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private List<NewsCard> data;
-
-    public NewsAdapter(){
+    private Context myContext;
+    public NewsAdapter(Context myContext){
+        this.myContext = myContext;
     }
 
     //设置newslist显示的新闻
     public void resetData(List<NewsCard> data){
         this.data = data;
         notifyDataSetChanged();//刷新显示数据
+    }
+
+    public NewsCard getNews(int position){
+        return data.get(position);
     }
 
     public void appendData(List<NewsCard> data){
@@ -55,6 +61,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull NewsAdapter.ViewHolder holder, int position) {
         holder.news_title.setText(data.get(position).title);
+        if(data.get(position).visited)
+            holder.news_title.setTextColor(myContext.getResources().getColor(R.color.colorReadNews));
         holder.news_date.setText(data.get(position).time);
         holder.news_source.setText(data.get(position).source);
         //TODO:把newsitem修改一下

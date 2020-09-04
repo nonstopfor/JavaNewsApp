@@ -1,5 +1,7 @@
 package com.java.zhangzhexin.news.newslist;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -31,7 +33,7 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        adapter = new NewsAdapter();
+        adapter = new NewsAdapter(getContext());
         layoutManager = new LinearLayoutManager(getContext());
         System.out.println("newslistfragment arguments = "+getArguments());
         assert getArguments() != null;
@@ -70,10 +72,13 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
         recyclerView.setAdapter(adapter);
 
         //点击事件
-        recyclerView.addOnItemTouchListener(new NewsListener(getContext(),recyclerView, (view1, position) -> {
-            TextView title = view1.findViewById(R.id.news_title);
-            title.setTextColor(getResources().getColor(R.color.colorClickedNews));
+        recyclerView.addOnItemTouchListener(new NewsListener(getContext(),recyclerView, (news, position) -> {
+            TextView title = news.findViewById(R.id.news_title);
+            title.setTextColor(getResources().getColor(R.color.colorReadNews)); //改变颜色
+            myPresenter.openNewsDetail(adapter.getNews(position));
             System.out.println("点击位置"+position);
+            //myPresenter.openNewsDetail();
+            //myPresenter.openNewsDetail(new);
             //TODO:startActivity到详情页, intent的参数等缓存方式确定以后再决定
         }));
 
@@ -138,5 +143,15 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
 
         System.out.println("in createPresenter, type = "+type+", keyword = "+keyword);
         return new NewsListPresenter(type,keyword);
+    }
+
+    @Override
+    public void start(Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
+    public Context getMyContext() {
+        return getContext();
     }
 }
