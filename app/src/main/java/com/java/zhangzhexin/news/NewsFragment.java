@@ -33,6 +33,7 @@ public class NewsFragment extends Fragment {
     public NewsFragment(Tab tabObject){
         this.tabObject = tabObject;
         this.categories = tabObject.tabs;
+        //System.out.println("categories = "+categories);
     }
 
     public static NewsFragment newInstance(Tab tabObject){
@@ -72,6 +73,7 @@ public class NewsFragment extends Fragment {
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
+            System.out.println("category = "+categories.get(position));
             return categories.get(position);
         }
 
