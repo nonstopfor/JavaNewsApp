@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         if(newsFragment==null){
             tabObject = new Tab();
             tabObject.addTab("news");
-            tabObject.addTab("papers");
+            tabObject.addTab("paper");
             System.out.println("tabs = "+tabObject.tabs);
             newsFragment = NewsFragment.newInstance(tabObject);
             transaction.add(R.id.frameLayout,newsFragment);
