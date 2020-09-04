@@ -16,12 +16,14 @@ import android.view.MenuItem;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.java.zhangzhexin.model.Tab;
 import com.java.zhangzhexin.news.NewsFragment;
 import com.java.zhangzhexin.news.newslist.NewsListFragment;
 
 
 //FIXME: 模拟器上 切换时会崩掉
 public class MainActivity extends AppCompatActivity {
+    private Tab tabObject;
     private NewsFragment newsFragment;
     private NewsListFragment historyFragment;
     private SearchView searchView;
@@ -41,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
     public void initFragment(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if(newsFragment==null){
-            newsFragment = NewsFragment.newInstance();
+            tabObject = new Tab();
+            System.out.println(tabObject.tabs);
+            newsFragment = NewsFragment.newInstance(tabObject);
             transaction.add(R.id.frameLayout,newsFragment);
             System.out.println("finish construct newsFragment");
             //transaction.hide(newsFragment); //default显示新闻首页

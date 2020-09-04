@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.java.zhangzhexin.model.Tab;
 import com.java.zhangzhexin.news.newslist.NewsListFragment;
 
 import java.lang.reflect.Array;
@@ -26,12 +27,16 @@ public class NewsFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private MyPagerAdapter adapter;
-    private List<String>categories = new ArrayList<>(Arrays.asList("news","paper"));
+    private Tab tabObject;
+    private List<String>categories;
     //TODO: 分类的增加/删除
-    public NewsFragment(){}
+    public NewsFragment(Tab tabObject){
+        this.tabObject = tabObject;
+        this.categories = tabObject.tabs;
+    }
 
-    public static NewsFragment newInstance(){
-        NewsFragment newsFragment = new NewsFragment();
+    public static NewsFragment newInstance(Tab tabObject){
+        NewsFragment newsFragment = new NewsFragment(tabObject);
         return newsFragment;
     }
 
@@ -73,7 +78,7 @@ public class NewsFragment extends Fragment {
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            System.out.println("getItem: type = "+categories.get(position)+" keyword = "+"");
+            //System.out.println("getItem: type = "+categories.get(position)+" keyword = "+"");
             return NewsListFragment.newInstance(categories.get(position),"");
             //TODO: 传搜索的关键字
         }
