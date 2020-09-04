@@ -61,4 +61,10 @@ public class DataManager {
         refreshNew();
         return getMoreNews(size);
     }
+
+    public SingleNews getContent(String id) throws InterruptedException {
+        SingleNews singleNews = UrlManager.getSingleNewsById(id);
+        singleNews.save();
+        return singleNews;
+    }
 }
