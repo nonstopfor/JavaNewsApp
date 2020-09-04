@@ -52,7 +52,13 @@ public class SingleNews {
         DaoSession daoSession = App.getDaoSession();
         SingleNewsDao singleNewsDao = daoSession.getSingleNewsDao();
         // TODO: 检查如果this已在数据库中，再调insert是否会有问题
-        singleNewsDao.insert(this);
+        if (singleNewsDao.queryBuilder().where(SingleNewsDao.Properties.Id.eq(id)).list().isEmpty()) {
+            System.out.println("Saving SingleNews");
+            singleNewsDao.insert(this);
+        }
+        else{
+            System.out.println("SingleNews has already existed");
+        }
         System.out.println("SingleNews saved!");
     }
 
