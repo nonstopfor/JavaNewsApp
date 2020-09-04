@@ -39,7 +39,7 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
 //        news_content = findViewById(R.id.text_content);
 
         String news_id = getIntent().getStringExtra("news_id");
-        System.out.println("newdetailacitivity get id = "+news_id);
+//        System.out.println("newdetailacitivity get id = "+news_id);
         myPresenter.setNews(news_id);
         //TODO:调用presenter接口实现 返回一个SingleNews
 
@@ -66,7 +66,7 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
         //news_content.setText("这是一条新闻正文");
         news_title.setText(news.title);
         news_content.setText(news.content);
-        System.out.println("detail setNews finish!");
+//        System.out.println("detail setNews finish!");
         //FIXME:没显示
     }
 }
