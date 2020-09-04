@@ -21,6 +21,9 @@
                 android:resource="@xml/searchable"/>
         </activity>
 
+        <activity android:name=".news.newsdetail.NewsDetailActivity">
+        </activity>
+
         <provider
             android:authorities="com.java.zhangzhexin.SearchHistoryProvider"
             android:name=".SearchHistoryProvider"/>

@@ -1,23 +1,31 @@
 package com.java.zhangzhexin.news.newslist;
 
-import com.google.gson.JsonObject;
+import android.content.Intent;
+
+
 import com.java.zhangzhexin.BasePresenter;
-import com.java.zhangzhexin.BaseView;
 import com.java.zhangzhexin.model.DataManager;
 import com.java.zhangzhexin.model.NewsCard;
-import com.java.zhangzhexin.model.UrlManager;
+import com.java.zhangzhexin.news.newsdetail.NewsDetailActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NewsListPresenter extends BasePresenter<NewsListView> {
     private int page = 0;
     private DataManager dataManager;
-
+    private String type;
+    private String keyword;
     public NewsListPresenter(String type,String keyword){
-        super(type,keyword);
+        this.type = type;
+        this.keyword = keyword;
         System.out.println("presenter type = "+type+", keyword = "+keyword);
         dataManager = new DataManager(type);
+    }
+
+    public void openNewsDetail(NewsCard news){
+        Intent intent = new Intent(myView.getMyContext(), NewsDetailActivity.class);
+        intent.putExtra("news_id",news.id);
+        myView.start(intent);
     }
 
     public void getMoreNews(int size) throws InterruptedException {

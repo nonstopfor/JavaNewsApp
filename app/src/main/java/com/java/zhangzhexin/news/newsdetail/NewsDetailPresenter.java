@@ -10,7 +10,10 @@ import com.java.zhangzhexin.BasePresenter;
  */
 public class NewsDetailPresenter extends BasePresenter<NewsDetailView> {
 
-    public NewsDetailPresenter(String type, String keyword) {
-        super(type, keyword);
+    public NewsDetailPresenter(){}
+
+    public void setNews(String news_id){
+        myView.setNews(null);
+        //TODO:调用接口
     }
 }

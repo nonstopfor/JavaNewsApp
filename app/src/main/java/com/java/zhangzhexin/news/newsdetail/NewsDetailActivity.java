@@ -1,11 +1,15 @@
 package com.java.zhangzhexin.news.newsdetail;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import com.java.zhangzhexin.BaseActivity;
 import com.java.zhangzhexin.R;
+import com.java.zhangzhexin.model.SingleNews;
 
 
 /*
@@ -20,15 +24,47 @@ FIXME:
 先写完News的详情页 之后再决定如何扩展到其他的详情页
 */
 public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPresenter> implements NewsDetailView  {
-    @Override
-    public NewsDetailPresenter createPresenter() {
-        return null;
-    }
+    private TextView news_title;
+    private TextView news_content;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        //setContentView(R.layout.activity_detail);
+        setContentView(R.layout.news_detail);
+        news_title = findViewById(R.id.news_title);
+        news_content = findViewById(R.id.news_content);
+//        news_title = findViewById(R.id.text_detail);
+//        news_content = findViewById(R.id.text_content);
 
+        String news_id = getIntent().getStringExtra("news_id");
+        System.out.println("newdetailacitivity get id = "+news_id);
+        myPresenter.setNews(news_id);
+        //TODO:调用presenter接口实现 返回一个SingleNews
+
+    }
+
+    @Override
+    public void start(Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
+    public Context getMyContext() {
+        return this;
+    }
+
+    @Override
+    public NewsDetailPresenter createPresenter() {
+        return new NewsDetailPresenter();
+    }
+
+    @Override
+    public void setNews(SingleNews news) {
+        news_title.setText("这是一条新闻标题");
+        news_content.setText("这是一条新闻正文");
+
+        System.out.println("detail setNews finish!");
+        //FIXME:没显示
     }
 }
