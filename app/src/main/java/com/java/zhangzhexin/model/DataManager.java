@@ -34,6 +34,16 @@ public class DataManager {
         }
     }
 
+    public void refreshHistory() {
+        idx = 0;
+        DaoSession daoSession = App.getDaoSession();
+        SingleNewsDao singleNewsDao = daoSession.getSingleNewsDao();
+        allNews.clear();
+        for(SingleNews singleNews:singleNewsDao.loadAll()) {
+            allNews.add(new NewsCard(singleNews));
+        }
+    }
+
     public List<NewsCard> getMoreNewsOld(int size) {
         int len = allNews.size();
         if (BuildConfig.DEBUG && !(len > 0)) {
@@ -57,12 +67,20 @@ public class DataManager {
 
     public List<NewsCard> getMoreNews(int size) throws InterruptedException {
 //        return getMoreNewsOld(size);
+        if(type.equals("history")){
+            return getMoreNewsOld(size);
+        }
         return getMoreNewsNew(size);
     }
 
     public List<NewsCard> RefreshNews(int size) throws InterruptedException {
 //        refreshOld();
-        refreshNew();
+        if (type.equals("history")) {
+            refreshHistory();
+        }
+        else{
+            refreshNew();
+        }
         return getMoreNews(size);
     }
 
