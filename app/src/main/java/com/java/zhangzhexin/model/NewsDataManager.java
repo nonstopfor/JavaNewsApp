@@ -39,9 +39,12 @@ public class NewsDataManager {
         DaoSession daoSession = App.getDaoSession();
         SingleNewsDao singleNewsDao = daoSession.getSingleNewsDao();
         allNews.clear();
-        for(SingleNews singleNews:singleNewsDao.loadAll()) {
-            allNews.add(new NewsCard(singleNews));
+        List<SingleNews> allSingleNews = singleNewsDao.loadAll();
+
+        for (int i = allSingleNews.size() - 1; i >= 0; --i) {
+            allNews.add(new NewsCard(allSingleNews.get(i)));
         }
+
     }
 
     public List<NewsCard> getMoreNewsOld(int size) {
@@ -67,7 +70,7 @@ public class NewsDataManager {
 
     public List<NewsCard> getMoreNews(int size) throws InterruptedException {
 //        return getMoreNewsOld(size);
-        if(type.equals("history")){
+        if (type.equals("history")) {
             return getMoreNewsOld(size);
         }
         return getMoreNewsNew(size);
@@ -77,8 +80,7 @@ public class NewsDataManager {
 //        refreshOld();
         if (type.equals("history")) {
             refreshHistory();
-        }
-        else{
+        } else {
             refreshNew();
         }
         return getMoreNews(size);
