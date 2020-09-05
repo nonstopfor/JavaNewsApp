@@ -48,7 +48,7 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
 //        news_title = findViewById(R.id.text_detail);
 //        news_content = findViewById(R.id.text_content);
 
-        news_id = getIntent().getStringExtra("news_id");
+        //news_id = getIntent().getStringExtra("news_id"); //移到resume里
 //        System.out.println("newdetailacitivity get id = "+news_id);
         System.out.println("详情页离开onCreate");
     }
@@ -70,9 +70,18 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
     @Override
     protected void onResume() {
         super.onResume();
+
+        news_id = getIntent().getStringExtra("news_id");
+        System.out.println("详情页收到新的news_id = "+news_id);
         myPresenter.setNews(news_id);
         System.out.println("详情页setNews");
         //TODO:调用presenter接口实现 返回一个SingleNews
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
     }
 
     @Override

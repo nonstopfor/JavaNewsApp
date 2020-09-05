@@ -86,7 +86,7 @@ public class NewsFragment extends Fragment {
             Intent intent = new Intent(getContext(), SetChannelActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
-            //TODO: 接收
+            //TODO: 修改tablayout
         });
 //        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) editButton.getLayoutParams();
 //        System.out.println("tablayout height = "+tabLayout.getLayoutParams().height);
