@@ -4,28 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.cheng.channel.Channel;
 import com.cheng.channel.ChannelView;
-import com.cheng.channel.DefaultStyleAdapter;
-import com.cheng.channel.ViewHolder;
-import com.cheng.channel.adapter.BaseStyleAdapter;
-import com.cheng.channel.adapter.ChannelListenerAdapter;
 import com.java.zhangzhexin.BaseActivity;
 import com.java.zhangzhexin.R;
 
-
 import java.util.LinkedHashMap;
 import java.util.List;
-
-//TODO: 分类增删, 等config做好之后做
 
 public class SetChannelActivity extends BaseActivity<SetChannelView, SetChannelPresenter> implements SetChannelView {
     private ChannelView channelView;
@@ -76,47 +65,20 @@ public class SetChannelActivity extends BaseActivity<SetChannelView, SetChannelP
         super.onResume();
         data = myPresenter.getData();
         adapter.setData(data);
-        channelView.setStyleAdapter(adapter);
+        channelView.setStyleAdapter(adapter); //没有notify 只能每次重新set
         System.out.println("分类列表getData");
     }
 
+    //点击返回键
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == android.R.id.home){
             myPresenter.updateTab(channelView.getMyChannel());
-            //finish();
             myPresenter.back();
-            //TODO:更新tab
-
         }
         return super.onOptionsItemSelected(item);
     }
 
-    //先不需要自定义样式
-    /*
-    class MyChannelAdapter extends BaseStyleAdapter<MyChannelAdapter.MyChannelViewHolder>{
-
-        class MyChannelViewHolder extends ViewHolder {
-            TextView tv;
-            ImageView iv;
-
-            public MyChannelViewHolder(View itemView) {
-                super(itemView);
-                //tv = itemView.findViewById(R.id.tv_channel);
-                //iv = itemView.findViewById(R.id.iv_delete);
-            }
-        }
-        @Override
-        public MyChannelAdapter.MyChannelViewHolder createStyleView(ViewGroup parent, String channelName) {
-            return null;
-        }
-
-        @Override
-        public LinkedHashMap<String, List<Channel>> getChannelData() {
-            return null;
-        }
-    }
-    */
     @Override
     public SetChannelPresenter createPresenter() {
         return new SetChannelPresenter();

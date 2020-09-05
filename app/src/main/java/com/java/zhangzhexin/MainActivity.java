@@ -1,6 +1,5 @@
 package com.java.zhangzhexin;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
@@ -13,13 +12,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
-import android.view.MenuItem;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.java.zhangzhexin.model.Tab;
-import com.java.zhangzhexin.news.NewsFragment;
-import com.java.zhangzhexin.news.newslist.NewsListFragment;
+import com.java.zhangzhexin.overview.newslist.NewsListFragment;
 
 
 //FIXME: 模拟器上 切换时会崩掉

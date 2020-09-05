@@ -1,4 +1,4 @@
-package com.java.zhangzhexin.news.newslist;
+package com.java.zhangzhexin.overview.newslist;
 
 import com.java.zhangzhexin.BaseView;
 import com.java.zhangzhexin.model.NewsCard;

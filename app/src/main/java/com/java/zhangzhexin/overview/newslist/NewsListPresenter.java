@@ -1,4 +1,4 @@
-package com.java.zhangzhexin.news.newslist;
+package com.java.zhangzhexin.overview.newslist;
 
 import android.content.Intent;
 
@@ -6,7 +6,7 @@ import android.content.Intent;
 import com.java.zhangzhexin.BasePresenter;
 import com.java.zhangzhexin.model.NewsDataManager;
 import com.java.zhangzhexin.model.NewsCard;
-import com.java.zhangzhexin.news.newsdetail.NewsDetailActivity;
+import com.java.zhangzhexin.detail.newsdetail.NewsDetailActivity;
 
 import java.util.List;
 

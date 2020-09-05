@@ -1,4 +1,4 @@
-package com.java.zhangzhexin.news.newsdetail;
+package com.java.zhangzhexin.detail.newsdetail;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.java.zhangzhexin.BaseActivity;
-import com.java.zhangzhexin.MainActivity;
 import com.java.zhangzhexin.R;
 import com.java.zhangzhexin.model.SingleNews;
 
