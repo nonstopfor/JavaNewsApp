@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("enter MainActivity onCreate!");
+        System.out.println("糟糕！进入MainActivity onCreate!");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

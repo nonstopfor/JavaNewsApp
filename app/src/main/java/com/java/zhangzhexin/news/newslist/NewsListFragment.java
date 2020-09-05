@@ -39,8 +39,6 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
         type = getArguments().getString("type");
         keyword = getArguments().getString("keyword");
         System.out.println("NewsListFragment : "+type+" onCreate!");
-        adapter = new NewsAdapter(getContext(),type);
-        layoutManager = new LinearLayoutManager(getContext());
         //System.out.println("newslistfragment arguments = "+getArguments());
         super.onCreate(savedInstanceState);
         //System.out.println("newslistfragment type = "+type+", keyword = "+keyword);
@@ -69,25 +67,29 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         System.out.println("NewsListFragment : "+type+" onCreateView");
+        if(view == null)
+        {
+            System.out.println("NewsListFragment: "+type+" view为空");
+            view = inflater.inflate(R.layout.fragment_newslist, container, false);
+            initView();
+            initSet();
+        }
+        else
+            System.out.println("NewsListFragmetn: "+type+" view非空");
 
-        if(view != null)
-            return view;
+        return view;
+    }
 
-//        try {
-//            myPresenter.refreshNews(20);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-        //FIXME:移到onResume中
-
-
-        System.out.println("NewsListFragment: "+type+" really create View");
-
-        view = inflater.inflate(R.layout.fragment_newslist, container, false);
+    public void initView(){
         recyclerView = view.findViewById(R.id.recyclerView);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+    }
+
+    public void initSet(){
+        adapter = new NewsAdapter(getContext(),type);
+        layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
         //点击事件
         recyclerView.addOnItemTouchListener(new NewsListener(getContext(),recyclerView, (news, position) -> {
             TextView title = news.findViewById(R.id.news_title);
@@ -95,28 +97,17 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
                 title.setTextColor(getResources().getColor(R.color.colorReadNews)); //改变颜色
             myPresenter.openNewsDetail(adapter.getNews(position));
             System.out.println("点击位置"+position);
-            //myPresenter.openNewsDetail();
-            //myPresenter.openNewsDetail(new);
-            //TODO:startActivity到详情页, intent的参数等缓存方式确定以后再决定
         }));
 
         //上拉获取更多
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            //TODO:秦岳组还重写了onScroll 可能是为了处理在滑动过程中到达底部的情况?
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 int lastItemPosition = layoutManager.findLastVisibleItemPosition();
                 if(newState == RecyclerView.SCROLL_STATE_IDLE && lastItemPosition == layoutManager.getItemCount()-1){
-
                     System.out.println("arrive last item!");
-                    try {
-                        myPresenter.getMoreNews(20);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    //appendNewsList(20);
-                    //TODO:获取更多新闻->显示
+                    myPresenter.getMoreNews(20);
                 }
                 //当前在滚动的recyclerView,  当前滚动状态
                 /*
@@ -128,35 +119,23 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
             }
         });
 
+
         //下拉刷新
-        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(() -> {
             System.out.println("refresh!");
             swipeRefreshLayout.setRefreshing(true);
-            //adapter.setData(new String[]{"news4", "news5", "news6","news7","news4", "news5", "news6","news7","news4", "news5", "news6","news7","news4", "news5", "news6","news7"});
-
-            try {
-                myPresenter.refreshNews(20);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            myPresenter.refreshNews(20);
             swipeRefreshLayout.setRefreshing(false); //FIXME:需要手动关闭动画
         });
 
-        return view;
     }
-
 
     @Override
     public void onResume() {
         super.onResume();
         System.out.println("NewsListFragment : "+type+" onResume");
         if(isFirstLoad || type.equals("history")) {
-            try {
-                myPresenter.refreshNews(20);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            myPresenter.refreshNews(20);
             isFirstLoad = false;
         }
     }

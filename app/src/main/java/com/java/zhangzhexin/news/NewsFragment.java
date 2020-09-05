@@ -35,7 +35,9 @@ public class NewsFragment extends Fragment {
     private Tab tabObject;
     private ImageView editButton;
     private List<String>categories;
-    //TODO: 分类的增加/删除
+
+    private View view;
+
     public NewsFragment(Tab tabObject){
         this.tabObject = tabObject;
         this.categories = tabObject.getTabs();
@@ -48,41 +50,51 @@ public class NewsFragment extends Fragment {
         return newsFragment;
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        adapter = new MyPagerAdapter(getChildFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-    }
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        adapter = new MyPagerAdapter(getChildFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+//    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_news, container,false);
+        if(view == null){
+            System.out.println("NewsFragment view为空");
+            view = inflater.inflate(R.layout.fragment_news, container,false);
+            initView();
+            initSet();
+        }
+        else{
+            System.out.println("NewsFragment view非空 不需要重新设置");
+        }
+        //view = inflater.inflate(R.layout.fragment_news, container,false);
+        return view;
+    }
+
+    public void initView(){
         viewPager = view.findViewById(R.id.viewPager);
         tabLayout = view.findViewById(R.id.tabLayout);
         editButton = view.findViewById(R.id.editButton);
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("点击分类按钮，将弹出分类页面");
-                Intent intent = new Intent(getContext(), SetChannelActivity.class);
-                startActivity(intent);
-                //TODO: 接收
-            }
+
+    }
+
+    public void initSet(){
+        editButton.setOnClickListener(v -> {
+            System.out.println("点击分类按钮，将弹出分类页面");
+            Intent intent = new Intent(getContext(), SetChannelActivity.class);
+            startActivity(intent);
+            //TODO: 接收
         });
 //        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) editButton.getLayoutParams();
 //        System.out.println("tablayout height = "+tabLayout.getLayoutParams().height);
 //        params.height = tabLayout.getLayoutParams().height;
 //        System.out.println("height = "+ params.height);
 //        editButton.setLayoutParams(params);
+        adapter = new MyPagerAdapter(getChildFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-
-//        for(String category : categories){
-//            tabLayout.addTab(tabLayout.newTab().setText(category));
-//        }
-        return view;
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {

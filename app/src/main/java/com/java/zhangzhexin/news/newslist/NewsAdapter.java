@@ -78,7 +78,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         if(isEmpty()) {
-            System.out.println("NewsAdapter data为空， ItemCount return 0");
+            System.out.println("NewsAdapter : "+type+" data为空， ItemCount return 0");
             return 0;
         }
         else

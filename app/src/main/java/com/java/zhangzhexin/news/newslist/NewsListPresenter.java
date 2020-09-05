@@ -29,16 +29,26 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
         myView.start(intent);
     }
 
-    public void getMoreNews(int size) throws InterruptedException {
-        List<NewsCard> result = newsDataManager.getMoreNews(size);
+    public void getMoreNews(int size) {
+        List<NewsCard> result = null;
+        try {
+            result = newsDataManager.getMoreNews(size);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assert(result!=null);
         myView.appendNewsList(result);
     }
 
 
-    public void refreshNews(int size) throws InterruptedException {
+    public void refreshNews(int size) {
         System.out.println("refreshNews!");
-        List<NewsCard> result = newsDataManager.RefreshNews(size);
+        List<NewsCard> result = null;
+        try {
+            result = newsDataManager.RefreshNews(size);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assert(result!=null);
         myView.resetNewsList(result);
     }
