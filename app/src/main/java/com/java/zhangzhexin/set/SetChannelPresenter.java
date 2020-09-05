@@ -38,6 +38,7 @@ public class SetChannelPresenter extends BasePresenter<SetChannelView> {
 
     public void back(){
         Intent intent = new Intent(myView.getMyContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         myView.start(intent);
     }
 
