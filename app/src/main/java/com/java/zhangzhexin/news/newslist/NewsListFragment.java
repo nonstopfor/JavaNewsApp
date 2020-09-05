@@ -165,6 +165,7 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
 
     @Override
     public void start(Intent intent) {
+
         startActivity(intent);
     }
 

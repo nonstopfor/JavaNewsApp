@@ -31,6 +31,7 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
     private TextView news_content;
     private TextView news_source;
     private TextView news_date;
+    private String news_id;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,16 +48,15 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
 //        news_title = findViewById(R.id.text_detail);
 //        news_content = findViewById(R.id.text_content);
 
-        String news_id = getIntent().getStringExtra("news_id");
+        news_id = getIntent().getStringExtra("news_id");
 //        System.out.println("newdetailacitivity get id = "+news_id);
-        myPresenter.setNews(news_id);
-        //TODO:调用presenter接口实现 返回一个SingleNews
         System.out.println("详情页离开onCreate");
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == android.R.id.home){
+            //finish();
             myPresenter.back();
             //finish();
 //            Intent intent = new Intent(this, MainActivity.class);
@@ -65,6 +65,14 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
 //            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        myPresenter.setNews(news_id);
+        System.out.println("详情页setNews");
+        //TODO:调用presenter接口实现 返回一个SingleNews
     }
 
     @Override

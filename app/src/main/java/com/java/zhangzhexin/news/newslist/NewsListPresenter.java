@@ -25,6 +25,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
     public void openNewsDetail(NewsCard news){
         //TODO:切换时加特效
         Intent intent = new Intent(myView.getMyContext(), NewsDetailActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         intent.putExtra("news_id",news.id);
         myView.start(intent);
     }

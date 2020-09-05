@@ -32,23 +32,19 @@ public class SetChannelActivity extends BaseActivity<SetChannelView, SetChannelP
     //private List<Channel> checkedChannelList;
     //private List<Channel> uncheckedChannelList;
     private LinkedHashMap<String, List<Channel>> data;
+    private MyStyleAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        System.out.println("分类列表onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_channel);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        System.out.println("");
-        data = myPresenter.getData();
 
         channelView = findViewById(R.id.channelView);
         channelView.setChannelFixedCount(0); //设置频道数
-        channelView.setStyleAdapter(new DefaultStyleAdapter() {
-            @Override
-            public LinkedHashMap<String, List<Channel>> getChannelData() {
-                return data;
-            }
-        }); //设置adapter
+        adapter = new MyStyleAdapter();
+        //channelView.setStyleAdapter(adapter); //设置adapter
 
 //        channelView.setOnChannelListener(new ChannelListenerAdapter() {
 //            @Override
@@ -76,9 +72,19 @@ public class SetChannelActivity extends BaseActivity<SetChannelView, SetChannelP
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        data = myPresenter.getData();
+        adapter.setData(data);
+        channelView.setStyleAdapter(adapter);
+        System.out.println("分类列表getData");
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == android.R.id.home){
             myPresenter.updateTab(channelView.getMyChannel());
+            //finish();
             myPresenter.back();
             //TODO:更新tab
 
