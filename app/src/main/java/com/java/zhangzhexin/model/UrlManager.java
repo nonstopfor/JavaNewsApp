@@ -105,4 +105,34 @@ public class UrlManager {
         JsonObject jsonData = new JsonParser().parse(data).getAsJsonObject();
         return new SingleNews(jsonData.getAsJsonObject("data"));
     }
+
+    public static List<EpidemicDataCard> getLatestEpidemicData() throws InterruptedException {
+        List<EpidemicDataCard> result = new ArrayList<>();
+        String url = "https://covid-dashboard.aminer.cn/api/dist/epidemic.json";
+        String data = readUrl(url);
+        JsonObject jsonData = new JsonParser().parse(data).getAsJsonObject();
+        for (String key : jsonData.keySet()) {
+//            System.out.print(key + " ");
+            JsonArray allData = jsonData.get(key).getAsJsonObject().get("data").getAsJsonArray();
+            int len = allData.size();
+            JsonArray newData = allData.get(len - 1).getAsJsonArray();
+            Integer confirmed = readInt(newData.get(0));
+            Integer suspected = readInt(newData.get(1));
+            Integer cured = readInt(newData.get(2));
+            Integer dead = readInt(newData.get(3));
+            result.add(new EpidemicDataCard(key, confirmed, suspected, cured, dead));
+
+//            System.out.println(key+" "+confirmed+" "+suspected+" "+cured+" "+dead);
+        }
+//        System.out.println(jsonData.keySet().size());
+
+        return result;
+    }
+
+    public static Integer readInt(JsonElement obj){
+        if(obj.isJsonNull()){
+            return null;
+        }
+        return obj.getAsInt();
+    }
 }
