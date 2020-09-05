@@ -19,7 +19,7 @@ public class EpidemicDataCard {
     }
 
     private void splitPlace(String place) {
-        String[] strings = place.split("|");
+        String[] strings = place.split("\\|");
         country = strings[0];
         if (strings.length > 1) province = strings[1];
         if (strings.length > 2) county = strings[2];
