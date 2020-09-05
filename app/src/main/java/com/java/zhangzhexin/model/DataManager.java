@@ -46,9 +46,9 @@ public class DataManager {
 
     public List<NewsCard> getMoreNewsOld(int size) {
         int len = allNews.size();
-        if (BuildConfig.DEBUG && !(len > 0)) {
-            throw new AssertionError("Assertion failed");
-        }
+//        if (BuildConfig.DEBUG && !(len > 0)) {
+//            throw new AssertionError("Assertion failed");
+//        }
         int to = Math.min(len, idx + size);
         List<NewsCard> result = new ArrayList<>();
         for (int i = idx; i < to; ++i) {
