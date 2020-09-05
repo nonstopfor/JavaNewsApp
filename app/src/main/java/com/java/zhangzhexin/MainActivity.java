@@ -46,9 +46,7 @@ public class MainActivity extends AppCompatActivity {
     public void initFragment(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if(newsFragment==null){
-            tabObject = new Tab();
-            tabObject.addTab("news");
-            tabObject.addTab("paper");
+            tabObject = Tab.getInstance();
             //System.out.println("tabs = "+tabObject.tabs);
             newsFragment = NewsFragment.newInstance(tabObject);
             transaction.add(R.id.frameLayout,newsFragment);

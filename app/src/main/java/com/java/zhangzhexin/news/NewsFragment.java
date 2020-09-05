@@ -36,7 +36,7 @@ public class NewsFragment extends Fragment {
     //TODO: 分类的增加/删除
     public NewsFragment(Tab tabObject){
         this.tabObject = tabObject;
-        this.categories = tabObject.tabs;
+        this.categories = tabObject.getTabs();
         //this.categories = new ArrayList<>(Arrays.asList("news","paper","news","paper","news","paper","news","paper","news","paper","news","paper"));
         //System.out.println("categories = "+categories);
     }
