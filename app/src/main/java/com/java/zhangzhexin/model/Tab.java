@@ -112,5 +112,6 @@ public class Tab {
 
     public void setTabs(List<String> tabs) {
         this.tabs = tabs;
+        save();
     }
 }
