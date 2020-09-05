@@ -40,4 +40,13 @@ public class SetChannelPresenter extends BasePresenter<SetChannelView> {
         Intent intent = new Intent(myView.getMyContext(), MainActivity.class);
         myView.start(intent);
     }
+
+    //点击返回键时 更新Tab的内容
+    public void updateTab(List<Channel>checkedChannelList){
+        List<String> checkedTabs = new ArrayList<>();
+        for(Channel channel : checkedChannelList){
+            checkedTabs.add(channel.getChannelName());
+        }
+        tab.setTabs(checkedTabs);
+    }
 }

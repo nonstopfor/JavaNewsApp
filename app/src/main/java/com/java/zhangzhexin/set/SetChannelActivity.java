@@ -49,35 +49,39 @@ public class SetChannelActivity extends BaseActivity<SetChannelView, SetChannelP
                 return data;
             }
         }); //设置adapter
-        channelView.setOnChannelListener(new ChannelListenerAdapter() {
-            @Override
-            public void channelItemClick(int position, Channel channel) {
-                System.out.println(position + ".." + channel);
-            }
 
-            @Override
-            public void channelEditStateItemClick(int position, Channel channel) {
-                System.out.println("EditState: "+position + ".." + channel);
-            }
-
-            @Override
-            public void channelEditFinish(List<Channel> channelList) {
-                System.out.println(channelList.toString());
-                System.out.println(channelView.isChange() + "");
-                System.out.println(channelView.getOtherChannel().toString());
-            }
-
-            @Override
-            public void channelEditStart() {
-                System.out.println("channelEditStart");
-            }
-        });
+//        channelView.setOnChannelListener(new ChannelListenerAdapter() {
+//            @Override
+//            public void channelItemClick(int position, Channel channel) {
+//                System.out.println(position + ".." + channel);
+//            }
+//
+//            @Override
+//            public void channelEditStateItemClick(int position, Channel channel) {
+//                System.out.println("EditState: "+position + ".." + channel);
+//            }
+//
+//            @Override
+//            public void channelEditFinish(List<Channel> channelList) {
+//                System.out.println(channelList.toString());
+//                System.out.println(channelView.isChange() + "");
+//                System.out.println(channelView.getOtherChannel().toString());
+//            }
+//
+//            @Override
+//            public void channelEditStart() {
+//                System.out.println("channelEditStart");
+//            }
+//        });
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == android.R.id.home){
+            myPresenter.updateTab(channelView.getMyChannel());
             myPresenter.back();
+            //TODO:更新tab
+
         }
         return super.onOptionsItemSelected(item);
     }

@@ -68,8 +68,7 @@ public class NewsFragment extends Fragment {
                 System.out.println("点击分类按钮，将弹出分类页面");
                 Intent intent = new Intent(getContext(), SetChannelActivity.class);
                 startActivity(intent);
-                //TODO: 弹出分类页面 setActivity
-                //
+                //TODO: 接收
             }
         });
 //        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) editButton.getLayoutParams();
