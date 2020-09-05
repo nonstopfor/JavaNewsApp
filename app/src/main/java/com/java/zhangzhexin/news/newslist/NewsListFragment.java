@@ -134,7 +134,7 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
     public void onResume() {
         super.onResume();
         System.out.println("NewsListFragment : "+type+" onResume");
-        if(isFirstLoad || type.equals("history")) {
+        if(isFirstLoad || type.equals("history")) { //浏览记录每次都要刷新
             myPresenter.refreshNews(20);
             isFirstLoad = false;
         }
