@@ -1,23 +1,20 @@
-package com.java.zhangzhexin.news.newslist;
+package com.java.zhangzhexin.overview.newslist;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.java.zhangzhexin.BaseFragment;
-import com.java.zhangzhexin.BasePresenter;
 import com.java.zhangzhexin.R;
 import com.java.zhangzhexin.model.NewsCard;
 

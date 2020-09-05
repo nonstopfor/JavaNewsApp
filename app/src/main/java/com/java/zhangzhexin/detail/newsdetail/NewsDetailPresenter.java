@@ -1,4 +1,4 @@
-package com.java.zhangzhexin.news.newsdetail;
+package com.java.zhangzhexin.detail.newsdetail;
 
 import android.content.Intent;
 

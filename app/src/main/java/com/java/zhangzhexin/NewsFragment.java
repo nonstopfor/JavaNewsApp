@@ -1,4 +1,4 @@
-package com.java.zhangzhexin.news;
+package com.java.zhangzhexin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,26 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.java.zhangzhexin.model.Tab;
-import com.java.zhangzhexin.news.newslist.NewsListFragment;
+import com.java.zhangzhexin.overview.newslist.NewsListFragment;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import com.java.zhangzhexin.R;
 import com.java.zhangzhexin.set.SetChannelActivity;
 
 public class NewsFragment extends Fragment {
