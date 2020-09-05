@@ -22,7 +22,7 @@ import com.java.zhangzhexin.overview.newslist.NewsListFragment;
 //FIXME: 模拟器上 切换时会崩掉
 public class MainActivity extends AppCompatActivity {
     private Tab tabObject;
-    private NewsFragment newsFragment;
+    private HomeFragment homeFragment;
     private NewsListFragment historyFragment;
     private SearchView searchView;
     private BottomNavigationView bottomNavigationView;
@@ -42,11 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void initFragment(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if(newsFragment==null){
+        if(homeFragment ==null){
             tabObject = Tab.getInstance();
             //System.out.println("tabs = "+tabObject.tabs);
-            newsFragment = NewsFragment.newInstance(tabObject);
-            transaction.add(R.id.frameLayout,newsFragment);
+            homeFragment = HomeFragment.newInstance(tabObject);
+            transaction.add(R.id.frameLayout, homeFragment);
             
             System.out.println("finish construct newsFragment");
             //transaction.hide(newsFragment); //default显示新闻首页
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         transaction.commit();
-        currentFragment = newsFragment; //default是新闻首页
+        currentFragment = homeFragment; //default是新闻首页
     }
 
     @Override
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             if(menuItem.getItemId() == R.id.home) {
-                switchFragment(newsFragment);
+                switchFragment(homeFragment);
                 //getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, newsFragment).commit();
                 System.out.println("切换到首页");
                 return true; //不return true切换时没有动画效果

@@ -22,7 +22,7 @@ import java.util.List;
 
 import com.java.zhangzhexin.set.SetChannelActivity;
 
-public class NewsFragment extends Fragment {
+public class HomeFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private MyPagerAdapter adapter;
@@ -31,7 +31,7 @@ public class NewsFragment extends Fragment {
 
     private View view;
 
-    public NewsFragment(Tab tabObject){
+    public HomeFragment(Tab tabObject){
         this.tabObject = tabObject;
         System.out.println("构造NewsFragment, tabs = "+tabObject.getTabs());
         //this.categories = tabObject.getTabs();
@@ -54,9 +54,9 @@ public class NewsFragment extends Fragment {
     }
 
 
-    public static NewsFragment newInstance(Tab tabObject){
-        NewsFragment newsFragment = new NewsFragment(tabObject);
-        return newsFragment;
+    public static HomeFragment newInstance(Tab tabObject){
+        HomeFragment homeFragment = new HomeFragment(tabObject);
+        return homeFragment;
     }
 
 //    @Override
