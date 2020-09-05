@@ -44,4 +44,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'org.greenrobot:greendao:3.3.0'
     implementation 'com.github.chengzhicao:ChannelView:v1.1.2'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
