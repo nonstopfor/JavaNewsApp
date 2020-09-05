@@ -81,7 +81,7 @@ public class NewsFragment extends Fragment {
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            //System.out.println("getItem: type = "+categories.get(position)+" keyword = "+"");
+            System.out.println("getItem: type = "+categories.get(position)+" keyword = "+"");
             return NewsListFragment.newInstance(categories.get(position),"");
         }
 

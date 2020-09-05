@@ -35,13 +35,13 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        System.out.println("NewsListFragment : "+type+" onCreate!");
-        adapter = new NewsAdapter(getContext());
-        layoutManager = new LinearLayoutManager(getContext());
-        //System.out.println("newslistfragment arguments = "+getArguments());
         assert getArguments() != null;
         type = getArguments().getString("type");
         keyword = getArguments().getString("keyword");
+        System.out.println("NewsListFragment : "+type+" onCreate!");
+        adapter = new NewsAdapter(getContext(),type);
+        layoutManager = new LinearLayoutManager(getContext());
+        //System.out.println("newslistfragment arguments = "+getArguments());
         super.onCreate(savedInstanceState);
         //System.out.println("newslistfragment type = "+type+", keyword = "+keyword);
         //FIXME:转移 visible时create
@@ -91,7 +91,8 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
         //点击事件
         recyclerView.addOnItemTouchListener(new NewsListener(getContext(),recyclerView, (news, position) -> {
             TextView title = news.findViewById(R.id.news_title);
-            title.setTextColor(getResources().getColor(R.color.colorReadNews)); //改变颜色
+            if(!type.equals("history"))
+                title.setTextColor(getResources().getColor(R.color.colorReadNews)); //改变颜色
             myPresenter.openNewsDetail(adapter.getNews(position));
             System.out.println("点击位置"+position);
             //myPresenter.openNewsDetail();
@@ -150,7 +151,7 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
     public void onResume() {
         super.onResume();
         System.out.println("NewsListFragment : "+type+" onResume");
-        if(isFirstLoad) {
+        if(isFirstLoad || type.equals("history")) {
             try {
                 myPresenter.refreshNews(20);
             } catch (InterruptedException e) {

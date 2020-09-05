@@ -18,9 +18,11 @@ import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private List<NewsCard> data = null;
     private Context myContext;
+    private String type;
 
-    public NewsAdapter(Context myContext){
+    public NewsAdapter(Context myContext,String type){
         this.myContext = myContext;
+        this.type = type;
     }
 
     public boolean isEmpty(){
@@ -66,7 +68,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull NewsAdapter.ViewHolder holder, int position) {
         holder.news_title.setText(data.get(position).title);
-        if(data.get(position).visited())
+        if(!type.equals("history") && data.get(position).visited())
             holder.news_title.setTextColor(myContext.getResources().getColor(R.color.colorReadNews));
         holder.news_date.setText(data.get(position).time);
         holder.news_source.setText(data.get(position).source);

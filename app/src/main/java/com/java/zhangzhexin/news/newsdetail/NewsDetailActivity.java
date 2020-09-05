@@ -34,6 +34,7 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        System.out.println("详情页onCreate");
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_detail);
@@ -50,7 +51,7 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
 //        System.out.println("newdetailacitivity get id = "+news_id);
         myPresenter.setNews(news_id);
         //TODO:调用presenter接口实现 返回一个SingleNews
-
+        System.out.println("详情页离开onCreate");
     }
 
     @Override
