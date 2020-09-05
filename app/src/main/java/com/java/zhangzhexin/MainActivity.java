@@ -100,18 +100,6 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("离开MainActivity.onCreate");
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        System.out.println("main activity is destroy");
-//        super.onDestroy();
-//    }
-//
-//    @Override
-//    public void finish() {
-//        System.out.println("main activity is finish");
-//        moveTaskToBack(true);
-//    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 

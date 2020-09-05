@@ -16,8 +16,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.java.zhangzhexin.model.Tab;
+import com.java.zhangzhexin.overview.epidemic.data.EpidemicDataFragment;
 import com.java.zhangzhexin.overview.newslist.NewsListFragment;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.java.zhangzhexin.set.SetChannelActivity;
@@ -28,6 +30,9 @@ public class HomeFragment extends Fragment {
     private MyPagerAdapter adapter;
     private Tab tabObject;
     private ImageView editButton;
+
+    private List<String>newsTypeList = Arrays.asList("news","paper"); //TODO：添加聚类
+
 
     private View view;
 
@@ -135,7 +140,20 @@ public class HomeFragment extends Fragment {
         @Override
         public Fragment getItem(int position) {
             System.out.println("getItem: type = "+data.get(position)+" keyword = "+"");
-            return NewsListFragment.newInstance(data.get(position),"");
+            String type = data.get(position);
+            switch (Tab.getType(type)) {
+                case news:
+                    return NewsListFragment.newInstance(type,"");
+                case epidemicData:
+                    return EpidemicDataFragment.newInstance();
+                case scholar: //TODO:修改为对应的fragment
+                    return NewsListFragment.newInstance(type,"");
+                case graph:
+                    return NewsListFragment.newInstance(type,"");
+                default:
+                    return NewsListFragment.newInstance(type,"");
+            }
+            //return NewsListFragment.newInstance(data.get(position),"");
         }
 
         @Override
