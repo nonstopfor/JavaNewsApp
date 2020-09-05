@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -44,7 +45,7 @@ public class NewsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter = new MyPagerAdapter(getChildFragmentManager());
+        adapter = new MyPagerAdapter(getChildFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
 
     @Nullable
@@ -63,11 +64,11 @@ public class NewsFragment extends Fragment {
         return view;
     }
 
-    private class MyPagerAdapter extends FragmentStatePagerAdapter{
+    private class MyPagerAdapter extends FragmentPagerAdapter {
 
-        public MyPagerAdapter(@NonNull FragmentManager fm) {
-            super(fm);
-
+        public MyPagerAdapter(@NonNull FragmentManager fm,int behavior) {
+            super(fm,behavior);
+            System.out.println("");
         }
 
         @Nullable
@@ -82,7 +83,6 @@ public class NewsFragment extends Fragment {
         public Fragment getItem(int position) {
             //System.out.println("getItem: type = "+categories.get(position)+" keyword = "+"");
             return NewsListFragment.newInstance(categories.get(position),"");
-            //TODO: 传搜索的关键字
         }
 
         @Override

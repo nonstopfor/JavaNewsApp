@@ -16,10 +16,15 @@ import com.java.zhangzhexin.model.NewsCard;
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
-    private List<NewsCard> data;
+    private List<NewsCard> data = null;
     private Context myContext;
+
     public NewsAdapter(Context myContext){
         this.myContext = myContext;
+    }
+
+    public boolean isEmpty(){
+        return data == null;
     }
 
     //设置newslist显示的新闻
@@ -70,6 +75,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return data.size();
+        if(isEmpty()) {
+            System.out.println("NewsAdapter data为空， ItemCount return 0");
+            return 0;
+        }
+        else
+            return data.size();
     }
 }

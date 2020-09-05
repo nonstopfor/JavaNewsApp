@@ -37,6 +37,7 @@ public class NewsListPresenter extends BasePresenter<NewsListView> {
 
 
     public void refreshNews(int size) throws InterruptedException {
+        System.out.println("refreshNews!");
         List<NewsCard> result = dataManager.RefreshNews(size);
         assert(result!=null);
         myView.resetNewsList(result);

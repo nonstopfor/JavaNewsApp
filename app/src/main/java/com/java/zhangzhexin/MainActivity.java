@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Lifecycle;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -35,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
         if(currentFragment != target){
             System.out.println("current fragment = "+currentFragment+", target fragment = "+target);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.hide(currentFragment).show(target).commit();
+            transaction.hide(currentFragment).show(target);
+            transaction.setMaxLifecycle(currentFragment, Lifecycle.State.STARTED).setMaxLifecycle(target, Lifecycle.State.RESUMED);
+            transaction.commit();
             currentFragment = target;
         }
     }
@@ -49,12 +52,13 @@ public class MainActivity extends AppCompatActivity {
             //System.out.println("tabs = "+tabObject.tabs);
             newsFragment = NewsFragment.newInstance(tabObject);
             transaction.add(R.id.frameLayout,newsFragment);
+            
             System.out.println("finish construct newsFragment");
             //transaction.hide(newsFragment); //default显示新闻首页
         }
         if(historyFragment==null){
-            historyFragment = NewsListFragment.newInstance("news",""); //TODO:要给history一种类型
-            transaction.add(R.id.frameLayout,historyFragment);
+            historyFragment = NewsListFragment.newInstance("history",""); //TODO:要给history一种类型
+            transaction.add(R.id.frameLayout,historyFragment).setMaxLifecycle(historyFragment, Lifecycle.State.STARTED);
             transaction.hide(historyFragment);
             System.out.println("finish construct historyFragment");
         }
@@ -97,19 +101,21 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
+
+        System.out.println("离开MainActivity.onCreate");
     }
 
-    @Override
-    protected void onDestroy() {
-        System.out.println("main activity is destroy");
-        super.onDestroy();
-    }
-
-    @Override
-    public void finish() {
-        System.out.println("main activity is finish");
-        moveTaskToBack(true);
-    }
+//    @Override
+//    protected void onDestroy() {
+//        System.out.println("main activity is destroy");
+//        super.onDestroy();
+//    }
+//
+//    @Override
+//    public void finish() {
+//        System.out.println("main activity is finish");
+//        moveTaskToBack(true);
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

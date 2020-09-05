@@ -28,11 +28,14 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
     private NewsAdapter adapter;
     private LinearLayoutManager layoutManager;
     private SwipeRefreshLayout swipeRefreshLayout; //下拉刷新
+    private View view = null;
+    private boolean isFirstLoad = true;
 
     public NewsListFragment(){}
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        System.out.println("NewsListFragment : "+type+" onCreate!");
         adapter = new NewsAdapter(getContext());
         layoutManager = new LinearLayoutManager(getContext());
         //System.out.println("newslistfragment arguments = "+getArguments());
@@ -41,11 +44,12 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
         keyword = getArguments().getString("keyword");
         super.onCreate(savedInstanceState);
         //System.out.println("newslistfragment type = "+type+", keyword = "+keyword);
-        try {
-            myPresenter.refreshNews(20);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        //FIXME:转移 visible时create
+//        try {
+//            myPresenter.refreshNews(20);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         //adapter.setData(new String[]{"news1", "news2", "news3","news4","news1", "news2", "news3","news4","news1", "news2", "news3","news4","news1", "news2", "news3","news4","news1","news2","news3","news4"});
 
     }
@@ -64,9 +68,22 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_newslist,container,false);
+        System.out.println("NewsListFragment : "+type+" onCreateView");
+
+        if(view != null)
+            return view;
+
+//        try {
+//            myPresenter.refreshNews(20);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        //FIXME:移到onResume中
 
 
+        System.out.println("NewsListFragment: "+type+" really create View");
+
+        view = inflater.inflate(R.layout.fragment_newslist, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -124,11 +141,33 @@ public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresente
             }
             swipeRefreshLayout.setRefreshing(false); //FIXME:需要手动关闭动画
         });
+
         return view;
     }
 
-    @Override
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        System.out.println("NewsListFragment : "+type+" onResume");
+        if(isFirstLoad) {
+            try {
+                myPresenter.refreshNews(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            isFirstLoad = false;
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        System.out.println("NewsListFragment: "+type+" onDestroyView");
+        isFirstLoad = true; //重置
+    }
+
+    @Override
     public void resetNewsList(List<NewsCard> data) {
         adapter.resetData(data);
     }
