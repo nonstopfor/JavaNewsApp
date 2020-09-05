@@ -7,17 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class DataManager {
+public class NewsDataManager {
 
     List<NewsCard> allNews;
     String type;
     int idx = 0;
     int page = 0;
 
-    public DataManager() {
+    public NewsDataManager() {
     }
 
-    public DataManager(String type) {
+    public NewsDataManager(String type) {
         this.type = type;
         allNews = new ArrayList<>();
     }

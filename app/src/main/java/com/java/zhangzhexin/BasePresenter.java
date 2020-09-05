@@ -1,8 +1,5 @@
 package com.java.zhangzhexin;
 
-import com.java.zhangzhexin.model.DataManager;
-import com.java.zhangzhexin.model.UrlManager;
-
 abstract public class BasePresenter<V extends BaseView> {
     protected V myView;
 

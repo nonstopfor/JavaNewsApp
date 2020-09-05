@@ -1,7 +1,7 @@
 package com.java.zhangzhexin.news.newsdetail;
 
 import com.java.zhangzhexin.BasePresenter;
-import com.java.zhangzhexin.model.DataManager;
+import com.java.zhangzhexin.model.NewsDataManager;
 
 
 /*
@@ -10,14 +10,14 @@ import com.java.zhangzhexin.model.DataManager;
 2. 标记已读（数据库）
  */
 public class NewsDetailPresenter extends BasePresenter<NewsDetailView> {
-    private DataManager dataManager;
+    private NewsDataManager newsDataManager;
     public NewsDetailPresenter(){
-        dataManager = new DataManager();
+        newsDataManager = new NewsDataManager();
     }
 
     public void setNews(String news_id)  {
         try {
-            myView.setNews(dataManager.getContent(news_id));
+            myView.setNews(newsDataManager.getContent(news_id));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
