@@ -34,16 +34,31 @@ public class NewsFragment extends Fragment {
     private MyPagerAdapter adapter;
     private Tab tabObject;
     private ImageView editButton;
-    private List<String>categories;
 
     private View view;
 
     public NewsFragment(Tab tabObject){
         this.tabObject = tabObject;
-        this.categories = tabObject.getTabs();
+        System.out.println("构造NewsFragment, tabs = "+tabObject.getTabs());
+        //this.categories = tabObject.getTabs();
         //this.categories = new ArrayList<>(Arrays.asList("news","paper","news","paper","news","paper","news","paper","news","paper","news","paper"));
         //System.out.println("categories = "+categories);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        System.out.println("NewsFragment进入onResume");
+        updateCategories();
+        System.out.println("更新分类完毕");
+    }
+
+    public void updateCategories(){
+        if(adapter != null) {
+            adapter.setData(tabObject.getTabs());
+        }
+    }
+
 
     public static NewsFragment newInstance(Tab tabObject){
         NewsFragment newsFragment = new NewsFragment(tabObject);
@@ -86,42 +101,55 @@ public class NewsFragment extends Fragment {
             Intent intent = new Intent(getContext(), SetChannelActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
-            //TODO: 修改tablayout
+            //TODO: update一次 之后notify一下adapter
         });
 //        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) editButton.getLayoutParams();
 //        System.out.println("tablayout height = "+tabLayout.getLayoutParams().height);
 //        params.height = tabLayout.getLayoutParams().height;
 //        System.out.println("height = "+ params.height);
 //        editButton.setLayoutParams(params);
+
         adapter = new MyPagerAdapter(getChildFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+
     }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {
+
+        private List<String> data;
 
         public MyPagerAdapter(@NonNull FragmentManager fm,int behavior) {
             super(fm,behavior);
             System.out.println("");
         }
 
+        public void setData(List<String> data){
+            this.data = data;
+            notifyDataSetChanged();
+        }
+
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
             //System.out.println("category = "+categories.get(position));
-            return categories.get(position);
+            return data.get(position);
         }
 
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            System.out.println("getItem: type = "+categories.get(position)+" keyword = "+"");
-            return NewsListFragment.newInstance(categories.get(position),"");
+            System.out.println("getItem: type = "+data.get(position)+" keyword = "+"");
+            return NewsListFragment.newInstance(data.get(position),"");
         }
 
         @Override
         public int getCount() {
-            return categories.size();
+            if(data == null)
+                return 0;
+            else
+                return data.size();
         }
     }
 
