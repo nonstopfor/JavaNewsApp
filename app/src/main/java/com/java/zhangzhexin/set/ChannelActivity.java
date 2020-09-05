@@ -7,19 +7,19 @@ import com.java.zhangzhexin.BaseActivity;
 
 //TODO: 分类增删, 等config做好之后做
 
-public class SetActivity extends BaseActivity<SetView,SetPresenter> implements SetView {
+public class ChannelActivity extends BaseActivity<ChannelView, ChannelPresenter> implements ChannelView {
     @Override
-    public SetPresenter createPresenter() {
-        return null;
+    public ChannelPresenter createPresenter() {
+        return new ChannelPresenter();
     }
 
     @Override
     public void start(Intent intent) {
-
+        //直接finish退出吧
     }
 
     @Override
     public Context getMyContext() {
-        return null;
+        return this;
     }
 }

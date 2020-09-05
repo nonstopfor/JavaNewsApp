@@ -7,4 +7,5 @@
     <dimen name="margin_detailbottom">45dp</dimen>
     <dimen name="padding_newsdetail_H">10dp</dimen>
     <dimen name="padding_newsdetail_V">10dp</dimen>
+    <dimen name="height_editButton">48dp</dimen>
 </resources>

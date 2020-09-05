@@ -1,6 +1,9 @@
 package com.java.zhangzhexin.news.newsdetail;
 
+import android.content.Intent;
+
 import com.java.zhangzhexin.BasePresenter;
+import com.java.zhangzhexin.MainActivity;
 import com.java.zhangzhexin.model.NewsDataManager;
 
 
@@ -21,5 +24,13 @@ public class NewsDetailPresenter extends BasePresenter<NewsDetailView> {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void back(){
+        Intent intent = new Intent(myView.getMyContext(),MainActivity.class);
+        myView.start(intent);
+//            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//            startActivity(intent);
     }
 }

@@ -57,10 +57,12 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == android.R.id.home){
-            Intent intent = new Intent(this, MainActivity.class);
-            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            startActivity(intent);
+            myPresenter.back();
+            //finish();
+//            Intent intent = new Intent(this, MainActivity.class);
+//            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

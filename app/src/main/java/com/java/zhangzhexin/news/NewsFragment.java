@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,11 +31,13 @@ public class NewsFragment extends Fragment {
     private ViewPager viewPager;
     private MyPagerAdapter adapter;
     private Tab tabObject;
+    private ImageView editButton;
     private List<String>categories;
     //TODO: 分类的增加/删除
     public NewsFragment(Tab tabObject){
         this.tabObject = tabObject;
         this.categories = tabObject.tabs;
+        //this.categories = new ArrayList<>(Arrays.asList("news","paper","news","paper","news","paper","news","paper","news","paper","news","paper"));
         //System.out.println("categories = "+categories);
     }
 
@@ -55,6 +59,20 @@ public class NewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_news, container,false);
         viewPager = view.findViewById(R.id.viewPager);
         tabLayout = view.findViewById(R.id.tabLayout);
+        editButton = view.findViewById(R.id.editButton);
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("点击分类按钮，将弹出分类页面");
+                //TODO: 弹出分类页面 setActivity
+                //
+            }
+        });
+//        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) editButton.getLayoutParams();
+//        System.out.println("tablayout height = "+tabLayout.getLayoutParams().height);
+//        params.height = tabLayout.getLayoutParams().height;
+//        System.out.println("height = "+ params.height);
+//        editButton.setLayoutParams(params);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
