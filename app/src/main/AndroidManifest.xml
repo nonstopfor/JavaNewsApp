@@ -23,6 +23,8 @@
 
         <activity android:name=".news.newsdetail.NewsDetailActivity">
         </activity>
+        <activity android:name=".set.SetChannelActivity">
+        </activity>
 
         <provider
             android:authorities="com.java.zhangzhexin.SearchHistoryProvider"

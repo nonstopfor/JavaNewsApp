@@ -1,5 +1,6 @@
 package com.java.zhangzhexin.news;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.java.zhangzhexin.R;
+import com.java.zhangzhexin.set.SetChannelActivity;
 
 public class NewsFragment extends Fragment {
     private TabLayout tabLayout;
@@ -64,6 +66,8 @@ public class NewsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println("点击分类按钮，将弹出分类页面");
+                Intent intent = new Intent(getContext(), SetChannelActivity.class);
+                startActivity(intent);
                 //TODO: 弹出分类页面 setActivity
                 //
             }
