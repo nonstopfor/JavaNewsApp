@@ -71,6 +71,7 @@ public class EntityManager extends BaseManager {
         for (int i = 0; i < entityCardList.size(); ++i) {
             entityCardList.get(i).idx = i;
         }
+        System.out.println("entityCardList size:"+entityCardList.size());
         return results;
     }
 
