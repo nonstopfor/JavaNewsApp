@@ -16,7 +16,7 @@ import com.java.zhangzhexin.overview.ListAdapter;
 import java.util.List;
 
 public class NewsAdapter extends ListAdapter<NewsAdapter.ViewHolder,NewsCard> {
-    //private List<NewsCard> data = null;
+
     private Context myContext;
     private String type;
 
@@ -29,20 +29,8 @@ public class NewsAdapter extends ListAdapter<NewsAdapter.ViewHolder,NewsCard> {
         return data == null;
     }
 
-//    //设置newslist显示的新闻
-//    public void resetData(List<NewsCard> data){
-//        this.data = data;
-//        notifyDataSetChanged();//刷新显示数据
-//    }
-//
-//    public NewsCard getNews(int position){
-//        return data.get(position);
-//    }
-//
-//    public void appendData(List<NewsCard> data){
-//        this.data.addAll(data);
-//        notifyDataSetChanged();
-//    }
+
+
 
     //FIXME：用户拖拽屏幕过程中算点击吗?
     static class ViewHolder extends RecyclerView.ViewHolder{
@@ -78,10 +66,12 @@ public class NewsAdapter extends ListAdapter<NewsAdapter.ViewHolder,NewsCard> {
     @Override
     public int getItemCount() {
         if(isEmpty()) {
-            System.out.println("NewsAdapter : "+type+" data为空， ItemCount return 0");
+           // System.out.println("NewsAdapter : "+type+" data为空， ItemCount return 0");
             return 0;
         }
-        else
+        else {
+//            System.out.println("NewsAdapter中数据有"+data.size()+"条");
             return data.size();
+        }
     }
 }

@@ -17,6 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.java.zhangzhexin.model.Tab;
 import com.java.zhangzhexin.overview.epidemic.data.EpidemicDataFragment;
+import com.java.zhangzhexin.overview.epidemic.entity.EntityListFragment;
 import com.java.zhangzhexin.overview.newslist.NewsListFragment;
 
 import java.util.Arrays;
@@ -149,7 +150,7 @@ public class HomeFragment extends Fragment {
                 case scholar: //TODO:修改为对应的fragment
                     return NewsListFragment.newInstance(type,"");
                 case graph:
-                    return NewsListFragment.newInstance(type,"");
+                    return EntityListFragment.newInstance(type,"");
                 default:
                     return NewsListFragment.newInstance(type,"");
             }

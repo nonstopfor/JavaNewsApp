@@ -96,11 +96,8 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         //点击事件
-        recyclerView.addOnItemTouchListener(new MyListListener(getContext(),recyclerView, (news, position) -> {
-            TextView title = news.findViewById(R.id.news_title);
-            if(!type.equals("history"))
-                title.setTextColor(getResources().getColor(R.color.colorReadNews)); //改变颜色
-            myPresenter.openDetail(adapter.getData(position));
+        recyclerView.addOnItemTouchListener(new MyListListener(getContext(),recyclerView, (dataView, position) -> {
+            myPresenter.openDetail(dataView,adapter.getData(position));
             System.out.println("点击位置"+position);
         }));
 

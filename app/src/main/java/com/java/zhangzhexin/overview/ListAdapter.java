@@ -19,6 +19,8 @@ import java.util.List;
 abstract public class ListAdapter<VH extends RecyclerView.ViewHolder,MyCard extends BaseCard> extends RecyclerView.Adapter<VH>{
     protected List<MyCard> data;
     //设置newslist显示的新闻
+
+
     public void resetData(List<MyCard> data){
         this.data = data;
         notifyDataSetChanged();
@@ -29,9 +31,10 @@ abstract public class ListAdapter<VH extends RecyclerView.ViewHolder,MyCard exte
     }
 
     public void appendData(List<MyCard> data){
-        data.addAll(data);
+//        System.out.println("ListAdapter进入appendData");
+//        System.out.println("新数据为"+data);
+        this.data.addAll(data);
         notifyDataSetChanged();
     }
-
 
 }

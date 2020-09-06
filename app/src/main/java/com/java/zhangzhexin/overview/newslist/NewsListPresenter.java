@@ -1,9 +1,12 @@
 package com.java.zhangzhexin.overview.newslist;
 
 import android.content.Intent;
+import android.view.View;
+import android.widget.TextView;
 
 
 import com.java.zhangzhexin.BasePresenter;
+import com.java.zhangzhexin.R;
 import com.java.zhangzhexin.model.BaseCard;
 import com.java.zhangzhexin.model.BaseManager;
 import com.java.zhangzhexin.model.NewsDataManager;
@@ -14,14 +17,9 @@ import com.java.zhangzhexin.overview.MyListPresenter;
 import java.util.List;
 
 public class NewsListPresenter extends MyListPresenter<NewsDataManager,NewsCard> {
-    private int page = 0;
-    //private NewsDataManager newsDataManager;
-    private String type;
-    private String keyword;
-
 
     @Override
-    public NewsDataManager createMangaer(String type) {
+    public NewsDataManager createManager(String type) {
         return new NewsDataManager(type);
     }
 
@@ -34,7 +32,9 @@ public class NewsListPresenter extends MyListPresenter<NewsDataManager,NewsCard>
     }
 
     @Override
-    public void openDetail(NewsCard card) {
+    public void openDetail(View view, NewsCard card) {
+        TextView title = view.findViewById(R.id.news_title);
+        ((NewsListView)myView).setColor(title);
         Intent intent = new Intent(myView.getMyContext(), NewsDetailActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         intent.putExtra("news_id",card.id);
@@ -43,6 +43,7 @@ public class NewsListPresenter extends MyListPresenter<NewsDataManager,NewsCard>
 
     @Override
     public void getMoreData(int size) {
+        System.out.println("进入News的getMoreData");
         List<NewsCard> result = null;
         try {
             result = dataManager.getMoreNews(size);
@@ -50,6 +51,7 @@ public class NewsListPresenter extends MyListPresenter<NewsDataManager,NewsCard>
             e.printStackTrace();
         }
         assert(result!=null);
+        System.out.println("新得到的数据是"+result);
         myView.appendList(result);
     }
 
@@ -65,6 +67,4 @@ public class NewsListPresenter extends MyListPresenter<NewsDataManager,NewsCard>
         assert(result!=null);
         myView.resetList(result);
     }
-
-
 }
