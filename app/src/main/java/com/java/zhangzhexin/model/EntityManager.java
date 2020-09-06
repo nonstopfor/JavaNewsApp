@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class EntityManager extends BaseManager {
-//    List<EntityCard> entityCardList;
+    public List<EntityCard> entityCardList;
 
 
     public List<EntityCard> getEntityCardList(String keyword) throws InterruptedException {
@@ -67,6 +67,7 @@ public class EntityManager extends BaseManager {
                 return -1;
             }
         });
+        entityCardList = results;
         return results;
     }
 
