@@ -57,9 +57,10 @@ public class DetailActivity extends AppCompatActivity {
         }
         if(entityDetailFragment==null){
             entityDetailFragment = EntityDetailFragment.newInstance();
-            transaction.add(R.id.frameLayout,entityDetailFragment);
+            transaction.add(R.id.frameLayout,entityDetailFragment).hide(entityDetailFragment);
             System.out.println("finish construct entityDetailFragment");
         }
+        currentFragment = newsDetailFragment;
         transaction.commit();
     }
 
@@ -91,11 +92,13 @@ public class DetailActivity extends AppCompatActivity {
         if(type.equals("news"))
         {
             String news_id = getIntent().getStringExtra("news_id");
+            switchFragment(newsDetailFragment);
             newsDetailFragment.setId(news_id);
         }
         else if(type.equals("entity")){ //实体
             int entity_id = getIntent().getIntExtra("entity_id",-1);
             System.out.println("得到实体id = "+entity_id);
+            switchFragment(entityDetailFragment);
             entityDetailFragment.setId(entity_id);
         }
         else{

@@ -49,6 +49,12 @@ public class NewsDetailFragment extends BaseFragment<NewsDetailView,NewsDetailPr
     }
 
     @Override
+    public void onResume() {
+        System.out.println("新闻详情页onResume");
+        super.onResume();
+    }
+
+    @Override
     public NewsDetailPresenter createPresenter() {
         return new NewsDetailPresenter();
     }

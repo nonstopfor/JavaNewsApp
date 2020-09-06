@@ -58,6 +58,11 @@ public class EntityDetailFragment extends BaseFragment<EntityDetailView, EntityD
         startActivity(intent);
     }
 
+    @Override
+    public void onResume() {
+        System.out.println("实体详情页onResume");
+        super.onResume();
+    }
 
     public void setId(int id){
         myPresenter.setEntity(id);
