@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
 
     public void updateCategories(){
         if(adapter != null) {
-            adapter.setData(tabObject.getTabs());
+            adapter.setData(tabObject.getTabs(),"");
         }
     }
 
@@ -113,14 +113,29 @@ public class HomeFragment extends Fragment {
     public static class MyPagerAdapter extends FragmentPagerAdapter {
 
         private List<String> data;
+        private String keyword;
+
 
         public MyPagerAdapter(@NonNull FragmentManager fm,int behavior) {
             super(fm,behavior);
             System.out.println("");
         }
 
-        public void setData(List<String> data){
+        @Override
+        public long getItemId(int position) {
+            return super.getItemId(position)+keyword.hashCode();
+        }
+
+        @Override
+        public int getItemPosition(@NonNull Object object) {
+            return POSITION_NONE; //刷新
+            //return super.getItemPosition(object);
+        }
+
+        public void setData(List<String> data, String keyword){
             this.data = data;
+            this.keyword = keyword;
+            System.out.println("adapter收到新的keyword = "+keyword);
             notifyDataSetChanged();
         }
 
@@ -134,19 +149,19 @@ public class HomeFragment extends Fragment {
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            System.out.println("getItem: type = "+data.get(position)+" keyword = "+"");
+            System.out.println("getItem: type = "+data.get(position)+" keyword = "+keyword);
             String type = data.get(position);
             switch (Tab.getType(type)) {
                 case news:
-                    return NewsListFragment.newInstance(type,"");
+                    return NewsListFragment.newInstance(type,keyword);
                 case epidemicData:
                     return EpidemicDataFragment.newInstance();
                 case graph:
-                    return EntityListFragment.newInstance(type,"");
+                    return EntityListFragment.newInstance(type,keyword);
                 case scholar: //TODO:修改为对应的fragment
-                    return NewsListFragment.newInstance(type,"");
+                    return NewsListFragment.newInstance(type,keyword);
                 default:
-                    return NewsListFragment.newInstance(type,"");
+                    return NewsListFragment.newInstance(type,keyword);
             }
             //return NewsListFragment.newInstance(data.get(position),"");
         }

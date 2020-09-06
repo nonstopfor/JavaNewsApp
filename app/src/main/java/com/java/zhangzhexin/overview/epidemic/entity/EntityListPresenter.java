@@ -25,6 +25,7 @@ public class EntityListPresenter extends MyListPresenter<EntityManager, EntityCa
     @Override
     public void openDetail(View view, EntityCard card) {
         System.out.println("EntityList的点击事件尚未实现");
+        //TODO：不准备
     }
 
 
@@ -40,31 +41,32 @@ public class EntityListPresenter extends MyListPresenter<EntityManager, EntityCa
 
     @Override
     public void getMoreData(int size) {
-//        List<EntityCard> result = null;
-//        try {
-//            result = dataManager.getMoreNews(size);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-        List<EntityCard> result = new ArrayList<>();
-        result.add(new EntityCard("label1"));
-        result.add(new EntityCard("label2"));
-        assert(result!=null);
-        myView.appendList(result);
+        //不调用getMoreData,实体仅搜索时调用
+////        List<EntityCard> result = null;
+////        try {
+////            result = dataManager.getMoreNews(size);
+////        } catch (InterruptedException e) {
+////            e.printStackTrace();
+////        }
+////        List<EntityCard> result = new ArrayList<>();
+////        result.add(new EntityCard("label1"));
+////        result.add(new EntityCard("label2"));
+//        assert(result!=null);
+//        myView.appendList(result);
     }
 
     @Override
     public void refreshData(int size) {
-//        System.out.println("refreshNews!");
-//        List<NewsCard> result = null;
-//        try {
-//            result = dataManager.RefreshNews(size);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-        List<EntityCard> result = new ArrayList<>();
-        result.add(new EntityCard("label4"));
-        result.add(new EntityCard("label5"));
+        System.out.println("refreshNews!");
+        List<EntityCard> result = null;
+        try {
+            result = dataManager.getEntityCardList(keyword);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+//        List<EntityCard> result = new ArrayList<>();
+//        result.add(new EntityCard("label4"));
+//        result.add(new EntityCard("label5"));
         assert(result!=null);
         myView.resetList(result);
     }
