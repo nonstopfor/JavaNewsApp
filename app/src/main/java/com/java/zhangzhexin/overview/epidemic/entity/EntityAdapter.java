@@ -54,6 +54,7 @@ public class EntityAdapter extends ListAdapter<EntityAdapter.ViewHolder, EntityC
     @Override
     public void onBindViewHolder(@NonNull EntityAdapter.ViewHolder holder, int position) {
         holder.entity_label.setText(data.get(position).label);
+        //holder.entity_discription.setText(data.get(position).description);
 //        holder.news_title.setText(data.get(position).title);
 //        if(!type.equals("history") && data.get(position).visited())
 //            holder.news_title.setTextColor(myContext.getResources().getColor(R.color.colorReadNews));

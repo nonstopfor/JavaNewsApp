@@ -20,18 +20,18 @@ public class NewsDetailPresenter extends BasePresenter<NewsDetailView> {
 
     public void setNews(String news_id)  {
         try {
-            myView.setNews(newsDataManager.getContent(news_id));
+            myView.setView(newsDataManager.getContent(news_id));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public void back(){
-        Intent intent = new Intent(myView.getMyContext(),MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        myView.start(intent);
-//            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-//            startActivity(intent);
-    }
+//    public void back(){
+//        Intent intent = new Intent(myView.getMyContext(),MainActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//        myView.start(intent);
+////            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+////            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+////            startActivity(intent);
+//    }
 }

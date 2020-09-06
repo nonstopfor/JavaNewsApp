@@ -8,5 +8,6 @@
     <dimen name="padding_newsdetail_H">10dp</dimen>
     <dimen name="padding_newsdetail_V">10dp</dimen>
     <dimen name="height_editButton">48dp</dimen>
-    <dimen name="entityLbel_textsize">25sp</dimen>
+    <dimen name="entity_label">22sp</dimen>
+    <dimen name="entity_description">15sp</dimen>
 </resources>

@@ -1,18 +1,8 @@
 package com.java.zhangzhexin.overview;
 
-import android.content.Context;
-import android.content.Intent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.java.zhangzhexin.R;
-import com.java.zhangzhexin.detail.newsdetail.NewsDetailActivity;
 import com.java.zhangzhexin.model.BaseCard;
-import com.java.zhangzhexin.model.NewsCard;
 
 import java.util.List;
 

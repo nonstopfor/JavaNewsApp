@@ -17,13 +17,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/entity_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/entity_label"
+                android:textColor="@color/black"
+                android:layout_marginBottom="8dp"
+                android:textStyle="bold"/>
+        </RelativeLayout>
         <TextView
-            android:id="@+id/entity_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/entityLbel_textsize"
-            android:layout_marginBottom="8dp"
-            android:textStyle="bold"/>
+            android:id="@+id/simple_description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/entity_description"
+            android:text="实体"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

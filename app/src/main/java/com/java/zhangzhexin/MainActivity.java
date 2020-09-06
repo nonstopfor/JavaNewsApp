@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -155,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
             suggestions.saveRecentQuery(query, null);
             searchFragment.setKeyword(query); //更新关键词
             switchFragment(searchFragment);//切换到searchFragment
+            searchView.setQuery("",false); //清空搜索框
         }
         else
             super.startActivityForResult(intent, requestCode);
@@ -170,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         //searchView.setIconifiedByDefault(true); // Do not iconify the widget; expand it by default
         searchView.setSubmitButtonEnabled(true); //添加提交按钮
+        //((ImageView)searchView.findViewById(R.id.search_go_btn)).setImageResource(R.drawable.search);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

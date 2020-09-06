@@ -8,4 +8,6 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorMarkerBackground">#88000000</color>
     <color name="colorMarkerText">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="gray">#808080</color>
 </resources>

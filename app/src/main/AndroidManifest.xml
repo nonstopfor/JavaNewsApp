@@ -11,8 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-            android:launchMode="singleTop">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.SEARCH" />
@@ -22,7 +21,7 @@
                 android:resource="@xml/searchable"/>
         </activity>
 
-        <activity android:name=".detail.newsdetail.NewsDetailActivity"/>
+        <activity android:name=".detail.DetailActivity"/>
         <activity android:name=".set.SetChannelActivity"/>
         <activity android:name=".SearchActivity"/>
 
