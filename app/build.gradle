@@ -46,6 +46,8 @@ dependencies {
     implementation 'org.greenrobot:greendao:3.3.0'
     implementation 'com.github.chengzhicao:ChannelView:v1.1.2'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     //debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
 }
