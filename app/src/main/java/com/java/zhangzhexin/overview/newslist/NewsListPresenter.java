@@ -9,6 +9,7 @@ import com.java.zhangzhexin.R;
 import com.java.zhangzhexin.model.NewsDataManager;
 import com.java.zhangzhexin.model.NewsCard;
 import com.java.zhangzhexin.detail.DetailActivity;
+import com.java.zhangzhexin.model.NewsSearchManager;
 import com.java.zhangzhexin.overview.MyListPresenter;
 
 import java.util.List;
@@ -41,24 +42,33 @@ public class NewsListPresenter extends MyListPresenter<NewsDataManager,NewsCard>
 
     @Override
     public void getMoreData(int size) {
-        System.out.println("进入News的getMoreData");
-        List<NewsCard> result = null;
-        try {
-            result = dataManager.getMoreNews(size);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if(keyword.equals("")) {
+            System.out.println("进入News的getMoreData");
+            List<NewsCard> result = null;
+            try {
+                result = dataManager.getMoreNews(size);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            assert (result != null);
+            System.out.println("新得到的数据是" + result);
+            myView.appendList(result);
         }
-        assert(result!=null);
-        System.out.println("新得到的数据是"+result);
-        myView.appendList(result);
+        else
+            System.out.println("搜索框新闻不支持上拉获取更多");
+
     }
 
     @Override
     public void refreshData(int size) {
         System.out.println("refreshNews!");
         List<NewsCard> result = null;
+
         try {
-            result = dataManager.RefreshNews(size);
+            if(keyword.equals(""))
+                result = dataManager.RefreshNews(size);
+            else
+                result = NewsSearchManager.searchNews(keyword);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

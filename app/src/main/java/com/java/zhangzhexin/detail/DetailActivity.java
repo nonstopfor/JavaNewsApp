@@ -14,6 +14,7 @@ import androidx.lifecycle.Lifecycle;
 import com.java.zhangzhexin.HomeFragment;
 import com.java.zhangzhexin.MainActivity;
 import com.java.zhangzhexin.R;
+import com.java.zhangzhexin.detail.entitydetail.EntityDetailFragment;
 import com.java.zhangzhexin.detail.newsdetail.NewsDetailFragment;
 import com.java.zhangzhexin.model.Tab;
 
@@ -32,6 +33,7 @@ FIXME:
 public class DetailActivity extends AppCompatActivity {
 
     private NewsDetailFragment newsDetailFragment;
+    private EntityDetailFragment entityDetailFragment;
     private Fragment currentFragment;
     private String type;
 
@@ -48,11 +50,15 @@ public class DetailActivity extends AppCompatActivity {
 
     public void initFragment(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if(newsDetailFragment ==null){
-
+        if(newsDetailFragment==null){
             newsDetailFragment = NewsDetailFragment.newInstance();
             transaction.add(R.id.frameLayout, newsDetailFragment); //默认显示newsDetail
             System.out.println("finish construct newsDetailFragment");
+        }
+        if(entityDetailFragment==null){
+            entityDetailFragment = EntityDetailFragment.newInstance();
+            transaction.add(R.id.frameLayout,entityDetailFragment);
+            System.out.println("finish construct entityDetailFragment");
         }
         transaction.commit();
     }
@@ -87,9 +93,10 @@ public class DetailActivity extends AppCompatActivity {
             String news_id = getIntent().getStringExtra("news_id");
             newsDetailFragment.setId(news_id);
         }
-
         else if(type.equals("entity")){ //实体
-
+            int entity_id = getIntent().getIntExtra("entity_id",-1);
+            System.out.println("得到实体id = "+entity_id);
+            entityDetailFragment.setId(entity_id);
         }
         else{
             //TODO:学者
@@ -98,7 +105,6 @@ public class DetailActivity extends AppCompatActivity {
 //        news_id = getIntent().getStringExtra("news_id");
 //        System.out.println("详情页收到新的news_id = "+news_id);
 //        myPresenter.setNews(news_id);
-        System.out.println("详情页setNews");
         //TODO:调用presenter接口实现 返回一个SingleNews
     }
 

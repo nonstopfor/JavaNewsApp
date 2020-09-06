@@ -22,6 +22,7 @@ public class EntityListPresenter extends MyListPresenter<EntityManager, EntityCa
         Intent intent = new Intent(myView.getMyContext(), DetailActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         intent.putExtra("type","entity");
+        intent.putExtra("entity_id",card.idx);
         //TODO：把card的id放进来
         myView.start(intent);
         //System.out.println("EntityList的点击事件尚未实现");

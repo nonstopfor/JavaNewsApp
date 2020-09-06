@@ -1,6 +1,7 @@
 package com.java.zhangzhexin.detail.entitydetail;
 
 import com.java.zhangzhexin.BasePresenter;
+import com.java.zhangzhexin.model.EntityManager;
 import com.java.zhangzhexin.model.NewsDataManager;
 
 
@@ -10,17 +11,13 @@ import com.java.zhangzhexin.model.NewsDataManager;
 2. 标记已读（数据库）
  */
 public class EntityDetailPresenter extends BasePresenter<EntityDetailView> {
-    private NewsDataManager newsDataManager;
+    private EntityManager entityManager;
     public EntityDetailPresenter(){
-        newsDataManager = new NewsDataManager();
+        entityManager = new EntityManager();
     }
 
-    public void setNews(String news_id)  {
-        try {
-            myView.setView(newsDataManager.getContent(news_id));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void setEntity(int entity_id)  {
+        myView.setView(entityManager.getEntity(entity_id));
     }
 
 //    public void back(){

@@ -6,21 +6,22 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.java.zhangzhexin.BaseFragment;
 import com.java.zhangzhexin.R;
+import com.java.zhangzhexin.model.EntityCard;
 import com.java.zhangzhexin.model.SingleNews;
 
 public class EntityDetailFragment extends BaseFragment<EntityDetailView, EntityDetailPresenter> implements EntityDetailView {
     private TextView label;
     private TextView description;
-    private TextView news_source;
-    private TextView news_date;
-    private String news_id;
+    private ImageView image;
 
     private View view;
 
@@ -42,10 +43,9 @@ public class EntityDetailFragment extends BaseFragment<EntityDetailView, EntityD
     }
 
     public void initView(){
-        news_title = view.findViewById(R.id.news_title);
-        news_content = view.findViewById(R.id.news_content);
-        news_source = view.findViewById(R.id.news_source);
-        news_date = view.findViewById(R.id.news_date);
+        label = view.findViewById(R.id.label);
+        description = view.findViewById(R.id.description);
+        image = view.findViewById(R.id.image);
     }
 
     @Override
@@ -59,8 +59,8 @@ public class EntityDetailFragment extends BaseFragment<EntityDetailView, EntityD
     }
 
 
-    public void setId(String id){
-        myPresenter.setNews(id);
+    public void setId(int id){
+        myPresenter.setEntity(id);
     }
 
     @Override
@@ -69,11 +69,9 @@ public class EntityDetailFragment extends BaseFragment<EntityDetailView, EntityD
     }
 
     @Override
-    public void setView(SingleNews news) {
-        System.out.println("title = "+news.title);
-        news_title.setText(news.title);
-        news_content.setText(news.content);
-        news_date.setText(news.time);
-        news_source.setText(news.source);
+    public void setView(EntityCard entity) {
+        Glide.with(this).load(entity.imgUrl).into(image);
+        label.setText(entity.label);
+        description.setText(entity.description);
     }
 }
