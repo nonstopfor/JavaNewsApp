@@ -55,7 +55,6 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
             initView();
             initSet();
         }
-
         return view;
     }
 

@@ -32,17 +32,11 @@ public class HomeFragment extends Fragment {
     private Tab tabObject;
     private ImageView editButton;
 
-    private List<String>newsTypeList = Arrays.asList("news","paper"); //TODO：添加聚类
-
-
     private View view;
 
     public HomeFragment(Tab tabObject){
         this.tabObject = tabObject;
         System.out.println("构造NewsFragment, tabs = "+tabObject.getTabs());
-        //this.categories = tabObject.getTabs();
-        //this.categories = new ArrayList<>(Arrays.asList("news","paper","news","paper","news","paper","news","paper","news","paper","news","paper"));
-        //System.out.println("categories = "+categories);
     }
 
     @Override
@@ -76,15 +70,15 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         if(view == null){
-            System.out.println("NewsFragment view为空");
-            view = inflater.inflate(R.layout.fragment_news, container,false);
+            System.out.println("HomeFragment view为空");
+            view = inflater.inflate(R.layout.fragment_home, container,false);
             initView();
             initSet();
         }
         else{
-            System.out.println("NewsFragment view非空 不需要重新设置");
+            System.out.println("HomeFragment view非空 不需要重新设置");
         }
-        //view = inflater.inflate(R.layout.fragment_news, container,false);
+        //view = inflater.inflate(R.layout.fragment_home, container,false);
         return view;
     }
 
@@ -109,14 +103,14 @@ public class HomeFragment extends Fragment {
 //        System.out.println("height = "+ params.height);
 //        editButton.setLayoutParams(params);
 
-        adapter = new MyPagerAdapter(getChildFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        adapter = new MyPagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
 
     }
 
-    private class MyPagerAdapter extends FragmentPagerAdapter {
+    public static class MyPagerAdapter extends FragmentPagerAdapter {
 
         private List<String> data;
 
@@ -147,10 +141,10 @@ public class HomeFragment extends Fragment {
                     return NewsListFragment.newInstance(type,"");
                 case epidemicData:
                     return EpidemicDataFragment.newInstance();
-                case scholar: //TODO:修改为对应的fragment
-                    return NewsListFragment.newInstance(type,"");
                 case graph:
                     return EntityListFragment.newInstance(type,"");
+                case scholar: //TODO:修改为对应的fragment
+                    return NewsListFragment.newInstance(type,"");
                 default:
                     return NewsListFragment.newInstance(type,"");
             }
