@@ -121,16 +121,16 @@ public class HomeFragment extends Fragment {
             System.out.println("");
         }
 
-        @Override
-        public long getItemId(int position) {
-            return super.getItemId(position)+keyword.hashCode();
-        }
-
-        @Override
-        public int getItemPosition(@NonNull Object object) {
-            return POSITION_NONE; //刷新
-            //return super.getItemPosition(object);
-        }
+//        @Override
+//        public long getItemId(int position) {
+//            return super.getItemId(position)+keyword.hashCode();
+//        }
+//
+//        @Override
+//        public int getItemPosition(@NonNull Object object) {
+//            return POSITION_NONE; //刷新
+//            //return super.getItemPosition(object);
+//        }
 
         public void setData(List<String> data, String keyword){
             this.data = data;

@@ -52,12 +52,12 @@ public class DetailActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if(newsDetailFragment==null){
             newsDetailFragment = NewsDetailFragment.newInstance();
-            transaction.add(R.id.frameLayout, newsDetailFragment); //默认显示newsDetail
+            transaction.add(R.id.frameLayout, newsDetailFragment).setMaxLifecycle(newsDetailFragment, Lifecycle.State.RESUMED); //默认显示newsDetail
             System.out.println("finish construct newsDetailFragment");
         }
         if(entityDetailFragment==null){
             entityDetailFragment = EntityDetailFragment.newInstance();
-            transaction.add(R.id.frameLayout,entityDetailFragment).hide(entityDetailFragment);
+            transaction.add(R.id.frameLayout,entityDetailFragment).hide(entityDetailFragment).setMaxLifecycle(entityDetailFragment, Lifecycle.State.STARTED);
             System.out.println("finish construct entityDetailFragment");
         }
         currentFragment = newsDetailFragment;
