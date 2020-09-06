@@ -3,25 +3,12 @@ package com.java.zhangzhexin.overview.newslist;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import com.java.zhangzhexin.BaseFragment;
 import com.java.zhangzhexin.R;
 import com.java.zhangzhexin.model.NewsCard;
 import com.java.zhangzhexin.model.NewsDataManager;
 import com.java.zhangzhexin.overview.MyListFragment;
-import com.java.zhangzhexin.overview.MyListListener;
-
-import java.util.List;
 
 public class NewsListFragment extends MyListFragment<NewsAdapter.ViewHolder,NewsAdapter,NewsCard, NewsDataManager,NewsListView,NewsListPresenter> implements NewsListView{
 

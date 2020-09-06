@@ -56,7 +56,7 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
             initSet();
         }
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 
     public void initView() {
