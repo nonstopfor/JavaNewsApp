@@ -11,13 +11,10 @@ import com.java.zhangzhexin.model.NewsDataManager;
 2. 标记已读（数据库）
  */
 public class EntityDetailPresenter extends BasePresenter<EntityDetailView> {
-    private EntityManager entityManager;
-    public EntityDetailPresenter(){
-        entityManager = new EntityManager();
-    }
+    public EntityDetailPresenter(){}
 
     public void setEntity(int entity_id)  {
-        myView.setView(entityManager.getEntity(entity_id));
+        myView.setView(EntityManager.getEntity(entity_id));
     }
 
 //    public void back(){

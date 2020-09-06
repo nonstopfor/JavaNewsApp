@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class EntityManager extends BaseManager {
-    public List<EntityCard> entityCardList;
+    public static List<EntityCard> entityCardList;
 
 
     public List<EntityCard> getEntityCardList(String keyword) throws InterruptedException {
@@ -81,7 +81,7 @@ public class EntityManager extends BaseManager {
         return obj.getAsString();
     }
 
-    public EntityCard getEntity(int idx) {
+    public static EntityCard getEntity(int idx) {
         return entityCardList.get(idx);
     }
 }
