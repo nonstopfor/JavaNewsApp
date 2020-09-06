@@ -19,7 +19,7 @@ public class EpidemicDataManager {
         countryCards.clear();
         provinceCards.clear();
         for (EpidemicDataCard card : epidemicDataCards) {
-            if (card.province == null) {
+            if (card.province == null && !card.country.equals("World")) {
                 countryCards.add(card);
             } else if (card.county == null && card.country.equals("China")) {
                 provinceCards.add(card);
