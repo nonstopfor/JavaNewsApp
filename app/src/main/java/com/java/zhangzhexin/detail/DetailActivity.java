@@ -99,6 +99,7 @@ public class DetailActivity extends AppCompatActivity {
             int entity_id = getIntent().getIntExtra("entity_id",-1);
             System.out.println("得到实体id = "+entity_id);
             switchFragment(entityDetailFragment);
+            System.out.println("entityDetailFragment = "+entityDetailFragment);
             entityDetailFragment.setId(entity_id);
         }
         else{

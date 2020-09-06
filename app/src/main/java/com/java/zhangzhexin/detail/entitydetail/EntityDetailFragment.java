@@ -75,6 +75,7 @@ public class EntityDetailFragment extends BaseFragment<EntityDetailView, EntityD
 
     @Override
     public void setView(EntityCard entity) {
+        System.out.println("imgUrl = "+entity.imgUrl);
         Glide.with(this).load(entity.imgUrl).into(image);
         label.setText(entity.label);
         description.setText(entity.description);
