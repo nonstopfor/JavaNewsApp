@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private Fragment currentFragment;
     private SearchHistoryProvider searchHistoryProvider;
+    private SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
+            SearchHistoryProvider.AUTHORITY, SearchHistoryProvider.MODE);
 
     public void switchFragment(Fragment target){
         if(currentFragment != target){
@@ -93,20 +95,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            System.out.println("收到查询关键字 = "+query);
-            SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
-                    SearchHistoryProvider.AUTHORITY, SearchHistoryProvider.MODE);
-            suggestions.saveRecentQuery(query, null);
-
-            switchFragment(searchFragment);//切换到searchFragment
-            //启动SearchActivity
-            //TODO:改为启动SearchFragment
-//            Intent searchIntent = new Intent(this,SearchActivity.class);
-//            startActivity(searchIntent);
-        }
+//        Intent intent = getIntent();
+//        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+//            String query = intent.getStringExtra(SearchManager.QUERY);
+//            System.out.println("收到查询关键字 = "+query);
+//            SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
+//                    SearchHistoryProvider.AUTHORITY, SearchHistoryProvider.MODE);
+//            suggestions.saveRecentQuery(query, null);
+//
+//            switchFragment(searchFragment);//切换到searchFragment
+//            //启动SearchActivity
+//            //TODO:改为启动SearchFragment
+////            Intent searchIntent = new Intent(this,SearchActivity.class);
+////            startActivity(searchIntent);
+//        }
 
         initFragment();//创建fragment
 
@@ -117,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 switchFragment(homeFragment);
                 //getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, newsFragment).commit();
                 System.out.println("切换到首页");
-                return true; //不return true切换时没有动画效果
+                return false; //不return true切换时没有动画效果
             }
             else if(menuItem.getItemId() == R.id.history) {
                 switchFragment(historyFragment);
@@ -154,6 +156,23 @@ public class MainActivity extends AppCompatActivity {
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         //searchView.setIconifiedByDefault(true); // Do not iconify the widget; expand it by default
         searchView.setSubmitButtonEnabled(true); //添加提交按钮
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                System.out.println("收到查询关键字 = "+query);
+                suggestions.saveRecentQuery(query, null);
+                searchView.clearFocus();  //可以收起键盘
+                searchView.onActionViewCollapsed();    //可以收起SearchView视图
+                switchFragment(searchFragment);//切换到searchFragment
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         //FIXME: 搜索提交之后重新创建了MainActivity
         //监听搜索框关闭
         //FIXME: X点第一次是清空 第二次是退出
