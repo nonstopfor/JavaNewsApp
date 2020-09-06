@@ -36,7 +36,7 @@ public class Tab {
     @Convert(columnType = String.class, converter = StringConverter.class)
     private List<String> tabs;
 
-    public static List<String> allTabs = new ArrayList<>(Arrays.asList("news", "paper", "疫情数据", "知识图谱", "知疫学者"));
+    public static List<String> allTabs = new ArrayList<>(Arrays.asList("news", "paper", "知疫学者"));
 
     public static TabType getType(String name){
         switch (name) {
