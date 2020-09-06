@@ -19,10 +19,12 @@ import com.java.zhangzhexin.R;
 import com.java.zhangzhexin.model.NewsCard;
 
 import java.util.List;
+import androidx.recyclerview.widget.MergeAdapter; //TODO:用mergeAdapter来搞搜索框
 
 public class NewsListFragment extends BaseFragment<NewsListView,NewsListPresenter> implements NewsListView {
     private RecyclerView recyclerView;
     private NewsAdapter adapter;
+
     private LinearLayoutManager layoutManager;
     private SwipeRefreshLayout swipeRefreshLayout; //下拉刷新
     private View view = null;

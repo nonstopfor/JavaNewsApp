@@ -32,6 +32,7 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
     private TextView news_date;
     private String news_id;
 
+    //TODO：onCreate重写
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         System.out.println("详情页onCreate");
@@ -97,6 +98,7 @@ public class NewsDetailActivity extends BaseActivity<NewsDetailView,NewsDetailPr
     public NewsDetailPresenter createPresenter() {
         return new NewsDetailPresenter();
     }
+
 
     @Override
     public void setNews(SingleNews news) {

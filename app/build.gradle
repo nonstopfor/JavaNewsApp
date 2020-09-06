@@ -37,6 +37,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha02'
     implementation 'com.google.android.material:material:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
@@ -45,5 +46,6 @@ dependencies {
     implementation 'org.greenrobot:greendao:3.3.0'
     implementation 'com.github.chengzhicao:ChannelView:v1.1.2'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
     //debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
 }
