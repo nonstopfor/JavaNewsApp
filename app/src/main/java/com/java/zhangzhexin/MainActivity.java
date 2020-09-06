@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Lifecycle;
 
+import android.app.DownloadManager;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("糟糕！进入MainActivity onCreate!");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //在submitLisenter中捕获 防止activity跳转和重建
 //        Intent intent = getIntent();
 //        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 //            String query = intent.getStringExtra(SearchManager.QUERY);
@@ -105,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
 //
 //            switchFragment(searchFragment);//切换到searchFragment
 //            //启动SearchActivity
-//            //TODO:改为启动SearchFragment
 ////            Intent searchIntent = new Intent(this,SearchActivity.class);
 ////            startActivity(searchIntent);
 //        }
@@ -147,6 +147,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        String query = intent.getStringExtra(SearchManager.QUERY);
+        if(query!=null){
+            //拦截query发送
+            System.out.println("拦截到query = "+query);
+            suggestions.saveRecentQuery(query, null);
+            searchFragment.setKeyword(query); //更新关键词
+            switchFragment(searchFragment);//切换到searchFragment
+        }
+        else
+            super.startActivityForResult(intent, requestCode);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.search,menu);
@@ -160,12 +174,15 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                System.out.println("收到查询关键字 = "+query);
-                suggestions.saveRecentQuery(query, null);
-                searchView.clearFocus();  //可以收起键盘
-                searchView.onActionViewCollapsed();    //可以收起SearchView视图
-                switchFragment(searchFragment);//切换到searchFragment
-                return true;
+                System.out.println("监听器中收到关键字 = "+query);
+                return false;
+//                System.out.println("收到查询关键字 = "+query);
+//                suggestions.saveRecentQuery(query, null);
+//                searchFragment.setKeyword(query); //更新关键词
+//                searchView.clearFocus();  //可以收起键盘
+//                searchView.onActionViewCollapsed();    //可以收起SearchView视图
+//                switchFragment(searchFragment);//切换到searchFragment
+//                return true;
             }
 
             @Override

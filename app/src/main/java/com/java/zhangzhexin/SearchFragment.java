@@ -23,6 +23,7 @@ public class SearchFragment extends Fragment {
     private ViewPager viewPager;
     private MyPagerAdapter adapter;
     private String keyword;
+    private boolean visible = false;
 
     private View view;
     private List<String> categories = Arrays.asList("news","知识图谱");
@@ -33,6 +34,33 @@ public class SearchFragment extends Fragment {
 
     public void setKeyword(String keyword){
         this.keyword = keyword;
+        //FIXME: 重复搜索 子fragment没有刷新 不能通过
+        if(visible) {
+            System.out.println("搜索部分visible,更新adapter");
+            adapter.setData(categories, keyword); //searchFragment onResume状态下重复搜索
+
+        }
+    }
+
+    @Override
+    public void onResume() {
+        System.out.println("搜索部分onResume");
+        adapter.setData(categories,keyword); //第一次进入时 setdata
+        visible = true;
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        visible = false;
+        System.out.println("搜索部分onPause");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        System.out.println("搜索部分onDestroyView");
     }
 
     @Nullable
@@ -62,7 +90,7 @@ public class SearchFragment extends Fragment {
 
     public void initSet(){
         adapter = new MyPagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        adapter.setData(categories);
+        adapter.setData(categories,"");
         //TODO: 没有传入keyword
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
