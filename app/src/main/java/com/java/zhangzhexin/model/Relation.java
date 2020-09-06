@@ -5,4 +5,9 @@ public class Relation {
     String label;
     boolean forward;
 
+    public Relation(String relation, String label, boolean forward) {
+        relation = relation;
+        label = label;
+        forward = forward;
+    }
 }
