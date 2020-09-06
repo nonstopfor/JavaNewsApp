@@ -6,7 +6,10 @@
         android:title="@string/home" />
 
     <item
+        android:id="@+id/epidemicData"
+        android:title="疫情数据"/>
+
+    <item
         android:id="@+id/history"
         android:title="@string/history" />
-
 </menu>

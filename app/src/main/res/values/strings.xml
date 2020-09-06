@@ -3,6 +3,7 @@
     <string name="search_title">搜索框</string>
     <string name="home">首页</string>
     <string name="history">浏览历史</string>
+    <string name="epidemicData">疫情数据</string>
     <string name="search_hint">搜索新闻</string>
     <string name="app_label">wjx_zzx</string>
 </resources>
