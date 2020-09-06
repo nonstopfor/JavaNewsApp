@@ -26,7 +26,7 @@ public class App extends Application {
             public void run() {
                 long startTime = System.currentTimeMillis();
                 try {
-                    NewsSearchManager.preDownloadNewsList = UrlManager.getNewsList("news", 1, 3000);
+                    NewsSearchManager.preDownloadNewsList = UrlManager.getNewsList("news", 1, 1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
