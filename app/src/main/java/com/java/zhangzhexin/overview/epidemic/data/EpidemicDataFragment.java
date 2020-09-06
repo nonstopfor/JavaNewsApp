@@ -49,8 +49,9 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        System.out.println("EpidemicDataFragment onCreateView!");
+        System.out.println("疫情数据onCreateView!");
         if (view == null) {
+            System.out.println("疫情数据view为空，需要加载");
             view = inflater.inflate(R.layout.fragment_epidemicdata, container, false);
             initView();
             initSet();

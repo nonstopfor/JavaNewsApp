@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 switchFragment(homeFragment);
                 //getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, newsFragment).commit();
                 System.out.println("切换到首页");
-                return false; //不return true切换时没有动画效果
+                return true; //不return true切换时没有动画效果
             }
             else if(menuItem.getItemId() == R.id.history) {
                 switchFragment(historyFragment);
