@@ -4,15 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/countryBarChart"
-        android:layout_height="300dp"
-        android:layout_width="match_parent"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/countryBarChart"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/provinceBarChart"
-        android:layout_height="300dp"
-        android:layout_width="match_parent"/>
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/provinceBarChart"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
+    </LinearLayout>
 
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

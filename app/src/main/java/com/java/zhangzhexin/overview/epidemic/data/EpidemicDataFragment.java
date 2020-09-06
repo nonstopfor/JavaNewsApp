@@ -44,7 +44,6 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Nullable
@@ -69,7 +68,6 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
     }
 
     void setBarChartStyle(BarChart barChart) {
-
         barChart.getDescription().setEnabled(false);
         barChart.getLegend().setEnabled(false);
         barChart.setScaleEnabled(false);
@@ -85,8 +83,6 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
         left.setAxisMinimum(0);
         YAxis right = barChart.getAxisRight();
         right.setAxisMinimum(0);
-
-
     }
 
     public void setCountryBarChartStyle() {
@@ -112,6 +108,7 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
 
     @Override
     public void onResume() {
+        System.out.println("疫情数据onResume");
         super.onResume();
         if (isFirstLoad) {
             try {
@@ -132,7 +129,6 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
     public static EpidemicDataFragment newInstance() {
 
         Bundle args = new Bundle();
-
         EpidemicDataFragment fragment = new EpidemicDataFragment();
         fragment.setArguments(args);
         return fragment;

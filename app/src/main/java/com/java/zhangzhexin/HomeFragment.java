@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
         super.onResume();
         System.out.println("NewsFragment进入onResume");
         updateCategories();
-        System.out.println("更新分类完毕");
+        //System.out.println("更新分类完毕");
     }
 
     public void updateCategories(){
