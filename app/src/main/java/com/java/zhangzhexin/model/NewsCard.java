@@ -3,7 +3,7 @@ package com.java.zhangzhexin.model;
 import com.google.gson.JsonObject;
 import com.java.zhangzhexin.App;
 
-public class NewsCard {
+public class NewsCard extends BaseCard{
     public String title;
     public String time;
     public String source; //for test

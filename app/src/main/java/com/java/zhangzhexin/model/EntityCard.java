@@ -3,7 +3,7 @@ package com.java.zhangzhexin.model;
 import java.util.List;
 import java.util.Map;
 
-public class EntityCard {
+public class EntityCard extends BaseCard {
     String label;
     String description;
     double hot;

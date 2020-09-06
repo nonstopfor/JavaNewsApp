@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class NewsDataManager {
+public class NewsDataManager extends BaseManager {
 
     List<NewsCard> allNews;
     String type;

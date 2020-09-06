@@ -1,4 +1,4 @@
-package com.java.zhangzhexin.overview.newslist;
+package com.java.zhangzhexin.overview;
 
 import android.content.Context;
 import android.view.GestureDetector;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 //用于监听对item的点击事件
-public class NewsListener implements RecyclerView.OnItemTouchListener {
+public class MyListListener implements RecyclerView.OnItemTouchListener {
 
     private GestureDetector gestureDetector;
     private OnItemClickListener listener;
@@ -18,7 +18,7 @@ public class NewsListener implements RecyclerView.OnItemTouchListener {
         void onItemClick(View view,int position);//childview和position
     }
 
-    public NewsListener(Context context, final RecyclerView recyclerView, final OnItemClickListener listener){
+    public MyListListener(Context context, final RecyclerView recyclerView, final OnItemClickListener listener){
         this.listener = listener;
         gestureDetector = new GestureDetector(context,new GestureDetector.SimpleOnGestureListener(){
             @Override
