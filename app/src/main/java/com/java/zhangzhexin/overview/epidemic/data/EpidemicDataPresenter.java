@@ -10,7 +10,9 @@ public class EpidemicDataPresenter extends BasePresenter<EpidemicDataView> {
         epidemicDataManager = new EpidemicDataManager();
     }
 
-    public void refresh(){
-
+    public void refresh() throws InterruptedException {
+        epidemicDataManager.refresh();
+        myView.resetEpidemicCountryData(epidemicDataManager.getCountryCards());
+        myView.resetEpidemicProvinceData(epidemicDataManager.getProvinceCards());
     }
 }

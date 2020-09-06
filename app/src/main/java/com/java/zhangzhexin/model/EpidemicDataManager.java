@@ -10,10 +10,14 @@ public class EpidemicDataManager {
 
     public EpidemicDataManager() {
         epidemicDataCards = new ArrayList<>();
+        countryCards = new ArrayList<>();
+        provinceCards = new ArrayList<>();
     }
 
     public void refresh() throws InterruptedException {
         epidemicDataCards = UrlManager.getLatestEpidemicData();
+        countryCards.clear();
+        provinceCards.clear();
         for (EpidemicDataCard card : epidemicDataCards) {
             if (card.province == null) {
                 countryCards.add(card);
