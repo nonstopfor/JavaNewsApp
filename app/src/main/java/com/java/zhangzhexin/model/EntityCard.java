@@ -10,6 +10,7 @@ public class EntityCard extends BaseCard {
     public Map properties;
     public String imgUrl;
     public List<Relation> relationList;
+    int idx;
 
     public EntityCard(String label){
         this.label = label;

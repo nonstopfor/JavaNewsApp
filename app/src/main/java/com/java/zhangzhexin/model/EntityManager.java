@@ -68,6 +68,9 @@ public class EntityManager extends BaseManager {
             }
         });
         entityCardList = results;
+        for (int i = 0; i < entityCardList.size(); ++i) {
+            entityCardList.get(i).idx = i;
+        }
         return results;
     }
 
@@ -78,4 +81,7 @@ public class EntityManager extends BaseManager {
         return obj.getAsString();
     }
 
+    public EntityCard getEntity(int idx) {
+        return entityCardList.get(idx);
+    }
 }
