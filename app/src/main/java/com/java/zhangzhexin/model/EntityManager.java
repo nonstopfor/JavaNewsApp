@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +58,15 @@ public class EntityManager extends BaseManager {
             results.add(card);
         }
 //        System.out.println(results.size());
-
+        results.sort(new Comparator<EntityCard>() {
+            @Override
+            public int compare(EntityCard o1, EntityCard o2) {
+                if (o1.hot < o2.hot) {
+                    return 1;
+                }
+                return -1;
+            }
+        });
         return results;
     }
 

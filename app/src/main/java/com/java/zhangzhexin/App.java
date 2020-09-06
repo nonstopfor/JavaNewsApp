@@ -21,16 +21,17 @@ public class App extends Application {
         Database db = helper.getWritableDb();
 
         daoSession = new DaoMaster(db).newSession();
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
+                long startTime = System.currentTimeMillis();
                 try {
-                    NewsSearchManager.preDownloadNewsList = UrlManager.getNewsList("news",1,10000);
+                    NewsSearchManager.preDownloadNewsList = UrlManager.getNewsList("news", 1, 3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-                System.out.println("finish thread run");
+                long endTime = System.currentTimeMillis();
+                System.out.println("finish thread run, took " + (endTime - startTime) + " ms");
             }
         }.start();
 
