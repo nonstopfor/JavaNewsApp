@@ -63,6 +63,8 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
         swipeRefreshLayout = view.findViewById(R.id.epidemicDataSwipeRefreshLayout);
         countryBarChart = view.findViewById(R.id.countryBarChart);
         provinceBarChart = view.findViewById(R.id.provinceBarChart);
+//        countryBarChart.setTouchListener();
+//        provinceBarChart.setTouchListener();
         setCountryBarChartStyle();
         setProvinceBarChartStyle();
     }
