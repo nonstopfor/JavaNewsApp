@@ -6,4 +6,6 @@
     <color name="colorTabUnselected">#000000</color>
     <color name="colorReadNews">#d3d3d3</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorMarkerBackground">#88000000</color>
+    <color name="colorMarkerText">#ffffff</color>
 </resources>

@@ -24,4 +24,36 @@ public class EpidemicDataCard {
         if (strings.length > 1) province = strings[1];
         if (strings.length > 2) county = strings[2];
     }
+
+    public String displayMessageCountry() {
+        StringBuilder result = new StringBuilder();
+        result.append("country:" + country);
+        result.append("\nconfirmed:" + confirmed);
+        if (suspected != null) {
+            result.append("\nsuspected:" + suspected);
+        }
+        if (cured != null) {
+            result.append("\ncured:" + cured);
+        }
+        if (dead != null) {
+            result.append("\ndead:" + dead);
+        }
+        return result.toString();
+    }
+
+    public String displayMessageProvince(){
+        StringBuilder result = new StringBuilder();
+        result.append("province:" + province);
+        result.append("\nconfirmed:" + confirmed);
+        if (suspected != null) {
+            result.append("\nsuspected:" + suspected);
+        }
+        if (cured != null) {
+            result.append("\ncured:" + cured);
+        }
+        if (dead != null) {
+            result.append("\ndead:" + dead);
+        }
+        return result.toString();
+    }
 }

@@ -125,7 +125,7 @@ public class UrlManager {
 //            System.out.println(key+" "+confirmed+" "+suspected+" "+cured+" "+dead);
         }
 //        System.out.println(jsonData.keySet().size());
-
+//        System.out.println(result.size());
         return result;
     }
 
