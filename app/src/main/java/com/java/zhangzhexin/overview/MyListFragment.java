@@ -72,6 +72,7 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
         System.out.println("ListFragment : "+type+" onCreateView");
         if(view == null)
         {
+            isFirstLoad = true;
             System.out.println("ListFragment: "+type+" view为空");
             view = inflater.inflate(R.layout.fragment_list, container, false);
             initView();
@@ -136,7 +137,8 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
     public void onResume() {
         super.onResume();
         System.out.println("ListFragment : "+type+" onResume");
-        if(isFirstLoad || type.equals("history")) { //浏览记录每次都要刷新
+        //不用isFirstLoad 因为fragment会被destroyView  只要view非空 && 不是历史 就不刷新
+      if(isFirstLoad|| type.equals("history")) { //浏览记录每次都要刷新
             myPresenter.refreshData(20);
             isFirstLoad = false;
         }
@@ -146,7 +148,7 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
     public void onDestroyView() {
         super.onDestroyView();
         System.out.println("ListFragment: "+type+" onDestroyView");
-        isFirstLoad = true; //重置
+        //isFirstLoad = true; //重置
     }
 
     @Override
