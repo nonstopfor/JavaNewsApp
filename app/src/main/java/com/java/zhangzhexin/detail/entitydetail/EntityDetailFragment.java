@@ -32,7 +32,7 @@ public class EntityDetailFragment extends BaseFragment<EntityDetailView, EntityD
         if(view == null)
         {
             System.out.println("ListFragment: "+type+" view为空");
-            view = inflater.inflate(R.layout.fragment_newsdetail, container, false);
+            view = inflater.inflate(R.layout.fragment_entitydetail, container, false);
             initView();
         }
         return view;
