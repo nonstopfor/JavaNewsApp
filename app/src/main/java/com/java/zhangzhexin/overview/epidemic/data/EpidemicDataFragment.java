@@ -73,12 +73,16 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
         barChart.getLegend().setEnabled(false);
         barChart.setScaleEnabled(false);
         barChart.setDrawMarkers(true);
+        barChart.setExtraBottomOffset(10);
+
 
         XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTextSize(9f);
         xAxis.setDrawAxisLine(false);
         xAxis.setDrawGridLines(false);
+        xAxis.setLabelRotationAngle(-45);
+        xAxis.setGranularity(1.0f);
 
         YAxis left = barChart.getAxisLeft();
         left.setAxisMinimum(0);
@@ -161,7 +165,7 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
         countryBarChart.getXAxis().setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-                System.out.println(value);
+//                System.out.println(value);
                 return cards.get((int) value).country;
             }
         });
@@ -170,12 +174,13 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
         countryBarChart.setData(barData);
         ViewPortHandler viewPortHandler = countryBarChart.getViewPortHandler();
         Matrix matrix = new Matrix();
-        matrix.setScale(1.5f, 1.0f);
+        float xScale = cards.size() / 5;
+        matrix.setScale(xScale, 1.0f);
 
         viewPortHandler.refresh(matrix, countryBarChart, false);
 
         countryBarChart.invalidate();
-        System.out.println("barEntry size:"+barEntries.size());
+        System.out.println("barEntry size:" + barEntries.size());
         System.out.println("finish draw epidemic country data");
     }
 
@@ -195,7 +200,7 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
         provinceBarChart.getXAxis().setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-                System.out.println(value);
+//                System.out.println(value);
                 return cards.get((int) value).province;
             }
         });
@@ -204,7 +209,8 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
         provinceBarChart.setData(barData);
         ViewPortHandler viewPortHandler = provinceBarChart.getViewPortHandler();
         Matrix matrix = new Matrix();
-        matrix.setScale(1.5f, 1.0f);
+        float xScale = cards.size() / 6;
+        matrix.setScale(xScale, 1.0f);
 
         viewPortHandler.refresh(matrix, provinceBarChart, false);
 
@@ -228,10 +234,9 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
         @Override
         public void refreshContent(Entry e, Highlight highlight) {
             EpidemicDataCard card = cards.get((int) e.getX());
-            if(mode.equals("country")){
+            if (mode.equals("country")) {
                 textView.setText(card.displayMessageCountry());
-            }
-            else if(mode.equals("province")){
+            } else if (mode.equals("province")) {
                 textView.setText(card.displayMessageProvince());
             }
             super.refreshContent(e, highlight);
