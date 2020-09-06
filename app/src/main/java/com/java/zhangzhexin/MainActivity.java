@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     SearchHistoryProvider.AUTHORITY, SearchHistoryProvider.MODE);
             suggestions.saveRecentQuery(query, null);
 
-            //switchFragment(searchFragment);//切换到searchFragment
+            switchFragment(searchFragment);//切换到searchFragment
             //启动SearchActivity
             //TODO:改为启动SearchFragment
 //            Intent searchIntent = new Intent(this,SearchActivity.class);
