@@ -10,7 +10,7 @@ import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.xyzlf.share.library.interfaces.ShareConstant;
+
 
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
@@ -37,8 +37,8 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     @Override
     public void onResp(BaseResp resp) {
         Intent intent = new Intent();
-        intent.setAction(ShareConstant.ACTION_WEIXIN_CALLBACK);
-        intent.putExtra(ShareConstant.EXTRA_WEIXIN_RESULT, resp.errCode);
+//        intent.setAction(ShareConstant.ACTION_WEIXIN_CALLBACK);
+//        intent.putExtra(ShareConstant.EXTRA_WEIXIN_RESULT, resp.errCode);
         sendBroadcast(intent);
         finish();
     }

@@ -29,11 +29,16 @@ import com.java.zhangzhexin.model.Tab;
 //import com.sina.weibo.sdk.openapi.IWBAPI;
 //import com.sina.weibo.sdk.openapi.WBAPIFactory;
 //import com.sina.weibo.sdk.share.WbShareCallback;
+import com.sina.weibo.sdk.api.TextObject;
+import com.sina.weibo.sdk.api.WeiboMultiMessage;
+import com.sina.weibo.sdk.auth.AuthInfo;
+import com.sina.weibo.sdk.common.UiError;
+import com.sina.weibo.sdk.openapi.IWBAPI;
+import com.sina.weibo.sdk.openapi.WBAPIFactory;
+import com.sina.weibo.sdk.share.WbShareCallback;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.xyzlf.share.library.bean.ShareEntity;
-import com.xyzlf.share.library.interfaces.ShareConstant;
-import com.xyzlf.share.library.util.ShareUtil;
+
 
 
 /*
@@ -47,7 +52,7 @@ FIXME:
 
 先写完News的详情页 之后再决定如何扩展到其他的详情页
 */
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements WbShareCallback {
 
     private NewsDetailFragment newsDetailFragment;
     private EntityDetailFragment entityDetailFragment;
@@ -62,16 +67,16 @@ public class DetailActivity extends AppCompatActivity {
     // IWXAPI 是第三方app和微信通信的openApi接口
 //    private IWXAPI api;
 
-//    //微博
-//    private static final String APP_KY = "2651280216";
-//    //在微博开发平台为应用申请的App Key
-//    private static final String REDIRECT_URL = "http://www.sina.com";
-//    //在微博开放平台为应用申请的高级权限
-//    private static final String SCOPE =
-//            "email,direct_messages_read,direct_messages_write,"
-//                    + "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
-//                    + "follow_app_official_microblog," + "invitation_write";
-//    private IWBAPI mWBAPI;
+    //微博
+    private static final String APP_KY = "2651280216";
+    //在微博开发平台为应用申请的App Key
+    private static final String REDIRECT_URL = "http://www.sina.com";
+    //在微博开放平台为应用申请的高级权限
+    private static final String SCOPE =
+            "email,direct_messages_read,direct_messages_write,"
+                    + "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
+                    + "follow_app_official_microblog," + "invitation_write";
+    private IWBAPI mWBAPI;
 //    private CheckBox mShareText;
 //    private CheckBox mShareImage;
 //    private CheckBox mShareUrl;
@@ -108,11 +113,11 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
-//    private void initSdk(){
-//        AuthInfo authInfo = new AuthInfo(this, APP_KY, REDIRECT_URL, SCOPE);
-//        mWBAPI = WBAPIFactory.createWBAPI(this);
-//        mWBAPI.registerApp(this, authInfo);
-//    }
+    private void initSdk(){
+        AuthInfo authInfo = new AuthInfo(this, APP_KY, REDIRECT_URL, SCOPE);
+        mWBAPI = WBAPIFactory.createWBAPI(this);
+        mWBAPI.registerApp(this, authInfo);
+    }
 
 
 
@@ -129,8 +134,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("检测到微博分享点击");
-                shareData();
-                //doWeiboShare();
+                doWeiboShare();
             }
         });
 //        initSdk();
@@ -181,58 +185,50 @@ public class DetailActivity extends AppCompatActivity {
         setIntent(intent);
     }
 
-    public void shareData(){
-        ShareEntity shareEntity = new ShareEntity("疫情新闻","这是一个content");
-        ShareUtil.showShareDialog(this,ShareConstant.SHARE_CHANNEL_SINA_WEIBO | ShareConstant.SHARE_CHANNEL_WEIXIN_FRIEND,
-                shareEntity, ShareConstant.REQUEST_CODE);
+//    public void shareData(){
+//        ShareEntity shareEntity = new ShareEntity("疫情新闻","这是一个content");
+//        ShareUtil.showShareDialog(this,ShareConstant.SHARE_CHANNEL_SINA_WEIBO | ShareConstant.SHARE_CHANNEL_WEIXIN_FRIEND,
+//                shareEntity, ShareConstant.REQUEST_CODE);
+//    }
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mWBAPI.doResultIntent(data, this);
     }
 
-//    @Override
-//    public void onClick(View v) {
-//        System.out.println("检测到click, view = "+v);
-//        if (v == findViewById(R.id.weiboShareButton)) {
-//            System.out.println("是微博分享按钮");
-//            doWeiboShare();
-//        }
-//        //TODO: doWeixinShare
-//    }
+    private void doWeiboShare() {
+//        System.out.println("get into weiboshare");
+        WeiboMultiMessage message = new WeiboMultiMessage();
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        mWBAPI.doResultIntent(data, this);
-//    }
-//
-//    private void doWeiboShare() {
-////        System.out.println("get into weiboshare");
-//        WeiboMultiMessage message = new WeiboMultiMessage();
-//
-//        TextObject textObject = new TextObject();
-//        String text = "我正在使用微博客户端发博器分享文字。";
-//
-//        // 分享文字
-//
-//        text = "这里设置您要分享的内容！";
-//        textObject.text = text;
-//        message.textObject = textObject;
-//
-////        System.out.println(Thread.currentThread().getStackTrace()[2].getLineNumber());
-//
-//        mWBAPI.shareMessage(message, true);
-//    }
-//
-//    @Override
-//    public void onComplete() {
-//        Toast.makeText(DetailActivity.this, "分享成功", Toast.LENGTH_SHORT).show();
-//    }
-//
-//    @Override
-//    public void onError(UiError error) {
-//        Toast.makeText(DetailActivity.this, "分享失败:" + error.errorMessage, Toast.LENGTH_SHORT).show();
-//    }
-//
-//    @Override
-//    public void onCancel() {
-//        Toast.makeText(DetailActivity.this, "分享取消", Toast.LENGTH_SHORT).show();
-//    }
+        TextObject textObject = new TextObject();
+        String text = "我正在使用微博客户端发博器分享文字。";
+
+        // 分享文字
+
+        text = "这里设置您要分享的内容！";
+        textObject.text = text;
+        message.textObject = textObject;
+
+//        System.out.println(Thread.currentThread().getStackTrace()[2].getLineNumber());
+
+        mWBAPI.shareMessage(message, true);
+    }
+
+    @Override
+    public void onComplete() {
+        Toast.makeText(DetailActivity.this, "分享成功", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onError(UiError error) {
+        Toast.makeText(DetailActivity.this, "分享失败:" + error.errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCancel() {
+        Toast.makeText(DetailActivity.this, "分享取消", Toast.LENGTH_SHORT).show();
+    }
 }
