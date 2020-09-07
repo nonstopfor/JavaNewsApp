@@ -148,6 +148,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+
+        System.out.println("MainActivity onResume, 移除searchView焦点");
+        super.onResume();
+        if(searchView != null)
+            searchView.clearFocus();
+    }
+
+    @Override
     public void startActivityForResult(Intent intent, int requestCode) {
         String query = intent.getStringExtra(SearchManager.QUERY);
         if(query!=null){
