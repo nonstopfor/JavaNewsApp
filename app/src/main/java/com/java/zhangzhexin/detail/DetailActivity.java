@@ -36,6 +36,9 @@ import com.sina.weibo.sdk.common.UiError;
 import com.sina.weibo.sdk.openapi.IWBAPI;
 import com.sina.weibo.sdk.openapi.WBAPIFactory;
 import com.sina.weibo.sdk.share.WbShareCallback;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.opensdk.modelmsg.WXTextObject;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
@@ -60,12 +63,12 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
     private String type;
 
     private ImageView weiboButton;
-    private ImageView weixinButon;
+    private ImageView weixinButton;
 
     //微信
     private static final String APP_ID = "wx88888888";
-    // IWXAPI 是第三方app和微信通信的openApi接口
-//    private IWXAPI api;
+    //IWXAPI 是第三方app和微信通信的openApi接口
+    private IWXAPI api;
 
     //微博
     private static final String APP_KY = "2651280216";
@@ -113,11 +116,18 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
     }
 
 
-    private void initSdk(){
+    private void initWeibo(){
         AuthInfo authInfo = new AuthInfo(this, APP_KY, REDIRECT_URL, SCOPE);
         mWBAPI = WBAPIFactory.createWBAPI(this);
         mWBAPI.registerApp(this, authInfo);
     }
+
+    private void initWX(){
+        api = WXAPIFactory.createWXAPI(this, APP_ID, true);
+        // 将应用的appId注册到微信
+        api.registerApp(APP_ID);
+    }
+
 
 
 
@@ -129,6 +139,19 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_detail);
         initFragment();
+
+        //initWeibo();
+        initWX();
+
+        weixinButton = findViewById(R.id.weixinShareButton);
+        weixinButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                System.out.println("检测到微信分享点击");
+                doWeixinShare();
+            }
+        });
+
         weiboButton = findViewById(R.id.weiboShareButton);
         weiboButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,11 +160,6 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
                 doWeiboShare();
             }
         });
-        initSdk();
-        AuthInfo authInfo = new AuthInfo(this, APP_KY, REDIRECT_URL, SCOPE);
-        mWBAPI = WBAPIFactory.createWBAPI(this);
-        mWBAPI.registerApp(this, authInfo);
-        mWBAPI.setLoggerEnable(true);
         System.out.println("详情页离开onCreate");
     }
 
@@ -199,6 +217,26 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
         mWBAPI.doResultIntent(data, this);
     }
 
+
+    private void doWeixinShare(){
+        String text = "这里是一条微信分享的文本";
+        WXTextObject textObj = new WXTextObject();
+        textObj.text = text;
+
+        //用 WXTextObject 对象初始化一个 WXMediaMessage 对象
+        WXMediaMessage msg = new WXMediaMessage();
+        msg.mediaObject = textObj;
+        msg.description = text;
+
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        req.transaction = String.valueOf(System.currentTimeMillis());  //transaction字段用与唯一标示一个请求
+        req.message = msg;
+        //req.scene = WXSceneSession;
+
+        //调用api接口，发送数据到微信
+        api.sendReq(req);
+
+    }
     private void doWeiboShare() {
 //        System.out.println("get into weiboshare");
         WeiboMultiMessage message = new WeiboMultiMessage();

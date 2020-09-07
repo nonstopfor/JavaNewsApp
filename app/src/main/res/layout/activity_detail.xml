@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2" />
             <ImageView
-                android:id="@+id/wechatShareButton"
+                android:id="@+id/weixinShareButton"
                 android:layout_width="@dimen/buttonWidth"
                 android:layout_height="@dimen/buttonWidth"
                 android:src="@drawable/wechat" />
