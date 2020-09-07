@@ -31,7 +31,7 @@ public class NewsDetailFragment extends BaseFragment<NewsDetailView,NewsDetailPr
         if(view == null)
         {
             System.out.println("ListFragment: "+type+" view为空");
-            view = inflater.inflate(R.layout.fragment_newsdetail, container, false);
+            view = inflater.inflate(R.layout.news_detail, container, false);
             initView();
         }
         return view;

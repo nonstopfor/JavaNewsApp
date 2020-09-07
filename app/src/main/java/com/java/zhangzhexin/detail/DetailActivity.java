@@ -3,6 +3,10 @@ package com.java.zhangzhexin.detail;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +21,13 @@ import com.java.zhangzhexin.R;
 import com.java.zhangzhexin.detail.entitydetail.EntityDetailFragment;
 import com.java.zhangzhexin.detail.newsdetail.NewsDetailFragment;
 import com.java.zhangzhexin.model.Tab;
+import com.sina.weibo.sdk.api.TextObject;
+import com.sina.weibo.sdk.api.WeiboMultiMessage;
+import com.sina.weibo.sdk.auth.AuthInfo;
+import com.sina.weibo.sdk.common.UiError;
+import com.sina.weibo.sdk.openapi.IWBAPI;
+import com.sina.weibo.sdk.openapi.WBAPIFactory;
+import com.sina.weibo.sdk.share.WbShareCallback;
 
 
 /*
@@ -30,12 +41,31 @@ FIXME:
 
 先写完News的详情页 之后再决定如何扩展到其他的详情页
 */
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements View.OnClickListener,WbShareCallback{
 
     private NewsDetailFragment newsDetailFragment;
     private EntityDetailFragment entityDetailFragment;
     private Fragment currentFragment;
     private String type;
+
+
+    //微博
+    private static final String APP_KY = "2651280216";
+    //在微博开发平台为应用申请的App Key
+    private static final String REDIRECT_URL = "http://www.sina.com";
+    //在微博开放平台为应用申请的高级权限
+    private static final String SCOPE =
+            "email,direct_messages_read,direct_messages_write,"
+                    + "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
+                    + "follow_app_official_microblog," + "invitation_write";
+    private IWBAPI mWBAPI;
+    private CheckBox mShareText;
+    private CheckBox mShareImage;
+    private CheckBox mShareUrl;
+    private CheckBox mShareMultiImage;
+    private CheckBox mShareVideo;
+    private RadioButton mShareClientOnly;
+    private RadioButton mShareClientH5;
 
     public void switchFragment(Fragment target) {
         if (currentFragment != target) {
@@ -64,6 +94,12 @@ public class DetailActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    private void initSdk(){
+        AuthInfo authInfo = new AuthInfo(this, APP_KY, REDIRECT_URL, SCOPE);
+        mWBAPI = WBAPIFactory.createWBAPI(this);
+        mWBAPI.registerApp(this, authInfo);
+    }
+
     //TODO：onCreate重写
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,9 +108,15 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_detail);
         initFragment();
+        initSdk();
+        AuthInfo authInfo = new AuthInfo(this, APP_KY, REDIRECT_URL, SCOPE);
+        mWBAPI = WBAPIFactory.createWBAPI(this);
+        mWBAPI.registerApp(this, authInfo);
+        mWBAPI.setLoggerEnable(true);
         System.out.println("详情页离开onCreate");
     }
 
+    //返回MainActivity
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == android.R.id.home){
@@ -105,11 +147,6 @@ public class DetailActivity extends AppCompatActivity {
         else{
             //TODO:学者
         }
-        //TODO:根据intent传来的信息选择启动哪个detail fragment
-//        news_id = getIntent().getStringExtra("news_id");
-//        System.out.println("详情页收到新的news_id = "+news_id);
-//        myPresenter.setNews(news_id);
-        //TODO:调用presenter接口实现 返回一个SingleNews
     }
 
     //需要在resume里getIntent
@@ -120,5 +157,47 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        if (v == findViewById(R.id.weiboShareButton)) {
+            doWeiboShare();
+        }
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mWBAPI.doResultIntent(data, this);
+    }
+
+    private void doWeiboShare() {
+        WeiboMultiMessage message = new WeiboMultiMessage();
+
+        TextObject textObject = new TextObject();
+        String text = "我正在使用微博客户端发博器分享文字。";
+
+        // 分享文字
+        if (mShareText.isChecked()) {
+            text = "这里设置您要分享的内容！";
+            textObject.text = text;
+            message.textObject = textObject;
+        }
+
+        mWBAPI.shareMessage(message, mShareClientOnly.isChecked());
+    }
+
+    @Override
+    public void onComplete() {
+        Toast.makeText(DetailActivity.this, "分享成功", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onError(UiError error) {
+        Toast.makeText(DetailActivity.this, "分享失败:" + error.errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCancel() {
+        Toast.makeText(DetailActivity.this, "分享取消", Toast.LENGTH_SHORT).show();
+    }
 }
