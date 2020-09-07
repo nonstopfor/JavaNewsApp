@@ -30,6 +30,10 @@ import com.sina.weibo.sdk.openapi.IWBAPI;
 import com.sina.weibo.sdk.openapi.WBAPIFactory;
 import com.sina.weibo.sdk.share.WbShareCallback;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.xyzlf.share.library.bean.ShareEntity;
+import com.xyzlf.share.library.interfaces.ShareConstant;
+import com.xyzlf.share.library.util.ShareUtil;
 
 
 /*
@@ -109,6 +113,15 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
         mWBAPI.registerApp(this, authInfo);
     }
 
+    //微信
+    private void regToWx(){
+        // 通过WXAPIFactory工厂，获取IWXAPI的实例
+        api = WXAPIFactory.createWXAPI(this, APP_ID, true);
+        // 将应用的appId注册到微信
+        api.registerApp(APP_ID);
+
+    }
+
     //TODO：onCreate重写
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -122,7 +135,8 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
             @Override
             public void onClick(View v) {
                 System.out.println("检测到微博分享点击");
-                doWeiboShare();
+                shareData();
+                //doWeiboShare();
             }
         });
         initSdk();
@@ -173,6 +187,12 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
         setIntent(intent);
     }
 
+    public void shareData(){
+        ShareEntity shareEntity = new ShareEntity("疫情新闻","这是一个content");
+        ShareUtil.showShareDialog(this,
+                ShareConstant.SHARE_CHANNEL_QQ | ShareConstant.SHARE_CHANNEL_SINA_WEIBO | ShareConstant.SHARE_CHANNEL_WEIXIN_CIRCLE | ShareConstant.SHARE_CHANNEL_WEIXIN_FRIEND,
+                shareEntity, ShareConstant.REQUEST_CODE);
+    }
 
 //    @Override
 //    public void onClick(View v) {

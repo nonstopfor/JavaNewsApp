@@ -62,5 +62,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.sina.weibo.sdk:core:9.12.0:openDefaultRelease@aar'
     api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    implementation ('com.xyzlf.share:sharesdk:0.0.11') {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+    }
     //debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
 }
