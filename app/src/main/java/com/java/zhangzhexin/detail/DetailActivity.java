@@ -113,14 +113,7 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
         mWBAPI.registerApp(this, authInfo);
     }
 
-    //微信
-    private void regToWx(){
-        // 通过WXAPIFactory工厂，获取IWXAPI的实例
-        api = WXAPIFactory.createWXAPI(this, APP_ID, true);
-        // 将应用的appId注册到微信
-        api.registerApp(APP_ID);
 
-    }
 
     //TODO：onCreate重写
     @Override
@@ -139,11 +132,11 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
                 //doWeiboShare();
             }
         });
-        initSdk();
-        AuthInfo authInfo = new AuthInfo(this, APP_KY, REDIRECT_URL, SCOPE);
-        mWBAPI = WBAPIFactory.createWBAPI(this);
-        mWBAPI.registerApp(this, authInfo);
-        mWBAPI.setLoggerEnable(true);
+//        initSdk();
+//        AuthInfo authInfo = new AuthInfo(this, APP_KY, REDIRECT_URL, SCOPE);
+//        mWBAPI = WBAPIFactory.createWBAPI(this);
+//        mWBAPI.registerApp(this, authInfo);
+//        mWBAPI.setLoggerEnable(true);
         System.out.println("详情页离开onCreate");
     }
 
