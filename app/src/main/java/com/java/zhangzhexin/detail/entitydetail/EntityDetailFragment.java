@@ -104,10 +104,10 @@ public class EntityDetailFragment extends BaseFragment<EntityDetailView, EntityD
         //Clear previous Sections
         while (groupListView.getSectionCount() > 0) {
             System.out.println(groupListView.getSectionCount());
-            if (groupListView.getSection(0) != null) {
-                System.out.println("not null");
-            }
-            groupListView.getSection(0)
+//            if (mGroupListView.getSection(0) != null) {
+//                System.out.println("not null");
+//            }
+            groupListView.getSection(groupListView.getSectionCount()-1)
                     .removeFrom(groupListView);
         }
 
@@ -156,5 +156,13 @@ public class EntityDetailFragment extends BaseFragment<EntityDetailView, EntityD
             relationSection.addTo(groupListView);
         }
 
+//        while (groupListView.getSectionCount() > 0) {
+//            System.out.println(groupListView.getSectionCount());
+//            if (groupListView.getSection(0) != null) {
+//                System.out.println("not null");
+//            }
+//            groupListView.getSection(0)
+//                    .removeFrom(groupListView);
+//        }
     }
 }
