@@ -107,6 +107,7 @@ public class DetailActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+
 //    private void initSdk(){
 //        AuthInfo authInfo = new AuthInfo(this, APP_KY, REDIRECT_URL, SCOPE);
 //        mWBAPI = WBAPIFactory.createWBAPI(this);
@@ -182,7 +183,7 @@ public class DetailActivity extends AppCompatActivity {
 
     public void shareData(){
         ShareEntity shareEntity = new ShareEntity("疫情新闻","这是一个content");
-        ShareUtil.showShareDialog(this,ShareConstant.SHARE_CHANNEL_QQ | ShareConstant.SHARE_CHANNEL_SINA_WEIBO | ShareConstant.SHARE_CHANNEL_WEIXIN_CIRCLE | ShareConstant.SHARE_CHANNEL_WEIXIN_FRIEND,
+        ShareUtil.showShareDialog(this,ShareConstant.SHARE_CHANNEL_SINA_WEIBO | ShareConstant.SHARE_CHANNEL_WEIXIN_FRIEND,
                 shareEntity, ShareConstant.REQUEST_CODE);
     }
 
