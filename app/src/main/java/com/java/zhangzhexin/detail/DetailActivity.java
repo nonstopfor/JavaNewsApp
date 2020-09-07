@@ -191,19 +191,21 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
     }
 
     private void doWeiboShare() {
+//        System.out.println("get into weiboshare");
         WeiboMultiMessage message = new WeiboMultiMessage();
 
         TextObject textObject = new TextObject();
         String text = "我正在使用微博客户端发博器分享文字。";
 
         // 分享文字
-        if (mShareText.isChecked()) {
-            text = "这里设置您要分享的内容！";
-            textObject.text = text;
-            message.textObject = textObject;
-        }
 
-        mWBAPI.shareMessage(message, mShareClientOnly.isChecked());
+        text = "这里设置您要分享的内容！";
+        textObject.text = text;
+        message.textObject = textObject;
+
+//        System.out.println(Thread.currentThread().getStackTrace()[2].getLineNumber());
+
+        mWBAPI.shareMessage(message, true);
     }
 
     @Override
