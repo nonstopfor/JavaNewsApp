@@ -51,6 +51,7 @@ public class EntityManager extends BaseManager {
                 String r = relation.get("relation").getAsString();
                 String la = relation.get("label").getAsString();
                 boolean forward = relation.get("forward").getAsBoolean();
+//                System.out.println("relation:"+r);
                 relationList.add(new Relation(r, la, forward));
             }
             EntityCard card = new EntityCard(label, description, hot, map, imgUrl, relationList);

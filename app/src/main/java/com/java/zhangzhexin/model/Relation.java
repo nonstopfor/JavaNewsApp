@@ -1,13 +1,17 @@
 package com.java.zhangzhexin.model;
 
 public class Relation {
-    String relation;
-    String label;
-    boolean forward;
+    public String relation;
+    public String label;
+    public boolean forward;
 
     public Relation(String relation, String label, boolean forward) {
-        relation = relation;
-        label = label;
-        forward = forward;
+        this.relation = relation;
+        this.label = label;
+        this.forward = forward;
+    }
+
+    public void display(){
+        System.out.println("relation:"+relation+"\nlabel:"+label+"\nforward:"+forward);
     }
 }

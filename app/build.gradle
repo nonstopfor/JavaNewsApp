@@ -63,5 +63,8 @@ dependencies {
     api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     implementation 'com.sina.weibo.sdk:core:9.12.0:openDefaultRelease@aar'
     implementation 'com.qmuiteam:qmui:2.0.0-alpha10'
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+
     //debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
 }

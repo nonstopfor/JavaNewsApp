@@ -45,40 +45,53 @@
     </LinearLayout>
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+        <!--        app:qmui_skin_background="?attr/app_skin_common_background_1">-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginVertical="@dimen/padding_newsdetail_V">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="关系"
-            android:textSize="@dimen/entity_title"/>
-        <TextView
-            android:id="@+id/relation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="这是实体的关系"
-            android:textSize="@dimen/entity_description"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginVertical="@dimen/padding_newsdetail_V">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="属性"
-            android:textSize="@dimen/entity_title"/>
-        <TextView
-            android:id="@+id/properties"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="这是实体的属性"
-            android:textSize="@dimen/entity_description"/>
-    </LinearLayout>
+        <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
+            android:id="@+id/groupListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
+
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_marginVertical="@dimen/padding_newsdetail_V">-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="关系"-->
+<!--            android:textSize="@dimen/entity_title"/>-->
+<!--        <TextView-->
+<!--            android:id="@+id/relation"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="这是实体的关系"-->
+<!--            android:textSize="@dimen/entity_description"/>-->
+<!--    </LinearLayout>-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_marginVertical="@dimen/padding_newsdetail_V">-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="属性"-->
+<!--            android:textSize="@dimen/entity_title"/>-->
+<!--        <TextView-->
+<!--            android:id="@+id/properties"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="这是实体的属性"-->
+<!--            android:textSize="@dimen/entity_description"/>-->
+<!--    </LinearLayout>-->
 
 </LinearLayout>
