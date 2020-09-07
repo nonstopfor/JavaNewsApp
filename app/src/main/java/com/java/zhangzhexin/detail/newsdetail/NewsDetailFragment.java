@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.java.zhangzhexin.BaseFragment;
 import com.java.zhangzhexin.R;
+import com.java.zhangzhexin.model.NewsCard;
 import com.java.zhangzhexin.model.SingleNews;
 
 public class NewsDetailFragment extends BaseFragment<NewsDetailView,NewsDetailPresenter> implements NewsDetailView{
@@ -21,6 +22,7 @@ public class NewsDetailFragment extends BaseFragment<NewsDetailView,NewsDetailPr
     private TextView news_source;
     private TextView news_date;
     private String news_id;
+    public SingleNews current_news;
 
     private View view;
 
@@ -76,6 +78,7 @@ public class NewsDetailFragment extends BaseFragment<NewsDetailView,NewsDetailPr
 
     @Override
     public void setView(SingleNews news) {
+        current_news = news;
         System.out.println("title = "+news.title);
         news_title.setText(news.title);
         news_content.setText(news.content);

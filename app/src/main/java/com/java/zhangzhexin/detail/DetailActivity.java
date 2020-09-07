@@ -29,6 +29,7 @@ import com.java.zhangzhexin.model.Tab;
 //import com.sina.weibo.sdk.openapi.IWBAPI;
 //import com.sina.weibo.sdk.openapi.WBAPIFactory;
 //import com.sina.weibo.sdk.share.WbShareCallback;
+import com.sina.weibo.sdk.api.MediaObject;
 import com.sina.weibo.sdk.api.TextObject;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
 import com.sina.weibo.sdk.auth.AuthInfo;
@@ -147,8 +148,10 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
         weixinButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                System.out.println("检测到微信分享点击");
-                doWeixinShare();
+                if(currentFragment == newsDetailFragment) {
+                    System.out.println("检测到微信分享点击");
+                    doWeixinShare();
+                }
             }
         });
 
@@ -156,8 +159,10 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
         weiboButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("检测到微博分享点击");
-                doWeiboShare();
+                if(currentFragment == newsDetailFragment) {
+                    System.out.println("检测到微博分享点击");
+                    doWeiboShare();
+                }
             }
         });
         System.out.println("详情页离开onCreate");
@@ -219,14 +224,19 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
 
 
     private void doWeixinShare(){
-        String text = "这里是一条微信分享的文本";
+        String content = newsDetailFragment.current_news.content;
+        if(content.length()>20){
+            content = content.substring(0,20)+"...";
+        }
         WXTextObject textObj = new WXTextObject();
-        textObj.text = text;
+        textObj.text = content;
+
 
         //用 WXTextObject 对象初始化一个 WXMediaMessage 对象
         WXMediaMessage msg = new WXMediaMessage();
         msg.mediaObject = textObj;
-        msg.description = text;
+        msg.description = content;
+        msg.title = newsDetailFragment.current_news.title;
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = String.valueOf(System.currentTimeMillis());  //transaction字段用与唯一标示一个请求
@@ -235,21 +245,22 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
 
         //调用api接口，发送数据到微信
         api.sendReq(req);
-
     }
+
+
     private void doWeiboShare() {
 //        System.out.println("get into weiboshare");
         WeiboMultiMessage message = new WeiboMultiMessage();
 
         TextObject textObject = new TextObject();
-        String text = "我正在使用微博客户端发博器分享文字。";
-
-        // 分享文字
-
-        text = "这里设置您要分享的内容！";
-        textObject.text = text;
+        //textObject.text = newsDetailFragment.current_news;
+        textObject.title = newsDetailFragment.current_news.title;
+        String content = newsDetailFragment.current_news.content;
+        if(content.length()>20){
+            content = content.substring(0,20)+"...";
+        }
+        textObject.description = content;
         message.textObject = textObject;
-
 //        System.out.println(Thread.currentThread().getStackTrace()[2].getLineNumber());
 
         mWBAPI.shareMessage(message, true);
