@@ -137,11 +137,11 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
                 doWeiboShare();
             }
         });
-//        initSdk();
-//        AuthInfo authInfo = new AuthInfo(this, APP_KY, REDIRECT_URL, SCOPE);
-//        mWBAPI = WBAPIFactory.createWBAPI(this);
-//        mWBAPI.registerApp(this, authInfo);
-//        mWBAPI.setLoggerEnable(true);
+        initSdk();
+        AuthInfo authInfo = new AuthInfo(this, APP_KY, REDIRECT_URL, SCOPE);
+        mWBAPI = WBAPIFactory.createWBAPI(this);
+        mWBAPI.registerApp(this, authInfo);
+        mWBAPI.setLoggerEnable(true);
         System.out.println("详情页离开onCreate");
     }
 
