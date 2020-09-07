@@ -27,6 +27,15 @@
         <activity android:name=".set.SetChannelActivity"/>
         <activity android:name=".SearchActivity"/>
 
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="true"
+            android:taskAffinity="com.java.zhangzhexin"
+            android:launchMode="singleTask">
+        </activity>
+
         <provider
             android:authorities="com.java.zhangzhexin.SearchHistoryProvider"
             android:name=".SearchHistoryProvider"/>

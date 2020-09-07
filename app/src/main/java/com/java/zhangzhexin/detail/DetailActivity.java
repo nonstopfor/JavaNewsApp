@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import com.sina.weibo.sdk.common.UiError;
 import com.sina.weibo.sdk.openapi.IWBAPI;
 import com.sina.weibo.sdk.openapi.WBAPIFactory;
 import com.sina.weibo.sdk.share.WbShareCallback;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
 
 
 /*
@@ -41,13 +43,20 @@ FIXME:
 
 先写完News的详情页 之后再决定如何扩展到其他的详情页
 */
-public class DetailActivity extends AppCompatActivity implements View.OnClickListener,WbShareCallback{
+public class DetailActivity extends AppCompatActivity implements WbShareCallback{
 
     private NewsDetailFragment newsDetailFragment;
     private EntityDetailFragment entityDetailFragment;
     private Fragment currentFragment;
     private String type;
 
+    private ImageView weiboButton;
+    private ImageView weixinButon;
+
+    //微信
+    private static final String APP_ID = "wx88888888";
+    // IWXAPI 是第三方app和微信通信的openApi接口
+    private IWXAPI api;
 
     //微博
     private static final String APP_KY = "2651280216";
@@ -108,6 +117,14 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_detail);
         initFragment();
+        weiboButton = findViewById(R.id.weiboShareButton);
+        weiboButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("检测到微博分享点击");
+                doWeiboShare();
+            }
+        });
         initSdk();
         AuthInfo authInfo = new AuthInfo(this, APP_KY, REDIRECT_URL, SCOPE);
         mWBAPI = WBAPIFactory.createWBAPI(this);
@@ -157,12 +174,15 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-    @Override
-    public void onClick(View v) {
-        if (v == findViewById(R.id.weiboShareButton)) {
-            doWeiboShare();
-        }
-    }
+//    @Override
+//    public void onClick(View v) {
+//        System.out.println("检测到click, view = "+v);
+//        if (v == findViewById(R.id.weiboShareButton)) {
+//            System.out.println("是微博分享按钮");
+//            doWeiboShare();
+//        }
+//        //TODO: doWeixinShare
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
