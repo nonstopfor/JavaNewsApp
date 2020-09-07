@@ -229,14 +229,12 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
             content = content.substring(0,20)+"...";
         }
         WXTextObject textObj = new WXTextObject();
-        textObj.text = content;
+        textObj.text = "["+newsDetailFragment.current_news.title+"]\n"+content;
 
 
         //用 WXTextObject 对象初始化一个 WXMediaMessage 对象
         WXMediaMessage msg = new WXMediaMessage();
         msg.mediaObject = textObj;
-        msg.description = content;
-        msg.title = newsDetailFragment.current_news.title;
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = String.valueOf(System.currentTimeMillis());  //transaction字段用与唯一标示一个请求
@@ -253,13 +251,13 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
         WeiboMultiMessage message = new WeiboMultiMessage();
 
         TextObject textObject = new TextObject();
-        //textObject.text = newsDetailFragment.current_news;
-        textObject.title = newsDetailFragment.current_news.title;
+
+
         String content = newsDetailFragment.current_news.content;
         if(content.length()>20){
             content = content.substring(0,20)+"...";
         }
-        textObject.description = content;
+        textObject.text = "["+newsDetailFragment.current_news.title+"]\n"+content;
         message.textObject = textObject;
 //        System.out.println(Thread.currentThread().getStackTrace()[2].getLineNumber());
 
