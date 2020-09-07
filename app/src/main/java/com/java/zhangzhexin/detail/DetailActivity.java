@@ -259,6 +259,8 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
         if(content.length()>20){
             content = content.substring(0,20)+"...";
         }
+        System.out.println(textObject.title);
+        System.out.println(content);
         textObject.description = content;
         message.textObject = textObject;
 //        System.out.println(Thread.currentThread().getStackTrace()[2].getLineNumber());
