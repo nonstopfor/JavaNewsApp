@@ -9,7 +9,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UrlManager {
     public static List<NewsCard> getNewsList(String type, int page, int size) throws InterruptedException {
@@ -129,12 +131,52 @@ public class UrlManager {
         return result;
     }
 
-    public static Integer readInt(JsonElement obj){
-        if(obj.isJsonNull()){
+    public static Integer readInt(JsonElement obj) {
+        if (obj.isJsonNull()) {
             return null;
         }
         return obj.getAsInt();
     }
 
+    static List<ScholarCard> getScholars() throws InterruptedException {
+        String url = "https://innovaapi.aminer.cn/predictor/api/v1/valhalla/highlight/get_ncov_expers_list?v=2";
+        String data = readUrl(url);
+        JsonObject jsonData = new JsonParser().parse(data).getAsJsonObject();
+        JsonArray jsonArray = jsonData.get("data").getAsJsonArray();
 
+        List<ScholarCard> cards = new ArrayList<>();
+        for (int i = 0; i < jsonArray.size(); ++i) {
+            JsonObject scholar = jsonArray.get(i).getAsJsonObject();
+            String avatar = scholar.get("avatar").getAsString();
+//            String id = scholar.get("id").getAsString();
+//            String name = scholar.get("name").getAsString();
+            String name = scholar.get("name_zh").getAsString();
+            if (name.length() == 0) {
+                name = scholar.get("name").getAsString();
+            }
+//            String position = scholar.get("position").getAsString();
+            boolean passed = scholar.get("is_passedaway").getAsBoolean();
+            JsonObject profileObj = scholar.get("profile").getAsJsonObject();
+            String position = getString(profileObj, "position");
+            Map<String, String> profile = new HashMap<>();
+            profile.put("相关组织", profileObj.get("affiliation").getAsString());
+            profile.put("简介", profileObj.get("bio").getAsString());
+            profile.put("教育经历", getString(profileObj, "edu"));
+            profile.put("工作经历", getString(profileObj, "work"));
+            profile.put("主页", getString(profileObj, "homepage"));
+
+            ScholarCard card = new ScholarCard(avatar, name, position, passed, profile);
+//            card.display();
+            cards.add(card);
+        }
+        System.out.println(jsonArray.size());
+        return cards;
+    }
+
+    public static String getString(JsonObject obj, String name) {
+        if (obj.get(name) != null) {
+            return obj.get(name).getAsString();
+        }
+        return "";
+    }
 }
