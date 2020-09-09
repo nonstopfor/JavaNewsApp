@@ -2,12 +2,13 @@ package com.java.zhangzhexin.model;
 
 import java.util.Map;
 
-public class ScholarCard {
-    String avatar;
-    String name;
-    String position;
-    boolean passed;
-    Map<String, String> profile;
+public class ScholarCard extends BaseCard{
+    public String avatar;
+    public String name;
+    public String position;
+    public boolean passed;
+    public Map<String, String> profile;
+    public int idx;
 
     ScholarCard(String avatar, String name, String position, boolean passed, Map<String, String> profile) {
         this.avatar = avatar;

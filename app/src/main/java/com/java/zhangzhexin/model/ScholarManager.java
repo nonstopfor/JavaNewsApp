@@ -2,7 +2,7 @@ package com.java.zhangzhexin.model;
 
 import java.util.List;
 
-public class ScholarManager {
+public class ScholarManager extends BaseManager {
     List<ScholarCard> scholarCardList;
 
     public List<ScholarCard> refresh() throws InterruptedException {
