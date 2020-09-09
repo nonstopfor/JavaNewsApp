@@ -2,13 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/home"
+        android:icon="@drawable/home"
         android:title="@string/home" />
 
     <item
         android:id="@+id/epidemicData"
+        android:icon="@drawable/data"
         android:title="疫情数据"/>
 
     <item
         android:id="@+id/history"
+        android:icon="@drawable/history"
         android:title="@string/history" />
 </menu>

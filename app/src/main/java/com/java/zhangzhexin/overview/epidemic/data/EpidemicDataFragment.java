@@ -38,7 +38,7 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
     private BarChart countryBarChart;
     private BarChart provinceBarChart;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private boolean isFirstLoad = true;
+//    private boolean isFirstLoad = true;
 
 
     @Override
@@ -55,6 +55,7 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
             view = inflater.inflate(R.layout.fragment_epidemicdata, container, false);
             initView();
             initSet();
+            myPresenter.refresh(); //疫情数据加载太慢 创建时就refresh吧
         }
         return view;
     }
@@ -101,13 +102,8 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
 
     public void initSet() {
         swipeRefreshLayout.setOnRefreshListener(() -> {
-            System.out.println("refresh!");
             swipeRefreshLayout.setRefreshing(true);
-            try {
-                myPresenter.refresh();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            myPresenter.refresh();
             swipeRefreshLayout.setRefreshing(false);
         });
     }
@@ -116,21 +112,18 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
     public void onResume() {
         System.out.println("疫情数据onResume");
         super.onResume();
-        if (isFirstLoad) {
-            try {
-                myPresenter.refresh();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            isFirstLoad = false;
-        }
+//        if (isFirstLoad) {
+//            myPresenter.refresh();
+//            isFirstLoad = false;
+//        }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        isFirstLoad = true; //重置
-    }
+//    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
+//        System.out.println("疫情数据被detroy");
+//        isFirstLoad = true; //重置
+//    }
 
     public static EpidemicDataFragment newInstance() {
 

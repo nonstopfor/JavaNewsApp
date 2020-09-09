@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,20 +14,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Lifecycle;
 
-import com.java.zhangzhexin.HomeFragment;
 import com.java.zhangzhexin.MainActivity;
 import com.java.zhangzhexin.R;
 import com.java.zhangzhexin.detail.entitydetail.EntityDetailFragment;
 import com.java.zhangzhexin.detail.newsdetail.NewsDetailFragment;
-import com.java.zhangzhexin.model.Tab;
-//import com.sina.weibo.sdk.api.TextObject;
-//import com.sina.weibo.sdk.api.WeiboMultiMessage;
-//import com.sina.weibo.sdk.auth.AuthInfo;
-//import com.sina.weibo.sdk.common.UiError;
-//import com.sina.weibo.sdk.openapi.IWBAPI;
-//import com.sina.weibo.sdk.openapi.WBAPIFactory;
-//import com.sina.weibo.sdk.share.WbShareCallback;
-import com.sina.weibo.sdk.api.MediaObject;
 import com.sina.weibo.sdk.api.TextObject;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
 import com.sina.weibo.sdk.auth.AuthInfo;
@@ -130,9 +118,6 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
     }
 
 
-
-
-    //TODO：onCreate重写
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         System.out.println("详情页onCreate");
