@@ -94,6 +94,8 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
         name.setText(scholar.name);
         position.setText(scholar.position);
         organization.setText(scholar.profile.get("相关组织"));
+        //label.setText(scholar.label);
+        //description.setText(scholar.description);
 
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -132,6 +134,50 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
         }
         profileSection.addTo(groupListView);
 
+//        if (scholar.properties.size() > 0) {
+//            QMUIGroupListView.Section propertySection = QMUIGroupListView.newSection(getMyContext()).setTitle("属性");
+//            for (String key : scholar.properties.keySet()) {
+//                String val = scholar.properties.get(key);
+//                QMUICommonListItemView itemWithDetailBelow = groupListView.createItemView(null,
+//                        key,
+//                        val,
+//                        QMUICommonListItemView.VERTICAL,
+//                        QMUICommonListItemView.ACCESSORY_TYPE_NONE,
+//                        ViewGroup.LayoutParams.WRAP_CONTENT);
+////            int paddingVer = QMUIDisplayHelper.dp2px(getMyContext(), 12);
+////            itemWithDetailBelow.setPadding(itemWithDetailBelow.getPaddingLeft(), paddingVer,
+////                    itemWithDetailBelow.getPaddingRight(), paddingVer);
+//                propertySection.addItemView(itemWithDetailBelow, onClickListener);
+////            System.out.println(Thread.currentThread().getStackTrace()[2].getLineNumber());
+//            }
+//            propertySection.addTo(groupListView);
+//        }
+//
+//        if (scholar.relationList.size() > 0) {
+//            QMUIGroupListView.Section relationSection = QMUIGroupListView.newSection(getMyContext()).setTitle("关系");
+//            for (Relation r : scholar.relationList) {
+////            r.display();
+//                String key = r.relation;
+//                if (r.forward) {
+//                    key += "    =>";
+//                } else {
+//                    key += "    <=";
+//                }
+//                String val = r.label;
+//                QMUICommonListItemView itemWithDetailBelow = groupListView.createItemView(null,
+//                        key,
+//                        val,
+//                        QMUICommonListItemView.HORIZONTAL,
+//                        QMUICommonListItemView.ACCESSORY_TYPE_NONE,
+//                        ViewGroup.LayoutParams.WRAP_CONTENT);
+////            int paddingVer = QMUIDisplayHelper.dp2px(getMyContext(), 12);
+////            itemWithDetailBelow.setPadding(itemWithDetailBelow.getPaddingLeft(), paddingVer,
+////                    itemWithDetailBelow.getPaddingRight(), paddingVer);
+//                itemWithDetailBelow.setMinHeight(100);
+//                relationSection.addItemView(itemWithDetailBelow, onClickListener);
+//            }
+//            relationSection.addTo(groupListView);
+//        }
 
 //        while (groupListView.getSectionCount() > 0) {
 //            System.out.println(groupListView.getSectionCount());
