@@ -22,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
             intent.addCategory(Intent.CATEGORY_HOME);
             startActivity(intent);
             finish();
-        }, 3000);
+        }, 1500);
     }
 
 }
