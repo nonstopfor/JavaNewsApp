@@ -55,17 +55,14 @@ public class NewsAdapter extends ListAdapter<NewsAdapter.ViewHolder,NewsCard> {
             holder.news_title.setTextColor(myContext.getResources().getColor(R.color.colorReadNews));
         holder.news_date.setText(data.get(position).time);
         holder.news_source.setText(data.get(position).source);
-        //TODO:把newsitem修改一下
     }
 
     @Override
     public int getItemCount() {
         if(isEmpty()) {
-           // System.out.println("NewsAdapter : "+type+" data为空， ItemCount return 0");
             return 0;
         }
         else {
-//            System.out.println("NewsAdapter中数据有"+data.size()+"条");
             return data.size();
         }
     }

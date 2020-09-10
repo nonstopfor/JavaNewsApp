@@ -23,10 +23,6 @@ public class NewsListPresenter extends MyListPresenter<NewsDataManager,NewsCard>
 
     public NewsListPresenter(String type, String keyword){
         super(type, keyword);
-//        this.type = type;
-//        this.keyword = keyword;
-//        //System.out.println("presenter type = "+type+", keyword = "+keyword);
-//        newsDataManager = new NewsDataManager(type);
     }
 
     @Override
@@ -43,7 +39,6 @@ public class NewsListPresenter extends MyListPresenter<NewsDataManager,NewsCard>
     @Override
     public void getMoreData(int size) {
         if(keyword.equals("")) {
-            System.out.println("进入News的getMoreData");
             List<NewsCard> result = null;
             try {
                 result = dataManager.getMoreNews(size);
@@ -54,16 +49,12 @@ public class NewsListPresenter extends MyListPresenter<NewsDataManager,NewsCard>
             System.out.println("新得到的数据是" + result);
             myView.appendList(result);
         }
-        else
-            System.out.println("搜索框新闻不支持上拉获取更多");
-
     }
 
     @Override
     public void refreshData(int size) {
         System.out.println("refreshNews!");
         List<NewsCard> result = null;
-
         try {
             if(keyword.equals(""))
                 result = dataManager.RefreshNews(size);

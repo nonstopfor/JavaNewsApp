@@ -37,12 +37,6 @@ public class EntityDetailFragment extends BaseFragment<EntityDetailView, EntityD
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         System.out.println("ListFragment : " + type + " onCreateView");
-//        if (view == null) {
-//            System.out.println("ListFragment: " + type + " view为空");
-//            view = inflater.inflate(R.layout.detail_entity, container, false);
-//            ButterKnife.bind(this, view);
-//            initView();
-//        }
         view = inflater.inflate(R.layout.detail_entity, container, false);
         ButterKnife.bind(this, view);
         initView();
@@ -71,7 +65,7 @@ public class EntityDetailFragment extends BaseFragment<EntityDetailView, EntityD
 
     @Override
     public void onResume() {
-        System.out.println("实体详情页onResume");
+        //System.out.println("实体详情页onResume");
         super.onResume();
     }
 
@@ -86,7 +80,6 @@ public class EntityDetailFragment extends BaseFragment<EntityDetailView, EntityD
 
     @Override
     public void setView(EntityCard entity) {
-        System.out.println("imgUrl = " + entity.imgUrl);
         Glide.with(this).load(entity.imgUrl).into(image);
         label.setText(entity.label);
         description.setText(entity.description);
@@ -102,9 +95,7 @@ public class EntityDetailFragment extends BaseFragment<EntityDetailView, EntityD
         //Clear previous Sections
         while (groupListView.getSectionCount() > 0) {
             System.out.println(groupListView.getSectionCount());
-//            if (mGroupListView.getSection(0) != null) {
-//                System.out.println("not null");
-//            }
+
             groupListView.getSection(groupListView.getSectionCount()-1)
                     .removeFrom(groupListView);
         }

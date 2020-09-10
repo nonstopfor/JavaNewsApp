@@ -8,7 +8,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-//用于监听对item的点击事件
+
 public class MyListListener implements RecyclerView.OnItemTouchListener {
 
     private GestureDetector gestureDetector;
@@ -29,7 +29,6 @@ public class MyListListener implements RecyclerView.OnItemTouchListener {
                     return true;
                 }
                 return false;
-                //return super.onSingleTapUp(e);
             }
         });
     }

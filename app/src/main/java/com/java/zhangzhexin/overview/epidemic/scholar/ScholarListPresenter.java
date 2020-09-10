@@ -26,16 +26,11 @@ public class ScholarListPresenter extends MyListPresenter<ScholarManager, Schola
         intent.putExtra("type","scholar");
         intent.putExtra("scholar_id",card.idx);
         myView.start(intent);
-        //TODO: detail activity响应学者
     }
 
 
     public ScholarListPresenter(String type, String keyword){
         super(type, keyword);
-//        this.type = type;
-//        this.keyword = keyword;
-//        //System.out.println("presenter type = "+type+", keyword = "+keyword);
-//        newsDataManager = new NewsDataManager(type);
     }
 
 
@@ -45,9 +40,6 @@ public class ScholarListPresenter extends MyListPresenter<ScholarManager, Schola
         //不调用getMoreData,学者一次返回吧
         List<ScholarCard> result = null;
         result = dataManager.getMoreScholars(size);
-//        List<EntityCard> result = new ArrayList<>();
-//        result.add(new EntityCard("label1"));
-//        result.add(new EntityCard("label2"));
         assert(result!=null);
         myView.appendList(result);
     }

@@ -28,9 +28,6 @@ public class EntityAdapter extends ListAdapter<EntityAdapter.ViewHolder, EntityC
         return data == null;
     }
 
-
-
-
     //FIXME：用户拖拽屏幕过程中算点击吗?
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView entity_label;
@@ -41,9 +38,6 @@ public class EntityAdapter extends ListAdapter<EntityAdapter.ViewHolder, EntityC
             hot1 = itemView.findViewById(R.id.hot1);
             hot2 = itemView.findViewById(R.id.hot2);
             hot3 = itemView.findViewById(R.id.hot3);
-//            news_title = itemView.findViewById(R.id.news_title);
-//            news_source = itemView.findViewById(R.id.news_source);
-//            news_date = itemView.findViewById(R.id.news_date);
         }
     }
 
@@ -65,7 +59,7 @@ public class EntityAdapter extends ListAdapter<EntityAdapter.ViewHolder, EntityC
         holder.hot3.setImageResource(R.drawable.null_image);
         float hot = data.get(position).hot;
 
-        System.out.println("position = "+position+" ,entity = "+data.get(position).label+" ,hot = "+hot);
+        //System.out.println("position = "+position+" ,entity = "+data.get(position).label+" ,hot = "+hot);
         if(hot > 0.5)
             holder.hot1.setImageResource(R.drawable.fire);
         if(hot > 0.7)
@@ -77,7 +71,6 @@ public class EntityAdapter extends ListAdapter<EntityAdapter.ViewHolder, EntityC
     @Override
     public int getItemCount() {
         if(isEmpty()) {
-            System.out.println("EntityAdapter : "+type+" data为空， ItemCount return 0");
             return 0;
         }
         else

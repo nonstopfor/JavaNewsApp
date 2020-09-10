@@ -31,7 +31,6 @@ public class NewsListFragment extends MyListFragment<NewsAdapter.ViewHolder,News
 
     @Override
     public NewsListPresenter createPresenter() {
-        //System.out.println("in createPresenter, type = "+type+", keyword = "+keyword);
         return new NewsListPresenter(type,keyword);
     }
 

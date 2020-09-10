@@ -11,7 +11,7 @@ public class EpidemicDataPresenter extends BasePresenter<EpidemicDataView> {
     }
 
     public void refresh() {
-        System.out.println("疫情数据Presenter refresh!");
+        //System.out.println("疫情数据Presenter refresh!");
         try {
             epidemicDataManager.refresh();
         } catch (InterruptedException e) {

@@ -82,7 +82,7 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
 
     public void switchFragment(Fragment target) {
         if (currentFragment != target) {
-            System.out.println("当前fragment为 " + currentFragment + ", 切换到fragment = " + target);
+            //System.out.println("当前fragment为 " + currentFragment + ", 切换到fragment = " + target);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.hide(currentFragment).show(target);
             transaction.setMaxLifecycle(currentFragment, Lifecycle.State.STARTED).setMaxLifecycle(target, Lifecycle.State.RESUMED);
@@ -96,17 +96,17 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
         if(newsDetailFragment==null){
             newsDetailFragment = NewsDetailFragment.newInstance();
             transaction.add(R.id.frameLayout, newsDetailFragment).setMaxLifecycle(newsDetailFragment, Lifecycle.State.RESUMED); //默认显示newsDetail
-            System.out.println("finish construct newsDetailFragment");
+            //System.out.println("finish construct newsDetailFragment");
         }
         if(entityDetailFragment==null){
             entityDetailFragment = EntityDetailFragment.newInstance();
             transaction.add(R.id.frameLayout,entityDetailFragment).hide(entityDetailFragment).setMaxLifecycle(entityDetailFragment, Lifecycle.State.STARTED);
-            System.out.println("finish construct entityDetailFragment");
+            //System.out.println("finish construct entityDetailFragment");
         }
         if(scholarDetailFragment==null){
             scholarDetailFragment = ScholarDetailFragment.newInstance();
             transaction.add(R.id.frameLayout,scholarDetailFragment).hide(scholarDetailFragment).setMaxLifecycle(scholarDetailFragment, Lifecycle.State.STARTED);
-            System.out.println("finish construct scholarDetailFragment");
+            //System.out.println("finish construct scholarDetailFragment");
         }
         currentFragment = newsDetailFragment;
         transaction.commit();
@@ -142,7 +142,7 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
             @Override
             public void onClick(View v) {
                 if(currentFragment == newsDetailFragment) {
-                    System.out.println("检测到微信分享点击");
+                    //System.out.println("检测到微信分享点击");
                     doWeixinShare();
                 }
             }
@@ -153,12 +153,12 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
             @Override
             public void onClick(View v) {
                 if(currentFragment == newsDetailFragment) {
-                    System.out.println("检测到微博分享点击");
+                    //System.out.println("检测到微博分享点击");
                     doWeiboShare();
                 }
             }
         });
-        System.out.println("详情页离开onCreate");
+        //System.out.println("详情页离开onCreate");
     }
 
     //返回MainActivity
@@ -184,18 +184,17 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
         }
         else if(type.equals("entity")){ //实体
             int entity_id = getIntent().getIntExtra("entity_id",-1);
-            System.out.println("得到实体id = "+entity_id);
+            //System.out.println("得到实体id = "+entity_id);
             switchFragment(entityDetailFragment);
-            System.out.println("entityDetailFragment = "+entityDetailFragment);
+            //System.out.println("entityDetailFragment = "+entityDetailFragment);
             entityDetailFragment.setId(entity_id);
         }
         else if(type.equals("scholar")){ //学者
             int scholar_id = getIntent().getIntExtra("scholar_id",-1);
-            System.out.println("得到学者id = "+scholar_id);
+            //System.out.println("得到学者id = "+scholar_id);
             switchFragment(scholarDetailFragment);
-            System.out.println("scholarDetailFragment = "+scholarDetailFragment);
+            //System.out.println("scholarDetailFragment = "+scholarDetailFragment);
             scholarDetailFragment.setId(scholar_id);
-            //TODO:学者
         }
     }
 
@@ -206,20 +205,12 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
         setIntent(intent);
     }
 
-//    public void shareData(){
-//        ShareEntity shareEntity = new ShareEntity("疫情新闻","这是一个content");
-//        ShareUtil.showShareDialog(this,ShareConstant.SHARE_CHANNEL_SINA_WEIBO | ShareConstant.SHARE_CHANNEL_WEIXIN_FRIEND,
-//                shareEntity, ShareConstant.REQUEST_CODE);
-//    }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mWBAPI.doResultIntent(data, this);
     }
-
 
     private void doWeixinShare(){
         String content = newsDetailFragment.current_news.content;
@@ -229,7 +220,6 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
         WXTextObject textObj = new WXTextObject();
         textObj.text = "["+newsDetailFragment.current_news.title+"]\n"+content;
 
-
         //用 WXTextObject 对象初始化一个 WXMediaMessage 对象
         WXMediaMessage msg = new WXMediaMessage();
         msg.mediaObject = textObj;
@@ -237,7 +227,6 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = String.valueOf(System.currentTimeMillis());  //transaction字段用与唯一标示一个请求
         req.message = msg;
-        //req.scene = WXSceneSession;
 
         //调用api接口，发送数据到微信
         api.sendReq(req);

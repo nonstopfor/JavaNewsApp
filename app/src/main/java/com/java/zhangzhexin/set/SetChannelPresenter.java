@@ -15,8 +15,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SetChannelPresenter extends BasePresenter<SetChannelView> {
     private Tab tab = Tab.getInstance();  //更新tab
     private LinkedHashMap<String, List<Channel>> data;
-//    private List<Channel> checkedChannelList;
-//    private List<Channel> uncheckedChannelList;
 
     public SetChannelPresenter(){
         data = new LinkedHashMap<>();

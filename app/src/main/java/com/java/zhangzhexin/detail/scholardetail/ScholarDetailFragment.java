@@ -92,9 +92,6 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
         name.setText(scholar.name);
         position.setText(scholar.position);
         organization.setText(scholar.profile.get("相关组织"));
-        //label.setText(scholar.label);
-        //description.setText(scholar.description);
-
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override

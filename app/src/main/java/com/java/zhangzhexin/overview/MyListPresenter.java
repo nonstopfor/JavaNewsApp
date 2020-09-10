@@ -7,7 +7,6 @@ import com.java.zhangzhexin.model.BaseCard;
 import com.java.zhangzhexin.model.BaseManager;
 
 public abstract class MyListPresenter<MyManager extends BaseManager, MyCard extends BaseCard> extends BasePresenter<MyListView<MyCard>> {
-    private int page = 0;
     protected MyManager dataManager;
     protected String type;
     protected String keyword;
@@ -16,7 +15,6 @@ public abstract class MyListPresenter<MyManager extends BaseManager, MyCard exte
     public MyListPresenter(String type, String keyword){
         this.type = type;
         this.keyword = keyword;
-        //System.out.println("presenter type = "+type+", keyword = "+keyword);
         dataManager = createManager(type);
     }
 

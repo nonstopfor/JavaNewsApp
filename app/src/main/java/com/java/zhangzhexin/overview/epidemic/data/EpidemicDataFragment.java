@@ -38,8 +38,6 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
     private BarChart countryBarChart;
     private BarChart provinceBarChart;
     private SwipeRefreshLayout swipeRefreshLayout;
-//    private boolean isFirstLoad = true;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,13 +47,13 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        System.out.println("疫情数据onCreateView!");
+        //System.out.println("疫情数据onCreateView!");
         if (view == null) {
-            System.out.println("疫情数据view为空，需要加载");
+            //System.out.println("疫情数据view为空，需要加载");
             view = inflater.inflate(R.layout.fragment_epidemicdata, container, false);
             initView();
             initSet();
-            myPresenter.refresh(); //疫情数据加载太慢 创建时就refresh吧
+            myPresenter.refresh(); //疫情数据加载太慢 创建时就refresh
         }
         return view;
     }
@@ -64,8 +62,6 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
         swipeRefreshLayout = view.findViewById(R.id.epidemicDataSwipeRefreshLayout);
         countryBarChart = view.findViewById(R.id.countryBarChart);
         provinceBarChart = view.findViewById(R.id.provinceBarChart);
-//        countryBarChart.setTouchListener();
-//        provinceBarChart.setTouchListener();
         setCountryBarChartStyle();
         setProvinceBarChartStyle();
     }
@@ -112,18 +108,7 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
     public void onResume() {
         System.out.println("疫情数据onResume");
         super.onResume();
-//        if (isFirstLoad) {
-//            myPresenter.refresh();
-//            isFirstLoad = false;
-//        }
     }
-
-//    @Override
-//    public void onDestroyView() {
-//        super.onDestroyView();
-//        System.out.println("疫情数据被detroy");
-//        isFirstLoad = true; //重置
-//    }
 
     public static EpidemicDataFragment newInstance() {
 
@@ -155,15 +140,12 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
         BarDataSet barDataSet = new BarDataSet(barEntries, "Epidemic Data For Different Countries");
         BarData barData = new BarData(barDataSet);
         barData.setBarWidth(0.6f);
-//        barChart.getXAxis().setAxisMinimum(0);
         countryBarChart.getXAxis().setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-//                System.out.println(value);
                 return cards.get((int) value).country;
             }
         });
-//        barChart.getXAxis().setLabelCount(cards.size());
         countryBarChart.setMarker(new DataMarkder(getMyContext(), cards, "country"));
         countryBarChart.setData(barData);
         ViewPortHandler viewPortHandler = countryBarChart.getViewPortHandler();
@@ -174,8 +156,8 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
         viewPortHandler.refresh(matrix, countryBarChart, false);
 
         countryBarChart.invalidate();
-        System.out.println("barEntry size:" + barEntries.size());
-        System.out.println("finish draw epidemic country data");
+//        System.out.println("barEntry size:" + barEntries.size());
+//        System.out.println("finish draw epidemic country data");
     }
 
     public void drawEpidemicProvinceData(List<EpidemicDataCard> cards) {

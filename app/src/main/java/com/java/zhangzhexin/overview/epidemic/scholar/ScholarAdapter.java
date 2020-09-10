@@ -41,10 +41,6 @@ public class ScholarAdapter extends ListAdapter<ScholarAdapter.ViewHolder, Schol
             position = itemView.findViewById(R.id.position);
             name = itemView.findViewById(R.id.name);
             organization = itemView.findViewById(R.id.organization);
-//            entity_label = itemView.findViewById(R.id.entity_label);
-//            news_title = itemView.findViewById(R.id.news_title);
-//            news_source = itemView.findViewById(R.id.news_source);
-//            news_date = itemView.findViewById(R.id.news_date);
         }
     }
 
@@ -61,7 +57,6 @@ public class ScholarAdapter extends ListAdapter<ScholarAdapter.ViewHolder, Schol
         Glide.with(myContext).load(data.get(position).avatar).into(holder.photo);
         holder.position.setText(data.get(position).position);
         holder.name.setText(data.get(position).name);
-        System.out.println("organization = "+data.get(position).profile.get("相关组织"));
         holder.organization.setText(data.get(position).profile.get("相关组织"));
     }
 

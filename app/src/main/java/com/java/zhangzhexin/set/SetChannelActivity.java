@@ -18,8 +18,6 @@ import java.util.List;
 
 public class SetChannelActivity extends BaseActivity<SetChannelView, SetChannelPresenter> implements SetChannelView {
     private ChannelView channelView;
-    //private List<Channel> checkedChannelList;
-    //private List<Channel> uncheckedChannelList;
     private LinkedHashMap<String, List<Channel>> data;
     private MyStyleAdapter adapter;
 
@@ -33,31 +31,6 @@ public class SetChannelActivity extends BaseActivity<SetChannelView, SetChannelP
         channelView = findViewById(R.id.channelView);
         channelView.setChannelFixedCount(0); //设置频道数
         adapter = new MyStyleAdapter();
-        //channelView.setStyleAdapter(adapter); //设置adapter
-
-//        channelView.setOnChannelListener(new ChannelListenerAdapter() {
-//            @Override
-//            public void channelItemClick(int position, Channel channel) {
-//                System.out.println(position + ".." + channel);
-//            }
-//
-//            @Override
-//            public void channelEditStateItemClick(int position, Channel channel) {
-//                System.out.println("EditState: "+position + ".." + channel);
-//            }
-//
-//            @Override
-//            public void channelEditFinish(List<Channel> channelList) {
-//                System.out.println(channelList.toString());
-//                System.out.println(channelView.isChange() + "");
-//                System.out.println(channelView.getOtherChannel().toString());
-//            }
-//
-//            @Override
-//            public void channelEditStart() {
-//                System.out.println("channelEditStart");
-//            }
-//        });
     }
 
     @Override
@@ -65,7 +38,7 @@ public class SetChannelActivity extends BaseActivity<SetChannelView, SetChannelP
         super.onResume();
         data = myPresenter.getData();
         adapter.setData(data);
-        channelView.setStyleAdapter(adapter); //没有notify 只能每次重新set
+        channelView.setStyleAdapter(adapter);
         System.out.println("分类列表getData");
     }
 
