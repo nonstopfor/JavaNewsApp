@@ -44,11 +44,7 @@ public class ScholarListPresenter extends MyListPresenter<ScholarManager, Schola
     public void getMoreData(int size) {
         //不调用getMoreData,学者一次返回吧
         List<ScholarCard> result = null;
-        try {
-            result = dataManager.
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        result = dataManager.getMoreScholars(size);
 //        List<EntityCard> result = new ArrayList<>();
 //        result.add(new EntityCard("label1"));
 //        result.add(new EntityCard("label2"));
@@ -58,10 +54,10 @@ public class ScholarListPresenter extends MyListPresenter<ScholarManager, Schola
 
     @Override
     public void refreshData(int size) {
-        System.out.println("refreshNews!");
+        System.out.println("refreshScholar!");
         List<ScholarCard> result = null;
         try {
-            result = dataManager.refresh(); //TODO:完善这个接口
+            result = dataManager.refresh(size);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
