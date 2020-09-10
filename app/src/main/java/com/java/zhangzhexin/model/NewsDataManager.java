@@ -1,13 +1,22 @@
 package com.java.zhangzhexin.model;
 
+import android.content.res.AssetManager;
+
 import com.java.zhangzhexin.App;
 import com.java.zhangzhexin.BuildConfig;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
 public class NewsDataManager extends BaseManager {
+
+    public static AssetManager assetManager;
 
     List<NewsCard> allNews;
     String type;
@@ -28,10 +37,40 @@ public class NewsDataManager extends BaseManager {
     }
 
     public void refreshNew() {
-        page = 0;
-        if (!allNews.isEmpty()) {
-            allNews.clear();
+        if (!isEvent(type)) {
+            page = 0;
+            if (!allNews.isEmpty()) {
+                allNews.clear();
+            }
+        } else {
+            try {
+                InputStream is = assetManager.open(type + ".txt");
+                InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
+                BufferedReader br = new BufferedReader(isr);
+                idx = 0;
+                if (!allNews.isEmpty()) {
+                    allNews.clear();
+                }
+                String str = "";
+                while ((str = br.readLine()) != null) {
+                    String[] strs = str.split("###");
+                    String title = strs[0].substring(1);
+                    String id = strs[1].substring(1);
+                    String time = strs[2].substring(1);
+                    String source = strs[3].substring(1);
+                    allNews.add(new NewsCard(title, time, source, id));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    boolean isEvent(String type) {
+        if (type.equals("history") || type.equals("news") || type.equals("paper")) {
+            return false;
+        }
+        return true;
     }
 
     public void refreshHistory() {
@@ -62,6 +101,7 @@ public class NewsDataManager extends BaseManager {
     }
 
     public List<NewsCard> getMoreNewsNew(int size) throws InterruptedException {
+        if (isEvent(type)) return getMoreNewsOld(size);
         ++page;
         List<NewsCard> r = UrlManager.getNewsList(type, page, size);
         allNews.addAll(r);

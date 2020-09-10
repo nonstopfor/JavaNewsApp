@@ -19,7 +19,8 @@ with open('events.txt', 'r', encoding='utf-8') as f:
     lines = f.readlines()
     words_ls = []
     for line in lines:
-        words_ls.append(remove_stopwords(jieba.lcut(line.strip())))
+        title = line.split('###')[0][1:]
+        words_ls.append(remove_stopwords(jieba.lcut(title)))
 
     dict = corpora.Dictionary(words_ls)
     corpus = [dict.doc2bow(words) for words in words_ls]

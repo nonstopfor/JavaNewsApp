@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.java.zhangzhexin.model.DaoMaster;
 import com.java.zhangzhexin.model.DaoSession;
+import com.java.zhangzhexin.model.NewsDataManager;
 import com.java.zhangzhexin.model.NewsSearchManager;
 import com.java.zhangzhexin.model.UrlManager;
 
@@ -21,6 +22,8 @@ public class App extends Application {
         Database db = helper.getWritableDb();
 
         daoSession = new DaoMaster(db).newSession();
+        NewsDataManager.assetManager = getAssets();
+
         new Thread() {
             @Override
             public void run() {

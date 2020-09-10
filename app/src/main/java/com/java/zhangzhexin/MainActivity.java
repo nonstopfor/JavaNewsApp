@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             currentFragment = target;
             //处于搜索页面时显示返回键
             getSupportActionBar().setDisplayHomeAsUpEnabled(target == searchFragment);
-
         }
 
     }

@@ -3,7 +3,7 @@ package com.java.zhangzhexin.model;
 import com.google.gson.JsonObject;
 import com.java.zhangzhexin.App;
 
-public class NewsCard extends BaseCard{
+public class NewsCard extends BaseCard {
     public String title;
     public String time;
     public String source; //for test
@@ -11,6 +11,14 @@ public class NewsCard extends BaseCard{
 //    public boolean visited = false;
 
     //for test
+
+    public NewsCard(String title, String time, String source, String id) {
+        this.time = time;
+        this.title = title;
+        this.source = source;
+        this.id = id;
+    }
+
     public NewsCard(String title, String time, String source) {
         this.time = time;
         this.title = title;
@@ -33,10 +41,11 @@ public class NewsCard extends BaseCard{
         title = singleNews.title;
     }
 
-    public boolean visited(){
+    public boolean visited() {
         DaoSession daoSession = App.getDaoSession();
         SingleNewsDao singleNewsDao = daoSession.getSingleNewsDao();
-        if (singleNewsDao.queryBuilder().where(SingleNewsDao.Properties.Id.eq(id)).list().isEmpty()) return false;
+        if (singleNewsDao.queryBuilder().where(SingleNewsDao.Properties.Id.eq(id)).list().isEmpty())
+            return false;
         return true;
     }
 }

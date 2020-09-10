@@ -31,7 +31,7 @@ public class SingleNews {
         time = obj.get("date").getAsString();
         type = obj.get("type").getAsString();
         title = obj.get("title").getAsString();
-        source = obj.get("source").getAsString();
+        source = UrlManager.getString(obj, "source");
         if (source.length() == 0) source = "来源未知";
         id = obj.get("_id").getAsString();
     }
