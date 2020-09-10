@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.java.zhangzhexin.R;
 import com.java.zhangzhexin.model.EntityCard;
-import com.java.zhangzhexin.model.NewsCard;
 import com.java.zhangzhexin.overview.ListAdapter;
 
 public class EntityAdapter extends ListAdapter<EntityAdapter.ViewHolder, EntityCard> {
@@ -51,7 +50,7 @@ public class EntityAdapter extends ListAdapter<EntityAdapter.ViewHolder, EntityC
     @NonNull
     @Override
     public EntityAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.entity_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_entity, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

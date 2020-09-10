@@ -15,8 +15,6 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.java.zhangzhexin.BaseFragment;
 import com.java.zhangzhexin.R;
-import com.java.zhangzhexin.model.EntityCard;
-import com.java.zhangzhexin.model.Relation;
 import com.java.zhangzhexin.model.ScholarCard;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
@@ -41,11 +39,11 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
         System.out.println("学者页 : " + type + " onCreateView");
 //        if (view == null) {
 //            System.out.println("ListFragment: " + type + " view为空");
-//            view = inflater.inflate(R.layout.entity_detail, container, false);
+//            view = inflater.inflate(R.layout.detail_entity, container, false);
 //            ButterKnife.bind(this, view);
 //            initView();
 //        }
-        view = inflater.inflate(R.layout.scholar_detail, container, false);
+        view = inflater.inflate(R.layout.detail_scholar, container, false);
         ButterKnife.bind(this, view);
         initView();
         return view;

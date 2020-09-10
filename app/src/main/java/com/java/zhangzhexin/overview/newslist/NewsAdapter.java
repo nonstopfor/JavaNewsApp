@@ -13,8 +13,6 @@ import com.java.zhangzhexin.R;
 import com.java.zhangzhexin.model.NewsCard;
 import com.java.zhangzhexin.overview.ListAdapter;
 
-import java.util.List;
-
 public class NewsAdapter extends ListAdapter<NewsAdapter.ViewHolder,NewsCard> {
 
     private Context myContext;
@@ -45,7 +43,7 @@ public class NewsAdapter extends ListAdapter<NewsAdapter.ViewHolder,NewsCard> {
     @NonNull
     @Override
     public NewsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
