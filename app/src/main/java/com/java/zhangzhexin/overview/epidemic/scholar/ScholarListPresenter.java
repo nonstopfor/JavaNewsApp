@@ -24,8 +24,8 @@ public class ScholarListPresenter extends MyListPresenter<ScholarManager, Schola
         Intent intent = new Intent(myView.getMyContext(), DetailActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         intent.putExtra("type","scholar");
-        intent.putExtra("entity_id",card.idx);
-//        myView.start(intent);
+        intent.putExtra("scholar_id",card.idx);
+        myView.start(intent);
         //TODO: detail activity响应学者
     }
 

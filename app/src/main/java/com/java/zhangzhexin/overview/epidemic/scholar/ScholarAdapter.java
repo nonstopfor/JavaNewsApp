@@ -1,5 +1,6 @@
 package com.java.zhangzhexin.overview.epidemic.scholar;
 
+import android.appwidget.AppWidgetHost;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.java.zhangzhexin.R;
 import com.java.zhangzhexin.model.EntityCard;
 import com.java.zhangzhexin.model.ScholarCard;
@@ -29,19 +31,18 @@ public class ScholarAdapter extends ListAdapter<ScholarAdapter.ViewHolder, Schol
         return data == null;
     }
 
-
-
-
     //FIXME：用户拖拽屏幕过程中算点击吗?
     static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView photo;
         TextView position;
         TextView name;
+        TextView organization;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             photo = itemView.findViewById(R.id.photo);
             position = itemView.findViewById(R.id.position);
             name = itemView.findViewById(R.id.name);
+            organization = itemView.findViewById(R.id.organization);
 //            entity_label = itemView.findViewById(R.id.entity_label);
 //            news_title = itemView.findViewById(R.id.news_title);
 //            news_source = itemView.findViewById(R.id.news_source);
@@ -59,11 +60,11 @@ public class ScholarAdapter extends ListAdapter<ScholarAdapter.ViewHolder, Schol
 
     @Override
     public void onBindViewHolder(@NonNull ScholarAdapter.ViewHolder holder, int position) {
-        holder.position.setText("这是学者的position");
-        holder.name.setText("这是学者的名字");
-        //holder.entity_label.setText(data.get(position).label);
-        //holder.entity_discription.setText(data.get(position).description);
-        //TODO:把newsitem修改一下
+        Glide.with(myContext).load(data.get(position).avatar).into(holder.photo);
+        holder.position.setText(data.get(position).position);
+        holder.name.setText(data.get(position).name);
+        System.out.println("organization = "+data.get(position).profile.get("相关组织"));
+        holder.organization.setText(data.get(position).profile.get("相关组织"));
     }
 
     @Override
