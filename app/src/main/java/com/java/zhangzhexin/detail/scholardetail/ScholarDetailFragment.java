@@ -25,8 +25,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, ScholarDetailPresenter> implements ScholarDetailView {
-    private TextView label;
-    private TextView description;
+    private TextView name;
+    private TextView position;
+    private TextView organization;
     private ImageView image;
 
     @BindView(R.id.groupListView)
@@ -44,7 +45,7 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
 //            ButterKnife.bind(this, view);
 //            initView();
 //        }
-        view = inflater.inflate(R.layout.entity_detail, container, false);
+        view = inflater.inflate(R.layout.scholar_detail, container, false);
         ButterKnife.bind(this, view);
         initView();
         return view;
@@ -55,9 +56,10 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
     }
 
     public void initView() {
-        label = view.findViewById(R.id.label);
-        description = view.findViewById(R.id.description);
-        image = view.findViewById(R.id.image);
+        name = view.findViewById(R.id.name);
+        position = view.findViewById(R.id.position);
+        organization = view.findViewById(R.id.organization);
+        image = view.findViewById(R.id.photo);
     }
 
     @Override
@@ -72,12 +74,12 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
 
     @Override
     public void onResume() {
-        System.out.println("实体详情页onResume");
+        System.out.println("学者详情页onResume");
         super.onResume();
     }
 
     public void setId(int id) {
-        myPresenter.setEntity(id);
+        myPresenter.setScholar(id);
     }
 
     @Override
@@ -89,8 +91,9 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
     public void setView(ScholarCard scholar) {
         System.out.println("imgUrl = " + scholar.avatar);
         Glide.with(this).load(scholar.avatar).into(image);
-        label.setText(scholar.label);
-        description.setText(scholar.description);
+        name.setText(scholar.name);
+        position.setText(scholar.position);
+        organization.setText(scholar.profile.get("相关组织"));
 
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -106,54 +109,29 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
 //            if (mGroupListView.getSection(0) != null) {
 //                System.out.println("not null");
 //            }
-            groupListView.getSection(groupListView.getSectionCount()-1)
+            groupListView.getSection(groupListView.getSectionCount() - 1)
                     .removeFrom(groupListView);
         }
 
-        if (scholar.properties.size() > 0) {
-            QMUIGroupListView.Section propertySection = QMUIGroupListView.newSection(getMyContext()).setTitle("属性");
-            for (String key : scholar.properties.keySet()) {
-                String val = scholar.properties.get(key);
-                QMUICommonListItemView itemWithDetailBelow = groupListView.createItemView(null,
-                        key,
-                        val,
-                        QMUICommonListItemView.VERTICAL,
-                        QMUICommonListItemView.ACCESSORY_TYPE_NONE,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
+        QMUIGroupListView.Section profileSection = QMUIGroupListView.newSection(getMyContext()).setTitle("详细信息");
+        for (String key : scholar.profile.keySet()) {
+            if (key.equals("相关组织")) continue;
+            String val = scholar.profile.get(key);
+            if (val.length() == 0) continue;
+            QMUICommonListItemView itemWithDetailBelow = groupListView.createItemView(null,
+                    key,
+                    val,
+                    QMUICommonListItemView.VERTICAL,
+                    QMUICommonListItemView.ACCESSORY_TYPE_NONE,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
 //            int paddingVer = QMUIDisplayHelper.dp2px(getMyContext(), 12);
 //            itemWithDetailBelow.setPadding(itemWithDetailBelow.getPaddingLeft(), paddingVer,
 //                    itemWithDetailBelow.getPaddingRight(), paddingVer);
-                propertySection.addItemView(itemWithDetailBelow, onClickListener);
+            profileSection.addItemView(itemWithDetailBelow, onClickListener);
 //            System.out.println(Thread.currentThread().getStackTrace()[2].getLineNumber());
-            }
-            propertySection.addTo(groupListView);
         }
+        profileSection.addTo(groupListView);
 
-        if (scholar.relationList.size() > 0) {
-            QMUIGroupListView.Section relationSection = QMUIGroupListView.newSection(getMyContext()).setTitle("关系");
-            for (Relation r : scholar.relationList) {
-//            r.display();
-                String key = r.relation;
-                if (r.forward) {
-                    key += "    =>";
-                } else {
-                    key += "    <=";
-                }
-                String val = r.label;
-                QMUICommonListItemView itemWithDetailBelow = groupListView.createItemView(null,
-                        key,
-                        val,
-                        QMUICommonListItemView.HORIZONTAL,
-                        QMUICommonListItemView.ACCESSORY_TYPE_NONE,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-//            int paddingVer = QMUIDisplayHelper.dp2px(getMyContext(), 12);
-//            itemWithDetailBelow.setPadding(itemWithDetailBelow.getPaddingLeft(), paddingVer,
-//                    itemWithDetailBelow.getPaddingRight(), paddingVer);
-                itemWithDetailBelow.setMinHeight(100);
-                relationSection.addItemView(itemWithDetailBelow, onClickListener);
-            }
-            relationSection.addTo(groupListView);
-        }
 
 //        while (groupListView.getSectionCount() > 0) {
 //            System.out.println(groupListView.getSectionCount());

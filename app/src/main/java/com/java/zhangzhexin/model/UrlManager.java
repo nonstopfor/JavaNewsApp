@@ -10,6 +10,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -158,7 +159,7 @@ public class UrlManager {
             boolean passed = scholar.get("is_passedaway").getAsBoolean();
             JsonObject profileObj = scholar.get("profile").getAsJsonObject();
             String position = getString(profileObj, "position");
-            Map<String, String> profile = new HashMap<>();
+            Map<String, String> profile = new LinkedHashMap<>();
             profile.put("相关组织", profileObj.get("affiliation").getAsString());
             profile.put("简介", profileObj.get("bio").getAsString());
             profile.put("教育经历", getString(profileObj, "edu"));
