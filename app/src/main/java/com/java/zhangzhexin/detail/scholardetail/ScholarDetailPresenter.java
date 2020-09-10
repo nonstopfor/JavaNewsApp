@@ -2,6 +2,7 @@ package com.java.zhangzhexin.detail.scholardetail;
 
 import com.java.zhangzhexin.BasePresenter;
 import com.java.zhangzhexin.model.EntityManager;
+import com.java.zhangzhexin.model.ScholarManager;
 
 
 /*
@@ -12,8 +13,9 @@ import com.java.zhangzhexin.model.EntityManager;
 public class ScholarDetailPresenter extends BasePresenter<ScholarDetailView> {
     public ScholarDetailPresenter(){}
 
-    public void setEntity(int entity_id)  {
-        myView.setView(EntityManager.getEntity(entity_id));
+    public void setEntity(int scholar_id)  {
+        myView.setView(ScholarManager.getScholar(scholar_id));
+        //myView.setView(EntityManager.getEntity(entity_id));
     }
 
 //    public void back(){

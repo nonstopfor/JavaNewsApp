@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,9 +35,13 @@ public class EntityAdapter extends ListAdapter<EntityAdapter.ViewHolder, EntityC
     //FIXME：用户拖拽屏幕过程中算点击吗?
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView entity_label;
+        ImageView hot1,hot2,hot3;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             entity_label = itemView.findViewById(R.id.entity_label);
+            hot1 = itemView.findViewById(R.id.hot1);
+            hot2 = itemView.findViewById(R.id.hot2);
+            hot3 = itemView.findViewById(R.id.hot3);
 //            news_title = itemView.findViewById(R.id.news_title);
 //            news_source = itemView.findViewById(R.id.news_source);
 //            news_date = itemView.findViewById(R.id.news_date);
@@ -54,13 +59,20 @@ public class EntityAdapter extends ListAdapter<EntityAdapter.ViewHolder, EntityC
     @Override
     public void onBindViewHolder(@NonNull EntityAdapter.ViewHolder holder, int position) {
         holder.entity_label.setText(data.get(position).label);
-        //holder.entity_discription.setText(data.get(position).description);
-//        holder.news_title.setText(data.get(position).title);
-//        if(!type.equals("history") && data.get(position).visited())
-//            holder.news_title.setTextColor(myContext.getResources().getColor(R.color.colorReadNews));
-//        holder.news_date.setText(data.get(position).time);
-//        holder.news_source.setText(data.get(position).source);
-        //TODO:把newsitem修改一下
+        float hot = data.get(position).hot;
+        System.out.println("position = "+position+" ,entity = "+data.get(position).label+" ,hot = "+hot);
+        if(hot > 0.5) {
+            holder.hot1.setImageResource(R.drawable.fire);
+            System.out.println("hot > 0.5, set hot1");
+        }
+        if(hot > 0.7) {
+            holder.hot2.setImageResource(R.drawable.fire);
+            System.out.println("hot > 0.7, set hot2");
+        }
+        if(hot > 0.9) {
+            holder.hot3.setImageResource(R.drawable.fire);
+            System.out.println("hot > 0.9, set hot3");
+        }
     }
 
     @Override
