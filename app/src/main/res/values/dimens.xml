@@ -11,4 +11,5 @@
     <dimen name="entity_label">22sp</dimen>
     <dimen name="entity_description">15sp</dimen>
     <dimen name="entity_title">18sp</dimen>
+    <dimen name="scholar_name">18sp</dimen>
 </resources>

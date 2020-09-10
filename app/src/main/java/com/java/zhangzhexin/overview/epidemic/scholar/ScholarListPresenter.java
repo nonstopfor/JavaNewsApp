@@ -23,9 +23,10 @@ public class ScholarListPresenter extends MyListPresenter<ScholarManager, Schola
     public void openDetail(View view, ScholarCard card) {
         Intent intent = new Intent(myView.getMyContext(), DetailActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        intent.putExtra("type","entity");
+        intent.putExtra("type","scholar");
         intent.putExtra("entity_id",card.idx);
-        myView.start(intent);
+//        myView.start(intent);
+        //TODO: detail activity响应学者
     }
 
 
@@ -41,7 +42,7 @@ public class ScholarListPresenter extends MyListPresenter<ScholarManager, Schola
 
     @Override
     public void getMoreData(int size) {
-        //不调用getMoreData,实体仅搜索时调用
+        //不调用getMoreData,学者一次返回吧
 ////        List<EntityCard> result = null;
 ////        try {
 ////            result = dataManager.getMoreNews(size);
