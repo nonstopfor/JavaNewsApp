@@ -7,13 +7,13 @@ public class ScholarManager extends BaseManager {
     public static List<ScholarCard> scholarCardList;
     int cur = 0;
 
-    public List<ScholarCard> refresh() throws InterruptedException {
+    public List<ScholarCard> refresh(int size) throws InterruptedException {
         scholarCardList = UrlManager.getScholars();
         for (int i = 0; i < scholarCardList.size(); ++i) {
             scholarCardList.get(i).idx = i;
         }
         cur = 0;
-        return scholarCardList;
+        return getMoreScholars(size);
     }
 
     public List<ScholarCard> getMoreScholars(int size) {
