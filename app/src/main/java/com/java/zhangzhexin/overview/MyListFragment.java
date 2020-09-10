@@ -102,12 +102,14 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
         //点击事件
         recyclerView.addOnItemTouchListener(new MyListListener(getContext(),recyclerView, (dataView, position) -> {
             myPresenter.openDetail(dataView,adapter.getData(position));
             System.out.println("点击位置"+position);
         }));
 
+        refreshLayout.setEnableAutoLoadMore(false);
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
@@ -133,9 +135,8 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
 //                } catch (InterruptedException e) {
 //                    e.printStackTrace();
 //                }
-
-                refreshLayout.finishLoadMore(500);
                 myPresenter.getMoreData(20);
+                refreshLayout.finishLoadMore(200);
             }
         });
         //TODO:改监听器
