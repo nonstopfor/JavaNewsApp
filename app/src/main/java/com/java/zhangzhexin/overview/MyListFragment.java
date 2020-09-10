@@ -118,8 +118,8 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                myPresenter.refreshData(20);
                 System.out.println("检测到下拉刷新");
+                myPresenter.refreshData(20);
                 refreshLayout.finishRefresh(true);
             }
         });
@@ -127,7 +127,6 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                myPresenter.getMoreData(20);
                 System.out.println("检测到上拉获取更多 ");
 //                try {
 //                    Thread.sleep(1);
@@ -136,6 +135,7 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
 //                }
 
                 refreshLayout.finishLoadMore(500);
+                myPresenter.getMoreData(20);
             }
         });
         //TODO:改监听器
