@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public class UrlManager {
-    public static List<NewsCard> getNewsList(String type, int page, int size) throws InterruptedException {
+    public static List<NewsCard> getNewsList(String type, int page, int size) throws InterruptedException, IllegalStateException {
         StringBuilder url = new StringBuilder("https://covid-dashboard.aminer.cn/api/events/list?");
         url.append("type=").append(type);
         url.append("&page=").append(page);

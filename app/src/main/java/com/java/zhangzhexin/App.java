@@ -41,8 +41,9 @@ public class App extends Application {
                         System.out.println("download page:" + page);
 //                        System.out.println("cards.size:" + cards.size());
                         if (cards.isEmpty()) break;
-                    } catch (InterruptedException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
+                        --page;
                     }
                 }
                 long endTime = System.currentTimeMillis();
