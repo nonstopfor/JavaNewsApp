@@ -99,7 +99,7 @@ class TextCluster():
             y = dbscan.fit_predict(weights)
 
         elif self.type == 'kmeans':
-            kmeans = KMeans(n_clusters=num_labels, max_iter=300, n_init=40, init='k-means++')
+            kmeans = KMeans(n_clusters=self.num_labels, max_iter=300, n_init=40, init='k-means++')
             y = kmeans.fit_predict(weights)
 
         weights = self.reduction(weights)
