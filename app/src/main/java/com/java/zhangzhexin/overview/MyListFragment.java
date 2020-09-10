@@ -22,6 +22,10 @@ import com.java.zhangzhexin.model.NewsCard;
 import com.java.zhangzhexin.overview.newslist.NewsAdapter;
 import com.java.zhangzhexin.overview.newslist.NewsListPresenter;
 import com.java.zhangzhexin.overview.newslist.NewsListView;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.List;
 
@@ -30,7 +34,8 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
     private Adapter adapter;
 
     private LinearLayoutManager layoutManager;
-    private SwipeRefreshLayout swipeRefreshLayout; //下拉刷新
+    //private SwipeRefreshLayout swipeRefreshLayout; //下拉刷新
+    private SmartRefreshLayout refreshLayout;
     private View view = null;
     private boolean isFirstLoad = true;
 
@@ -86,7 +91,8 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
 
     public void initView(){
         recyclerView = view.findViewById(R.id.recyclerView);
-        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+        //swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         adapter = createAdapter();
     }
 
@@ -102,34 +108,59 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
             System.out.println("点击位置"+position);
         }));
 
-        //上拉获取更多
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                int lastItemPosition = layoutManager.findLastVisibleItemPosition();
-                if(newState == RecyclerView.SCROLL_STATE_IDLE && lastItemPosition == layoutManager.getItemCount()-1){
-                    System.out.println("arrive last item!");
-                    myPresenter.getMoreData(20);
-                }
-                //当前在滚动的recyclerView,  当前滚动状态
-                /*
-                newState有三种值
-                SCROLL_STATE_IDLE = 0； 静止没有滚动
-                SCROLL_STATE_DRAGGING = 1; 外部拖拽(用户手指)
-                SCROLL_STATE_SETTLING = 2; 自动滚动
-                */
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+
             }
         });
 
-
-        //下拉刷新
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-            System.out.println("refresh!");
-            swipeRefreshLayout.setRefreshing(true);
-            myPresenter.refreshData(20);
-            swipeRefreshLayout.setRefreshing(false); //FIXME:需要手动关闭动画
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                myPresenter.refreshData(20);
+                System.out.println("检测到下拉刷新");
+                refreshLayout.finishRefresh(true);
+            }
         });
+
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                myPresenter.getMoreData(20);
+                System.out.println("检测到上拉获取更多 ");
+                refreshLayout.finishLoadMore(true);
+            }
+        });
+        //TODO:改监听器
+        //上拉获取更多
+//        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+//                super.onScrollStateChanged(recyclerView, newState);
+//                int lastItemPosition = layoutManager.findLastVisibleItemPosition();
+//                if(newState == RecyclerView.SCROLL_STATE_IDLE && lastItemPosition == layoutManager.getItemCount()-1){
+//                    System.out.println("arrive last item!");
+//                    myPresenter.getMoreData(20);
+//                }
+//                //当前在滚动的recyclerView,  当前滚动状态
+//                /*
+//                newState有三种值
+//                SCROLL_STATE_IDLE = 0； 静止没有滚动
+//                SCROLL_STATE_DRAGGING = 1; 外部拖拽(用户手指)
+//                SCROLL_STATE_SETTLING = 2; 自动滚动
+//                */
+//            }
+//        });
+
+
+//        //下拉刷新
+//        swipeRefreshLayout.setOnRefreshListener(() -> {
+//            System.out.println("refresh!");
+//            swipeRefreshLayout.setRefreshing(true);
+//            myPresenter.refreshData(20);
+//            swipeRefreshLayout.setRefreshing(false); //FIXME:需要手动关闭动画
+//        });
 
     }
 

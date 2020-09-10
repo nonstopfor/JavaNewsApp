@@ -6,4 +6,5 @@
     <string name="epidemicData">疫情数据</string>
     <string name="search_hint">搜索新闻</string>
     <string name="app_label">wjx_zzx</string>
+    <string name="loading">正在加载</string>
 </resources>

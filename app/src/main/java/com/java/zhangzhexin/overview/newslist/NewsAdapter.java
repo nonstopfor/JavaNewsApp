@@ -30,9 +30,6 @@ public class NewsAdapter extends ListAdapter<NewsAdapter.ViewHolder,NewsCard> {
     }
 
 
-
-
-    //FIXME：用户拖拽屏幕过程中算点击吗?
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView news_title;
         TextView news_source;
