@@ -1,9 +1,15 @@
 import jieba
 from gensim import corpora, models
+from collections import defaultdict
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
+np.random.seed(4568239)
 with open('vocab/stopwords.txt', encoding='utf-8') as f:
     stopwords = [line.strip() for line in f.readlines()]
     stopwords.append(" ")
+
 
 def remove_stopwords(ls):  # 去除停用词
     return [word for word in ls if word not in stopwords]
@@ -25,13 +31,26 @@ with open('events.txt', 'r', encoding='utf-8') as f:
     # 推断每个语料库中的主题类别
 
     # exit(0)
+    cnt = defaultdict(int)
+    weights = []
+    y = []
     print('推断：')
     for e, values in enumerate(lda.inference(corpus)[0]):
         topic_val = 0
         topic_id = 0
+        temp_val = []
         for tid, val in enumerate(values):
+            temp_val.append(val)
             if val > topic_val:
                 topic_val = val
                 topic_id = tid
-        print(topic_id, '->', words_ls[e])
-        break
+        weights.append(temp_val)
+        y.append(topic_id)
+        # print(topic_id, '->', words_ls[e])
+        cnt[topic_id] += 1
+    print(cnt)
+    weights = np.array(weights)
+    fig = plt.figure()
+    ax = Axes3D(fig)
+    ax.scatter(weights[:, 0], weights[:, 1], weights[:, 2], c=y)
+    plt.show()
