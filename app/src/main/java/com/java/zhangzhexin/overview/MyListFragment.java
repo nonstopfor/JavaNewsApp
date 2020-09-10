@@ -129,7 +129,13 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 myPresenter.getMoreData(20);
                 System.out.println("检测到上拉获取更多 ");
-                refreshLayout.finishLoadMore(true);
+//                try {
+//                    Thread.sleep(1);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+
+                refreshLayout.finishLoadMore(500);
             }
         });
         //TODO:改监听器
