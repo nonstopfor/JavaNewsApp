@@ -59,20 +59,20 @@ public class EntityAdapter extends ListAdapter<EntityAdapter.ViewHolder, EntityC
     @Override
     public void onBindViewHolder(@NonNull EntityAdapter.ViewHolder holder, int position) {
         holder.entity_label.setText(data.get(position).label);
+
+        //清空
+        holder.hot1.setImageResource(R.drawable.null_image);
+        holder.hot2.setImageResource(R.drawable.null_image);
+        holder.hot3.setImageResource(R.drawable.null_image);
         float hot = data.get(position).hot;
+
         System.out.println("position = "+position+" ,entity = "+data.get(position).label+" ,hot = "+hot);
-        if(hot > 0.5) {
+        if(hot > 0.5)
             holder.hot1.setImageResource(R.drawable.fire);
-            System.out.println("hot > 0.5, set hot1");
-        }
-        if(hot > 0.7) {
+        if(hot > 0.7)
             holder.hot2.setImageResource(R.drawable.fire);
-            System.out.println("hot > 0.7, set hot2");
-        }
-        if(hot > 0.9) {
+        if(hot > 0.9)
             holder.hot3.setImageResource(R.drawable.fire);
-            System.out.println("hot > 0.9, set hot3");
-        }
     }
 
     @Override
