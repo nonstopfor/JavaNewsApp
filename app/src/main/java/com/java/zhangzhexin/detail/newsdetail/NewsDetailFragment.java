@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 
 import com.java.zhangzhexin.BaseFragment;
 import com.java.zhangzhexin.R;
-import com.java.zhangzhexin.model.NewsCard;
 import com.java.zhangzhexin.model.SingleNews;
 
 public class NewsDetailFragment extends BaseFragment<NewsDetailView,NewsDetailPresenter> implements NewsDetailView{
@@ -33,7 +32,7 @@ public class NewsDetailFragment extends BaseFragment<NewsDetailView,NewsDetailPr
         if(view == null)
         {
             System.out.println("ListFragment: "+type+" view为空");
-            view = inflater.inflate(R.layout.news_detail, container, false);
+            view = inflater.inflate(R.layout.detail_news, container, false);
             initView();
         }
         return view;

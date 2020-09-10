@@ -1,6 +1,5 @@
 package com.java.zhangzhexin.overview.epidemic.scholar;
 
-import android.appwidget.AppWidgetHost;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.java.zhangzhexin.R;
-import com.java.zhangzhexin.model.EntityCard;
 import com.java.zhangzhexin.model.ScholarCard;
 import com.java.zhangzhexin.overview.ListAdapter;
 
@@ -53,7 +51,7 @@ public class ScholarAdapter extends ListAdapter<ScholarAdapter.ViewHolder, Schol
     @NonNull
     @Override
     public ScholarAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.scholar_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_scholar, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

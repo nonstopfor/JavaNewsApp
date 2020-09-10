@@ -7,7 +7,7 @@
     tools:context=".detail.DetailActivity">
 
 
-    <include layout="@layout/news_detail"/>
+    <include layout="@layout/detail_news"/>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
