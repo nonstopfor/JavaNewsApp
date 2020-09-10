@@ -17,6 +17,7 @@ import com.java.zhangzhexin.BaseFragment;
 import com.java.zhangzhexin.R;
 import com.java.zhangzhexin.model.EntityCard;
 import com.java.zhangzhexin.model.Relation;
+import com.java.zhangzhexin.model.ScholarCard;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 
@@ -85,11 +86,11 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
     }
 
     @Override
-    public void setView(EntityCard entity) {
-        System.out.println("imgUrl = " + entity.imgUrl);
-        Glide.with(this).load(entity.imgUrl).into(image);
-        label.setText(entity.label);
-        description.setText(entity.description);
+    public void setView(ScholarCard scholar) {
+        System.out.println("imgUrl = " + scholar.avatar);
+        Glide.with(this).load(scholar.avatar).into(image);
+        label.setText(scholar.label);
+        description.setText(scholar.description);
 
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -109,10 +110,10 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
                     .removeFrom(groupListView);
         }
 
-        if (entity.properties.size() > 0) {
+        if (scholar.properties.size() > 0) {
             QMUIGroupListView.Section propertySection = QMUIGroupListView.newSection(getMyContext()).setTitle("属性");
-            for (String key : entity.properties.keySet()) {
-                String val = entity.properties.get(key);
+            for (String key : scholar.properties.keySet()) {
+                String val = scholar.properties.get(key);
                 QMUICommonListItemView itemWithDetailBelow = groupListView.createItemView(null,
                         key,
                         val,
@@ -128,9 +129,9 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
             propertySection.addTo(groupListView);
         }
 
-        if (entity.relationList.size() > 0) {
+        if (scholar.relationList.size() > 0) {
             QMUIGroupListView.Section relationSection = QMUIGroupListView.newSection(getMyContext()).setTitle("关系");
-            for (Relation r : entity.relationList) {
+            for (Relation r : scholar.relationList) {
 //            r.display();
                 String key = r.relation;
                 if (r.forward) {
