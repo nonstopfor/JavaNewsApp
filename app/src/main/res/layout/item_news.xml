@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_marginBottom="8dp"
+            android:lines="1"
             android:textStyle="bold"/>
         <LinearLayout
             android:layout_width="match_parent"
