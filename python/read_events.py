@@ -19,6 +19,6 @@ num = 0
 with open('events.txt', 'w', encoding='utf-8') as out_f:
     for data in a['data']:
         events.append(data['title'])
-        out_f.write(data['title'].replace('\n', ' ') + '\n')
+        out_f.write(data['title'].replace('\n', '。') + '\n')
 # print(num)
 print(len(events))

@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("糟糕！进入MainActivity onCreate!");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //在submitLisenter中捕获 防止activity跳转和重建
 //        Intent intent = getIntent();
 //        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {

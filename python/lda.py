@@ -8,7 +8,7 @@ from mpl_toolkits.mplot3d import Axes3D
 np.random.seed(4568239)
 with open('vocab/stopwords.txt', encoding='utf-8') as f:
     stopwords = [line.strip() for line in f.readlines()]
-    stopwords.append(" ")
+    stopwords.extend([' '])
 
 
 def remove_stopwords(ls):  # 去除停用词
@@ -25,10 +25,14 @@ with open('events.txt', 'r', encoding='utf-8') as f:
     corpus = [dict.doc2bow(words) for words in words_ls]
     lda = models.ldamodel.LdaModel(corpus=corpus, id2word=dict, num_topics=3)
 
+    topics = []
     for topic in lda.print_topics(num_words=5):
         print(topic)
-
+        topics.append(topic[1].split('"')[1])
     # 推断每个语料库中的主题类别
+    print(topics)
+    dir_name = 'types/'
+    files = [open(dir_name + i + '.txt', 'w', encoding='utf-8') for i in topics]
 
     # exit(0)
     cnt = defaultdict(int)
@@ -48,6 +52,7 @@ with open('events.txt', 'r', encoding='utf-8') as f:
         y.append(topic_id)
         # print(topic_id, '->', words_ls[e])
         cnt[topic_id] += 1
+        files[topic_id].write(lines[e].strip() + '\n')
     print(cnt)
     weights = np.array(weights)
     fig = plt.figure()
