@@ -18,6 +18,7 @@ import com.java.zhangzhexin.MainActivity;
 import com.java.zhangzhexin.R;
 import com.java.zhangzhexin.detail.entitydetail.EntityDetailFragment;
 import com.java.zhangzhexin.detail.newsdetail.NewsDetailFragment;
+import com.java.zhangzhexin.detail.scholardetail.ScholarDetailFragment;
 import com.sina.weibo.sdk.api.TextObject;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
 import com.sina.weibo.sdk.auth.AuthInfo;
@@ -48,6 +49,8 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
 
     private NewsDetailFragment newsDetailFragment;
     private EntityDetailFragment entityDetailFragment;
+    private ScholarDetailFragment scholarDetailFragment;
+
     private Fragment currentFragment;
     private String type;
 
@@ -99,6 +102,11 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
             entityDetailFragment = EntityDetailFragment.newInstance();
             transaction.add(R.id.frameLayout,entityDetailFragment).hide(entityDetailFragment).setMaxLifecycle(entityDetailFragment, Lifecycle.State.STARTED);
             System.out.println("finish construct entityDetailFragment");
+        }
+        if(scholarDetailFragment==null){
+            scholarDetailFragment = ScholarDetailFragment.newInstance();
+            transaction.add(R.id.frameLayout,scholarDetailFragment).hide(scholarDetailFragment).setMaxLifecycle(scholarDetailFragment, Lifecycle.State.STARTED);
+            System.out.println("finish construct scholarDetailFragment");
         }
         currentFragment = newsDetailFragment;
         transaction.commit();
@@ -181,7 +189,12 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
             System.out.println("entityDetailFragment = "+entityDetailFragment);
             entityDetailFragment.setId(entity_id);
         }
-        else{
+        else if(type.equals("scholar")){ //学者
+            int scholar_id = getIntent().getIntExtra("scholar_id",-1);
+            System.out.println("得到学者id = "+scholar_id);
+            switchFragment(scholarDetailFragment);
+            System.out.println("scholarDetailFragment = "+scholarDetailFragment);
+            scholarDetailFragment.setId(scholar_id);
             //TODO:学者
         }
     }

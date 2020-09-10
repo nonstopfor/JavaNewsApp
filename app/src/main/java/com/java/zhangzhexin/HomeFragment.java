@@ -18,6 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.java.zhangzhexin.model.Tab;
 import com.java.zhangzhexin.overview.epidemic.data.EpidemicDataFragment;
 import com.java.zhangzhexin.overview.epidemic.entity.EntityListFragment;
+import com.java.zhangzhexin.overview.epidemic.scholar.ScholarListFragment;
 import com.java.zhangzhexin.overview.newslist.NewsListFragment;
 
 import java.util.Arrays;
@@ -158,8 +159,8 @@ public class HomeFragment extends Fragment {
                     return EpidemicDataFragment.newInstance();
                 case graph:
                     return EntityListFragment.newInstance(type,keyword);
-                case scholar: //TODO:修改为对应的fragment
-                    return NewsListFragment.newInstance(type,keyword);
+                case scholar:
+                    return ScholarListFragment.newInstance(type,keyword);
                 default:
                     return NewsListFragment.newInstance(type,keyword);
             }
