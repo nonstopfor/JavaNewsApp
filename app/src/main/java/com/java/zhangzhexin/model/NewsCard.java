@@ -26,9 +26,9 @@ public class NewsCard extends BaseCard {
     }
 
     public NewsCard(JsonObject obj) {
-        time = obj.get("date").getAsString();
-        title = obj.get("title").getAsString();
-        source = obj.get("source").getAsString();
+        time = UrlManager.getString(obj, "date");
+        title = UrlManager.getString(obj, "title");
+        source = UrlManager.getString(obj, "source");
         if (source.length() == 0) source = "来源未知";
 //        System.out.println("string:"+obj.get("_id").getAsString());
         id = obj.get("_id").getAsString();

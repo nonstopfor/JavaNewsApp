@@ -27,7 +27,7 @@ public class UrlManager {
 
         for (int i = 0; i < jsonArray.size(); ++i) {
             JsonObject obj = (JsonObject) jsonArray.get(i);
-            if (obj.get("content").getAsString().length() == 0) continue;
+            if (getString(obj, "content").length() == 0) continue;
             result.add(new NewsCard(obj));
 //            System.out.println(obj.get("source"));
         }
