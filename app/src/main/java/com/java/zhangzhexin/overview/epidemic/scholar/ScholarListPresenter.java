@@ -43,17 +43,17 @@ public class ScholarListPresenter extends MyListPresenter<ScholarManager, Schola
     @Override
     public void getMoreData(int size) {
         //不调用getMoreData,学者一次返回吧
-////        List<EntityCard> result = null;
-////        try {
-////            result = dataManager.getMoreNews(size);
-////        } catch (InterruptedException e) {
-////            e.printStackTrace();
-////        }
-////        List<EntityCard> result = new ArrayList<>();
-////        result.add(new EntityCard("label1"));
-////        result.add(new EntityCard("label2"));
-//        assert(result!=null);
-//        myView.appendList(result);
+        List<ScholarCard> result = null;
+        try {
+            result = dataManager.
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+//        List<EntityCard> result = new ArrayList<>();
+//        result.add(new EntityCard("label1"));
+//        result.add(new EntityCard("label2"));
+        assert(result!=null);
+        myView.appendList(result);
     }
 
     @Override
