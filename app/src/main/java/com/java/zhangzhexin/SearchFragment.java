@@ -34,7 +34,6 @@ public class SearchFragment extends Fragment {
 
     public void setKeyword(String keyword){
         this.keyword = keyword;
-        //FIXME: 重复搜索 子fragment没有刷新 不能通过
         if(visible) {
 //            System.out.println("搜索部分visible,更新adapter");
             adapter.setData(categories, keyword); //searchFragment onResume状态下重复搜索

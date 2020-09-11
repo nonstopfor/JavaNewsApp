@@ -40,6 +40,11 @@ public class NewsAdapter extends ListAdapter<NewsAdapter.ViewHolder,NewsCard> {
         }
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     @NonNull
     @Override
     public NewsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

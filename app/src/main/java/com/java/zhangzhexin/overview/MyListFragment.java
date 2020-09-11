@@ -111,6 +111,7 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
         }
     }
 
+
     @Override
     public void start(Intent intent) {
         startActivity(intent);
