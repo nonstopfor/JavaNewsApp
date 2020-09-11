@@ -16,6 +16,7 @@ public class EpidemicDataPresenter extends BasePresenter<EpidemicDataView> {
             epidemicDataManager.refresh();
         } catch (InterruptedException e) {
             e.printStackTrace();
+            return;
         }
         myView.resetEpidemicCountryData(epidemicDataManager.getCountryCards());
         myView.resetEpidemicProvinceData(epidemicDataManager.getProvinceCards());

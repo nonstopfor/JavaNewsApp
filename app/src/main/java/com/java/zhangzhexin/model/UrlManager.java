@@ -20,10 +20,18 @@ public class UrlManager {
         url.append("type=").append(type);
         url.append("&page=").append(page);
         url.append("&size=").append(size);
-        String data = readUrl(url.toString());
-        JsonObject jsonData = new JsonParser().parse(data).getAsJsonObject();
-        JsonArray jsonArray = jsonData.getAsJsonArray("data");
         List<NewsCard> result = new ArrayList<>();
+
+        String data = readUrl(url.toString());
+        JsonObject jsonData;
+        try{
+            jsonData = new JsonParser().parse(data).getAsJsonObject();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return result;
+        }
+        JsonArray jsonArray = jsonData.getAsJsonArray("data");
 
         for (int i = 0; i < jsonArray.size(); ++i) {
             JsonObject obj = (JsonObject) jsonArray.get(i);
@@ -31,42 +39,6 @@ public class UrlManager {
             result.add(new NewsCard(obj));
 //            System.out.println(obj.get("source"));
         }
-        return result;
-    }
-
-    public static List<NewsCard> getAllNews() throws InterruptedException {
-        String url = "https://covid-dashboard.aminer.cn/api/dist/events.json";
-        String data = readUrl(url);
-        JsonObject jsonData = new JsonParser().parse(data).getAsJsonObject();
-        JsonArray jsonArray = jsonData.getAsJsonArray("data");
-        List<NewsCard> result = new ArrayList<>();
-
-        for (int i = 0; i < jsonArray.size(); ++i) {
-            JsonObject obj = (JsonObject) jsonArray.get(i);
-            result.add(new NewsCard(obj));
-//            System.out.println(obj.get("source"));
-        }
-        return result;
-    }
-
-    public static List<NewsCard> getAllNews(String type) throws InterruptedException {
-        String url = "https://covid-dashboard.aminer.cn/api/dist/events.json";
-        String data = readUrl(url);
-//        System.out.println(data);
-        JsonObject jsonData = new JsonParser().parse(data).getAsJsonObject();
-        JsonArray jsonArray = jsonData.getAsJsonArray("datas");
-        List<NewsCard> result = new ArrayList<>();
-        System.out.println("type:" + type);
-        System.out.println("jsonArray.size:" + jsonArray.size());
-        for (int i = 0; i < jsonArray.size(); ++i) {
-            JsonObject obj = (JsonObject) jsonArray.get(i);
-//            System.out.println(obj.get("type").getAsString());
-            if (!(obj.get("type").getAsString().equals(type))) continue;
-//            System.out.println(obj.get("type").getAsString());
-            result.add(new NewsCard(obj));
-//            System.out.println(obj.get("source"));
-        }
-        System.out.println("in getAllNews result size:" + result.size());
         return result;
     }
 
@@ -105,7 +77,14 @@ public class UrlManager {
     public static SingleNews getSingleNewsById(String id) throws InterruptedException {
         String url = "https://covid-dashboard-api.aminer.cn/event/" + id;
         String data = readUrl(url);
-        JsonObject jsonData = new JsonParser().parse(data).getAsJsonObject();
+        JsonObject jsonData;
+        try{
+            jsonData = new JsonParser().parse(data).getAsJsonObject();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return new SingleNews();
+        }
         return new SingleNews(jsonData.getAsJsonObject("data"));
     }
 
@@ -113,7 +92,14 @@ public class UrlManager {
         List<EpidemicDataCard> result = new ArrayList<>();
         String url = "https://covid-dashboard.aminer.cn/api/dist/epidemic.json";
         String data = readUrl(url);
-        JsonObject jsonData = new JsonParser().parse(data).getAsJsonObject();
+        JsonObject jsonData;
+        try{
+            jsonData = new JsonParser().parse(data).getAsJsonObject();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return result;
+        }
         for (String key : jsonData.keySet()) {
 //            System.out.print(key + " ");
             JsonArray allData = jsonData.get(key).getAsJsonObject().get("data").getAsJsonArray();
@@ -142,10 +128,18 @@ public class UrlManager {
     static List<ScholarCard> getScholars() throws InterruptedException {
         String url = "https://innovaapi.aminer.cn/predictor/api/v1/valhalla/highlight/get_ncov_expers_list?v=2";
         String data = readUrl(url);
-        JsonObject jsonData = new JsonParser().parse(data).getAsJsonObject();
+        JsonObject jsonData;
+        List<ScholarCard> cards = new ArrayList<>();
+
+        try{
+            jsonData = new JsonParser().parse(data).getAsJsonObject();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return cards;
+        }
         JsonArray jsonArray = jsonData.get("data").getAsJsonArray();
 
-        List<ScholarCard> cards = new ArrayList<>();
         for (int i = 0; i < jsonArray.size(); ++i) {
             JsonObject scholar = jsonArray.get(i).getAsJsonObject();
             String avatar = scholar.get("avatar").getAsString();

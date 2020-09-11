@@ -18,10 +18,18 @@ public class EntityManager extends BaseManager {
     public List<EntityCard> getEntityCardList(String keyword) throws InterruptedException {
         String url = "https://innovaapi.aminer.cn/covid/api/v1/pneumonia/entityquery?entity=" + keyword;
         String data = UrlManager.readUrl(url);
-        JsonObject jsonData = new JsonParser().parse(data).getAsJsonObject();
+        JsonObject jsonData;
+        List<EntityCard> results = new ArrayList<>();
+
+        try{
+            jsonData = new JsonParser().parse(data).getAsJsonObject();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return results;
+        }
         JsonArray allEntities = jsonData.get("data").getAsJsonArray();
 
-        List<EntityCard> results = new ArrayList<>();
 
         for (int i = 0; i < allEntities.size(); ++i) {
             JsonObject obj = (JsonObject) (allEntities.get(i));

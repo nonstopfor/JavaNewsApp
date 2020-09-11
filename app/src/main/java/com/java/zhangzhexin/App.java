@@ -33,18 +33,24 @@ public class App extends Application {
             public void run() {
                 long startTime = System.currentTimeMillis();
                 int siz = 500;
+
                 for (int page = 1; ; ++page) {
+
+                    List<NewsCard> cards = null;
                     try {
-                        List<NewsCard> cards = UrlManager.getNewsList("news", page, siz);
-//                        NewsSearchManager.preDownloadNewsList = UrlManager.getNewsList("news", 1, 1000);
-                        NewsSearchManager.preDownloadNewsList.addAll(cards);
-                        System.out.println("download page:" + page);
-//                        System.out.println("cards.size:" + cards.size());
-                        if (cards.isEmpty()) break;
+                        cards = UrlManager.getNewsList("news", page, siz);
                     } catch (Exception e) {
                         e.printStackTrace();
-                        --page;
                     }
+//                        NewsSearchManager.preDownloadNewsList = UrlManager.getNewsList("news", 1, 1000);
+                    NewsSearchManager.preDownloadNewsList.addAll(cards);
+                    System.out.println("download page:" + page);
+//                        System.out.println("cards.size:" + cards.size());
+                    if (cards.isEmpty()) {
+                        if (page > 100) break;
+                        else --page;
+                    }
+
                 }
                 long endTime = System.currentTimeMillis();
 
