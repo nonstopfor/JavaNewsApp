@@ -16,7 +16,7 @@ public class ScholarListPresenter extends MyListPresenter<ScholarManager, Schola
 
     @Override
     public ScholarManager createManager(String type) {
-        return new ScholarManager();
+        return new ScholarManager(type);
     }
 
     @Override
