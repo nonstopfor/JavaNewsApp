@@ -58,6 +58,8 @@ public class NewsAdapter extends ListAdapter<NewsAdapter.ViewHolder,NewsCard> {
         holder.news_title.setText(data.get(position).title);
         if(!type.equals("history") && data.get(position).visited())
             holder.news_title.setTextColor(myContext.getResources().getColor(R.color.colorReadNews));
+        else
+            holder.news_title.setTextColor(myContext.getResources().getColor(R.color.black));
         holder.news_date.setText(data.get(position).time);
         holder.news_source.setText(data.get(position).source);
     }
