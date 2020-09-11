@@ -25,6 +25,10 @@ public class ScholarListPresenter extends MyListPresenter<ScholarManager, Schola
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         intent.putExtra("type","scholar");
         intent.putExtra("scholar_id",card.idx);
+        boolean passed = true;
+        if(type=="高关注学者")
+            passed = false;
+        intent.putExtra("passed",passed);
         myView.start(intent);
     }
 

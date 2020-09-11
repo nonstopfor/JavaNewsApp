@@ -27,6 +27,7 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
     private TextView position;
     private TextView organization;
     private ImageView image;
+    private boolean passed = true;
 
     @BindView(R.id.groupListView)
     QMUIGroupListView groupListView;
@@ -76,8 +77,8 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
         super.onResume();
     }
 
-    public void setId(int id) {
-        myPresenter.setScholar(id);
+    public void setId(int id,boolean passed) {
+        myPresenter.setScholar(id,passed);
     }
 
     @Override

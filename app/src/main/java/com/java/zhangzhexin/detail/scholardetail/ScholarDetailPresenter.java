@@ -13,8 +13,8 @@ import com.java.zhangzhexin.model.ScholarManager;
 public class ScholarDetailPresenter extends BasePresenter<ScholarDetailView> {
     public ScholarDetailPresenter(){}
 
-    public void setScholar(int scholar_id) {
-
+    public void setScholar(int scholar_id,boolean passed) {
+        //FIXME:区分
         myView.setView(ScholarManager.getScholar(scholar_id));
 
     }

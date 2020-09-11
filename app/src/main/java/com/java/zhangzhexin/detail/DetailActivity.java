@@ -191,10 +191,11 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
         }
         else if(type.equals("scholar")){ //学者
             int scholar_id = getIntent().getIntExtra("scholar_id",-1);
+            boolean passed = getIntent().getBooleanExtra("passed",true);
             //System.out.println("得到学者id = "+scholar_id);
             switchFragment(scholarDetailFragment);
             //System.out.println("scholarDetailFragment = "+scholarDetailFragment);
-            scholarDetailFragment.setId(scholar_id);
+            scholarDetailFragment.setId(scholar_id,passed);
         }
     }
 
