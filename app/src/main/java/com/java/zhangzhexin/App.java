@@ -43,7 +43,11 @@ public class App extends Application {
                         e.printStackTrace();
                     }
 //                        NewsSearchManager.preDownloadNewsList = UrlManager.getNewsList("news", 1, 1000);
-                    NewsSearchManager.preDownloadNewsList.addAll(cards);
+                    for (NewsCard card : cards) {
+                        if (NewsSearchManager.idExist.contains(card.id)) continue;
+                        NewsSearchManager.idExist.add(card.id);
+                        NewsSearchManager.preDownloadNewsList.add(card);
+                    }
 //                    System.out.println("download page:" + page);
 //                        System.out.println("cards.size:" + cards.size());
                     if (cards.isEmpty()) {

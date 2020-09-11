@@ -11,14 +11,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
+import java.util.Set;
 
 public class NewsDataManager extends BaseManager {
 
     public static AssetManager assetManager;
 
     List<NewsCard> allNews;
+    Set<String> idExist = new HashSet<>();
     String type;
     int idx = 0;
     int page = 0;
@@ -36,6 +41,9 @@ public class NewsDataManager extends BaseManager {
             page = 0;
             if (!allNews.isEmpty()) {
                 allNews.clear();
+            }
+            if (!idExist.isEmpty()) {
+                idExist.clear();
             }
         } else {
             try {
@@ -99,8 +107,14 @@ public class NewsDataManager extends BaseManager {
         if (isEvent(type)) return getMoreNewsOld(size);
         ++page;
         List<NewsCard> r = UrlManager.getNewsList(type, page, size);
-        if(r.isEmpty()) --page;
-        allNews.addAll(r);
+        if (r.isEmpty()) --page;
+        else {
+            for (NewsCard card : r) {
+                if (idExist.contains(card.id)) continue;
+                idExist.add(card.id);
+                allNews.add(card);
+            }
+        }
         return r;
     }
 

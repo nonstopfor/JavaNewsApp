@@ -1,12 +1,15 @@
 package com.java.zhangzhexin.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.List;
 
 import static java.lang.Thread.sleep;
 
 public class NewsSearchManager {
     public static List<NewsCard> preDownloadNewsList = new ArrayList<>();
+    public static Set<String> idExist = new HashSet<>();
 
     public static List<NewsCard> searchNews(String key) throws InterruptedException {
         while (preDownloadNewsList == null) {
