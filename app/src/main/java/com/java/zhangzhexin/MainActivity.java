@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if(historyFragment==null){
             historyFragment = NewsListFragment.newInstance("history",""); //TODO:要给history一种类型
-            transaction.add(R.id.frameLayout,historyFragment);//.setMaxLifecycle(historyFragment, Lifecycle.State.STARTED);
+            transaction.add(R.id.frameLayout,historyFragment);
             transaction.hide(historyFragment);
             System.out.println("finish construct historyFragment");
         }
