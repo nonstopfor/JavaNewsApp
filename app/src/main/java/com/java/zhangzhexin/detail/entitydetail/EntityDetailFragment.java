@@ -36,7 +36,7 @@ public class EntityDetailFragment extends BaseFragment<EntityDetailView, EntityD
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        System.out.println("ListFragment : " + type + " onCreateView");
+//        System.out.println("ListFragment : " + type + " onCreateView");
         view = inflater.inflate(R.layout.detail_entity, container, false);
         ButterKnife.bind(this, view);
         initView();
@@ -94,7 +94,7 @@ public class EntityDetailFragment extends BaseFragment<EntityDetailView, EntityD
 
         //Clear previous Sections
         while (groupListView.getSectionCount() > 0) {
-            System.out.println(groupListView.getSectionCount());
+//            System.out.println(groupListView.getSectionCount());
 
             groupListView.getSection(groupListView.getSectionCount()-1)
                     .removeFrom(groupListView);

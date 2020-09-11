@@ -37,13 +37,13 @@ public class HomeFragment extends Fragment {
 
     public HomeFragment(Tab tabObject){
         this.tabObject = tabObject;
-        System.out.println("构造NewsFragment, tabs = "+tabObject.getTabs());
+//        System.out.println("构造NewsFragment, tabs = "+tabObject.getTabs());
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        System.out.println("NewsFragment进入onResume");
+//        System.out.println("NewsFragment进入onResume");
         updateCategories();
         //System.out.println("更新分类完毕");
     }
@@ -71,13 +71,13 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         if(view == null){
-            System.out.println("HomeFragment view为空");
+//            System.out.println("HomeFragment view为空");
             view = inflater.inflate(R.layout.fragment_home, container,false);
             initView();
             initSet();
         }
         else{
-            System.out.println("HomeFragment view非空 不需要重新设置");
+//            System.out.println("HomeFragment view非空 不需要重新设置");
         }
         //view = inflater.inflate(R.layout.fragment_home, container,false);
         return view;
@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment {
 
     public void initSet(){
         editButton.setOnClickListener(v -> {
-            System.out.println("点击分类按钮，将弹出分类页面");
+//            System.out.println("点击分类按钮，将弹出分类页面");
             Intent intent = new Intent(getContext(), SetChannelActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
@@ -119,7 +119,7 @@ public class HomeFragment extends Fragment {
 
         public MyPagerAdapter(@NonNull FragmentManager fm,int behavior) {
             super(fm,behavior);
-            System.out.println("");
+//            System.out.println("");
         }
 
         @Override
@@ -136,7 +136,7 @@ public class HomeFragment extends Fragment {
         public void setData(List<String> data, String keyword){
             this.data = data;
             this.keyword = keyword;
-            System.out.println("adapter收到新的keyword = "+keyword);
+//            System.out.println("adapter收到新的keyword = "+keyword);
             notifyDataSetChanged();
         }
 
@@ -150,7 +150,7 @@ public class HomeFragment extends Fragment {
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            System.out.println("getItem: type = "+data.get(position)+" keyword = "+keyword);
+//            System.out.println("getItem: type = "+data.get(position)+" keyword = "+keyword);
             String type = data.get(position);
             switch (Tab.getType(type)) {
                 case news:

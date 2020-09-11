@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void switchFragment(Fragment target){
         if(currentFragment != target){
-            System.out.println("当前fragmen为 "+currentFragment+", 切换到fragment = "+target);
+//            System.out.println("当前fragmen为 "+currentFragment+", 切换到fragment = "+target);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.hide(currentFragment).show(target);
             transaction.setMaxLifecycle(currentFragment, Lifecycle.State.STARTED).setMaxLifecycle(target, Lifecycle.State.RESUMED);
@@ -61,28 +61,28 @@ public class MainActivity extends AppCompatActivity {
             homeFragment = HomeFragment.newInstance(tabObject);
             transaction.add(R.id.frameLayout, homeFragment);
             
-            System.out.println("finish construct newsFragment");
+//            System.out.println("finish construct newsFragment");
             //transaction.hide(newsFragment); //default显示新闻首页
         }
         if(historyFragment==null){
             historyFragment = NewsListFragment.newInstance("history",""); //TODO:要给history一种类型
             transaction.add(R.id.frameLayout,historyFragment);//.setMaxLifecycle(historyFragment, Lifecycle.State.STARTED);
             transaction.hide(historyFragment);
-            System.out.println("finish construct historyFragment");
+//            System.out.println("finish construct historyFragment");
         }
 
         if(searchFragment==null){
             searchFragment = SearchFragment.newInstance();
             transaction.add(R.id.frameLayout,searchFragment).setMaxLifecycle(searchFragment, Lifecycle.State.STARTED);
             transaction.hide(searchFragment);
-            System.out.println("finish construct searchFragment");
+//            System.out.println("finish construct searchFragment");
         }
 
         if(epidemicDataFragment==null){
             epidemicDataFragment = EpidemicDataFragment.newInstance();
             transaction.add(R.id.frameLayout,epidemicDataFragment).setMaxLifecycle(epidemicDataFragment, Lifecycle.State.STARTED);
             transaction.hide(epidemicDataFragment);
-            System.out.println("finish construct epidemicDataFragment");
+//            System.out.println("finish construct epidemicDataFragment");
         }
 
         transaction.commit();
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("糟糕！进入MainActivity onCreate!");
+//        System.out.println("糟糕！进入MainActivity onCreate!");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -119,24 +119,24 @@ public class MainActivity extends AppCompatActivity {
             if(menuItem.getItemId() == R.id.home) {
                 switchFragment(homeFragment);
                 //getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, newsFragment).commit();
-                System.out.println("切换到首页");
+//                System.out.println("切换到首页");
                 return true; //不return true切换时没有动画效果
             }
             else if(menuItem.getItemId() == R.id.history) {
                 switchFragment(historyFragment);
                 //getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, historyFragment).commit();
-                System.out.println("切换到浏览历史");
+//                System.out.println("切换到浏览历史");
                 return true;
             }
             else if(menuItem.getItemId() == R.id.epidemicData){
                 switchFragment(epidemicDataFragment);
-                System.out.println("切换到疫情数据");
+//                System.out.println("切换到疫情数据");
                 return true;
             }
             return false;
         });
 
-        System.out.println("离开MainActivity.onCreate");
+//        System.out.println("离开MainActivity.onCreate");
     }
 
     @Override
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
 
-        System.out.println("MainActivity onResume, 移除searchView焦点");
+//        System.out.println("MainActivity onResume, 移除searchView焦点");
         super.onResume();
         if(searchView != null)
             searchView.clearFocus();
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         String query = intent.getStringExtra(SearchManager.QUERY);
         if(query!=null){
             //拦截query发送
-            System.out.println("拦截到query = "+query);
+//            System.out.println("拦截到query = "+query);
             suggestions.saveRecentQuery(query, null);
             searchFragment.setKeyword(query); //更新关键词
             switchFragment(searchFragment);//切换到searchFragment
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                System.out.println("监听器中收到关键字 = "+query);
+//                System.out.println("监听器中收到关键字 = "+query);
                 return false;
 //                System.out.println("收到查询关键字 = "+query);
 //                suggestions.saveRecentQuery(query, null);

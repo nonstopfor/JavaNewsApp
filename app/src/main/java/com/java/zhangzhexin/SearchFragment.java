@@ -36,7 +36,7 @@ public class SearchFragment extends Fragment {
         this.keyword = keyword;
         //FIXME: 重复搜索 子fragment没有刷新 不能通过
         if(visible) {
-            System.out.println("搜索部分visible,更新adapter");
+//            System.out.println("搜索部分visible,更新adapter");
             adapter.setData(categories, keyword); //searchFragment onResume状态下重复搜索
 
         }
@@ -44,7 +44,7 @@ public class SearchFragment extends Fragment {
 
     @Override
     public void onResume() {
-        System.out.println("搜索部分onResume");
+//        System.out.println("搜索部分onResume");
         adapter.setData(categories,keyword); //第一次进入时 setdata
         visible = true;
         super.onResume();
@@ -54,28 +54,28 @@ public class SearchFragment extends Fragment {
     public void onPause() {
         super.onPause();
         visible = false;
-        System.out.println("搜索部分onPause");
+//        System.out.println("搜索部分onPause");
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        System.out.println("搜索部分onDestroyView");
+//        System.out.println("搜索部分onDestroyView");
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     //    return super.onCreateView(inflater, container, savedInstanceState);
-        System.out.println("搜索fragment创建");
+//        System.out.println("搜索fragment创建");
         if(view == null){
-            System.out.println("SearchFragment view为空");
+//            System.out.println("SearchFragment view为空");
             view = inflater.inflate(R.layout.fragment_search, container,false);
             initView();
             initSet();
         }
         else{
-            System.out.println("SearchFragment view非空 不需要重新设置");
+//            System.out.println("SearchFragment view非空 不需要重新设置");
         }
         //view = inflater.inflate(R.layout.fragment_home, container,false);
         return view;

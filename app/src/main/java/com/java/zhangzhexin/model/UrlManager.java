@@ -164,7 +164,7 @@ public class UrlManager {
 //            card.display();
             cards.add(card);
         }
-        System.out.println(jsonArray.size());
+//        System.out.println(jsonArray.size());
         return cards;
     }
 

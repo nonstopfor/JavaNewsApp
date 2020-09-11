@@ -128,7 +128,7 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        System.out.println("详情页onCreate");
+//        System.out.println("详情页onCreate");
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_detail);

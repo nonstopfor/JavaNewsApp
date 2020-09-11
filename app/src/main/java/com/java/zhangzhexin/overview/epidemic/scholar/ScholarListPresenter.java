@@ -46,7 +46,7 @@ public class ScholarListPresenter extends MyListPresenter<ScholarManager, Schola
 
     @Override
     public void refreshData(int size) {
-        System.out.println("refreshScholar!");
+//        System.out.println("refreshScholar!");
         List<ScholarCard> result = null;
         try {
             result = dataManager.refresh(size);

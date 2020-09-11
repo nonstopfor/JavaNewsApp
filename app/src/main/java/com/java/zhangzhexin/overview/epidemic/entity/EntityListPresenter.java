@@ -39,7 +39,7 @@ public class EntityListPresenter extends MyListPresenter<EntityManager, EntityCa
 
     @Override
     public void refreshData(int size) {
-        System.out.println("refreshNews!");
+//        System.out.println("refreshNews!");
         List<EntityCard> result = null;
         try {
             result = dataManager.getEntityCardList(keyword);

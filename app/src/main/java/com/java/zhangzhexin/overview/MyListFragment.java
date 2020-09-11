@@ -51,17 +51,18 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        System.out.println("ListFragment : "+type+" onCreateView");
+//        System.out.println("ListFragment : "+type+" onCreateView");
         if(view == null)
         {
             isFirstLoad = true;
-            System.out.println("ListFragment: "+type+" view为空");
+//            System.out.println("ListFragment: "+type+" view为空");
             view = inflater.inflate(R.layout.fragment_list, container, false);
             initView();
             initSet();
         }
-        else
-            System.out.println("ListFragment: "+type+" view非空");
+        else{
+            //            System.out.println("ListFragment: "+type+" view非空");
+        }
 
         return view;
     }
@@ -82,19 +83,19 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
         //点击事件
         recyclerView.addOnItemTouchListener(new MyListListener(getContext(),recyclerView, (dataView, position) -> {
             myPresenter.openDetail(dataView,adapter.getData(position));
-            System.out.println("点击位置"+position);
+//            System.out.println("点击位置"+position);
         }));
 
         refreshLayout.setEnableAutoLoadMore(false);
 
         refreshLayout.setOnRefreshListener(refreshLayout -> {
-            System.out.println("检测到下拉刷新");
+//            System.out.println("检测到下拉刷新");
             myPresenter.refreshData(13);
             refreshLayout.finishRefresh(true);
         });
 
         refreshLayout.setOnLoadMoreListener(refreshLayout -> {
-            System.out.println("检测到上拉获取更多 ");
+//            System.out.println("检测到上拉获取更多 ");
             myPresenter.getMoreData(13);
             refreshLayout.finishLoadMore(200);
         });
@@ -103,7 +104,7 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
     @Override
     public void onResume() {
         super.onResume();
-        System.out.println("ListFragment : "+type+" onResume");
+//        System.out.println("ListFragment : "+type+" onResume");
         if(isFirstLoad|| type.equals("history")) { //浏览记录每次都要刷新
             myPresenter.refreshData(13);
             isFirstLoad = false;
