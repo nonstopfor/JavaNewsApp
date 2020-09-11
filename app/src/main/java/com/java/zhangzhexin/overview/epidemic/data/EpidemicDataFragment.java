@@ -129,6 +129,7 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
     }
 
     public void drawEpidemicCountryData(List<EpidemicDataCard> cards) {
+//        if(cards.isEmpty()) return;
         List<BarEntry> barEntries = new ArrayList<>();
         List<String> xLabels = new ArrayList<>();
         for (int i = 0; i < cards.size(); ++i) {
@@ -161,6 +162,7 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
     }
 
     public void drawEpidemicProvinceData(List<EpidemicDataCard> cards) {
+//        if(cards.isEmpty()) return;
         List<BarEntry> barEntries = new ArrayList<>();
         List<String> xLabels = new ArrayList<>();
         for (int i = 0; i < cards.size(); ++i) {

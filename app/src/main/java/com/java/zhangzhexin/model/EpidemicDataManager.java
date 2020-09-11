@@ -15,9 +15,12 @@ public class EpidemicDataManager {
     }
 
     public void refresh() throws InterruptedException {
-        epidemicDataCards = UrlManager.getLatestEpidemicData();
+        List<EpidemicDataCard> temp = UrlManager.getLatestEpidemicData();
+        if (temp.isEmpty()) return;
+        epidemicDataCards = temp;
         countryCards.clear();
         provinceCards.clear();
+        if (epidemicDataCards.isEmpty()) throw new InterruptedException();
         for (EpidemicDataCard card : epidemicDataCards) {
             if (card.province == null && !card.country.equals("World")) {
                 countryCards.add(card);

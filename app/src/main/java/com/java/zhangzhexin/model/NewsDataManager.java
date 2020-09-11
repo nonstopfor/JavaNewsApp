@@ -31,11 +31,6 @@ public class NewsDataManager extends BaseManager {
         allNews = new ArrayList<>();
     }
 
-    public void refreshOld() throws InterruptedException {
-        allNews = UrlManager.getAllNews(type);
-        idx = 0;
-    }
-
     public void refreshNew() {
         if (!isEvent(type)) {
             page = 0;
@@ -104,6 +99,7 @@ public class NewsDataManager extends BaseManager {
         if (isEvent(type)) return getMoreNewsOld(size);
         ++page;
         List<NewsCard> r = UrlManager.getNewsList(type, page, size);
+        if(r.isEmpty()) --page;
         allNews.addAll(r);
         return r;
     }
