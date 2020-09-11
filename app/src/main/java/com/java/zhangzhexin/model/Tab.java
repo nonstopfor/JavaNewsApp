@@ -19,7 +19,7 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class Tab {
 
-    public enum TabType {news,epidemicData,scholar,graph}
+    public enum TabType {news, epidemicData, scholar, graph}
 
     private static Tab tab = null;
 
@@ -36,15 +36,16 @@ public class Tab {
     @Convert(columnType = String.class, converter = StringConverter.class)
     private List<String> tabs;
 
-    public static List<String> allTabs = new ArrayList<>(Arrays.asList("news", "paper", "知疫学者", "病毒", "研究", "新冠"));
+    public static List<String> allTabs = new ArrayList<>(Arrays.asList("news", "paper", "高关注学者", "追忆学者", "病毒", "研究", "新冠"));
 
-    public static TabType getType(String name){
+    public static TabType getType(String name) {
         switch (name) {
             case "疫情数据":
                 return TabType.epidemicData;
             case "知识图谱":
                 return TabType.graph;
-            case "知疫学者":
+            case "高关注学者":
+            case "追忆学者":
                 return TabType.scholar;
             default:
                 return TabType.news;

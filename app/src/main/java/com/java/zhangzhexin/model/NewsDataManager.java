@@ -107,15 +107,17 @@ public class NewsDataManager extends BaseManager {
         if (isEvent(type)) return getMoreNewsOld(size);
         ++page;
         List<NewsCard> r = UrlManager.getNewsList(type, page, size);
+        List<NewsCard> result = new ArrayList<>();
         if (r.isEmpty()) --page;
         else {
             for (NewsCard card : r) {
                 if (idExist.contains(card.id)) continue;
                 idExist.add(card.id);
                 allNews.add(card);
+                result.add(card);
             }
         }
-        return r;
+        return result;
     }
 
     public List<NewsCard> getMoreNews(int size) throws InterruptedException {

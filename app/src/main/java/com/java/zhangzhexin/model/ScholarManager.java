@@ -6,9 +6,14 @@ import java.util.List;
 public class ScholarManager extends BaseManager {
     public static List<ScholarCard> scholarCardList;
     int cur = 0;
+    String type;
+
+    public ScholarManager(String type) {
+        this.type = type;
+    }
 
     public List<ScholarCard> refresh(int size) throws InterruptedException {
-        scholarCardList = UrlManager.getScholars();
+        scholarCardList = UrlManager.getScholars(type);
         for (int i = 0; i < scholarCardList.size(); ++i) {
             scholarCardList.get(i).idx = i;
         }

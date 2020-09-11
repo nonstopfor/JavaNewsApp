@@ -24,10 +24,9 @@ public class UrlManager {
 
         String data = readUrl(url.toString());
         JsonObject jsonData;
-        try{
+        try {
             jsonData = new JsonParser().parse(data).getAsJsonObject();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return result;
         }
@@ -78,10 +77,9 @@ public class UrlManager {
         String url = "https://covid-dashboard-api.aminer.cn/event/" + id;
         String data = readUrl(url);
         JsonObject jsonData;
-        try{
+        try {
             jsonData = new JsonParser().parse(data).getAsJsonObject();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new SingleNews();
         }
@@ -93,10 +91,9 @@ public class UrlManager {
         String url = "https://covid-dashboard.aminer.cn/api/dist/epidemic.json";
         String data = readUrl(url);
         JsonObject jsonData;
-        try{
+        try {
             jsonData = new JsonParser().parse(data).getAsJsonObject();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return result;
         }
@@ -125,16 +122,15 @@ public class UrlManager {
         return obj.getAsInt();
     }
 
-    static List<ScholarCard> getScholars() throws InterruptedException {
+    static List<ScholarCard> getScholars(String type) throws InterruptedException {
         String url = "https://innovaapi.aminer.cn/predictor/api/v1/valhalla/highlight/get_ncov_expers_list?v=2";
         String data = readUrl(url);
         JsonObject jsonData;
         List<ScholarCard> cards = new ArrayList<>();
 
-        try{
+        try {
             jsonData = new JsonParser().parse(data).getAsJsonObject();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return cards;
         }
@@ -151,6 +147,11 @@ public class UrlManager {
             }
 //            String position = scholar.get("position").getAsString();
             boolean passed = scholar.get("is_passedaway").getAsBoolean();
+            if (type.equals("追忆学者")) {
+                if (!passed) continue;
+            } else {
+                if (passed) continue;
+            }
             JsonObject profileObj = scholar.get("profile").getAsJsonObject();
             String position = getString(profileObj, "position");
             Map<String, String> profile = new LinkedHashMap<>();
