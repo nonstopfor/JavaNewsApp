@@ -110,7 +110,7 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
             isFirstLoad = false;
         }
         //刷新已读新闻的显示
-        if(!(type.equals("history") || type.equals("知疫学者") || type.equals("知识图谱"))){
+        if(!(type.equals("history") || type.equals("高关注学者") || type.equals("追忆学者")|| type.equals("知识图谱"))){
             //System.out.println("type = "+type);
             adapter.notifyDataSetChanged();
         }
