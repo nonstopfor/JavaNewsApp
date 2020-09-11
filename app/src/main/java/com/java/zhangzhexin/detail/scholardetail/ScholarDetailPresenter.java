@@ -14,8 +14,8 @@ public class ScholarDetailPresenter extends BasePresenter<ScholarDetailView> {
     public ScholarDetailPresenter(){}
 
     public void setScholar(int scholar_id,boolean passed) {
-        //FIXME:区分
-        myView.setView(ScholarManager.getScholar(scholar_id));
+        //System.out.println("在详情页的presenter中，passed = "+passed);
+        myView.setView(ScholarManager.getScholar(scholar_id,passed));
 
     }
 }
