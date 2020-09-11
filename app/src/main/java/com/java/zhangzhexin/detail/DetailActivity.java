@@ -134,7 +134,7 @@ public class DetailActivity extends AppCompatActivity implements WbShareCallback
         setContentView(R.layout.activity_detail);
         initFragment();
 
-        initWeibo();
+        //initWeibo();
         initWX();
 
         weixinButton = findViewById(R.id.weixinShareButton);

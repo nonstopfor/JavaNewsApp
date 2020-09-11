@@ -109,6 +109,11 @@ public abstract class MyListFragment<VH extends RecyclerView.ViewHolder,Adapter 
             myPresenter.refreshData(13);
             isFirstLoad = false;
         }
+        //刷新字的显示
+        if(!(type.equals("history") || type.equals("知疫学者") || type.equals("知识图谱"))){
+            //System.out.println("type = "+type);
+            adapter.notifyDataSetChanged();
+        }
     }
 
 

@@ -27,8 +27,8 @@ public class NewsListPresenter extends MyListPresenter<NewsDataManager,NewsCard>
 
     @Override
     public void openDetail(View view, NewsCard card) {
-        TextView title = view.findViewById(R.id.news_title);
-        ((NewsListView)myView).setColor(title);
+        //TextView title = view.findViewById(R.id.news_title);
+        //((NewsListView)myView).setColor(title);
         Intent intent = new Intent(myView.getMyContext(), DetailActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         intent.putExtra("type","news");
