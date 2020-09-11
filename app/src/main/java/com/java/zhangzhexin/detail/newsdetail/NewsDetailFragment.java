@@ -28,10 +28,10 @@ public class NewsDetailFragment extends BaseFragment<NewsDetailView,NewsDetailPr
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        System.out.println("ListFragment : "+type+" onCreateView");
+//        System.out.println("ListFragment : "+type+" onCreateView");
         if(view == null)
         {
-            System.out.println("ListFragment: "+type+" view为空");
+//            System.out.println("ListFragment: "+type+" view为空");
             view = inflater.inflate(R.layout.detail_news, container, false);
             initView();
         }
@@ -51,7 +51,7 @@ public class NewsDetailFragment extends BaseFragment<NewsDetailView,NewsDetailPr
 
     @Override
     public void onResume() {
-        System.out.println("新闻详情页onResume");
+//        System.out.println("新闻详情页onResume");
         super.onResume();
     }
 
@@ -78,7 +78,7 @@ public class NewsDetailFragment extends BaseFragment<NewsDetailView,NewsDetailPr
     @Override
     public void setView(SingleNews news) {
         current_news = news;
-        System.out.println("title = "+news.title);
+//        System.out.println("title = "+news.title);
         news_title.setText(news.title);
         news_content.setText(news.content);
         news_date.setText(news.time);

@@ -46,14 +46,14 @@ public class NewsListPresenter extends MyListPresenter<NewsDataManager,NewsCard>
                 e.printStackTrace();
             }
             assert (result != null);
-            System.out.println("新得到的数据是" + result);
+//            System.out.println("新得到的数据是" + result);
             myView.appendList(result);
         }
     }
 
     @Override
     public void refreshData(int size) {
-        System.out.println("refreshNews!");
+//        System.out.println("refreshNews!");
         List<NewsCard> result = null;
         try {
             if(keyword.equals(""))

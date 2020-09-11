@@ -26,6 +26,6 @@ public class EntityCard extends BaseCard {
     }
 
     public void display() {
-        System.out.println("label:" + label + "\ndescription:" + description + "\nhot:" + hot + "\nimgUrl:" + imgUrl);
+//        System.out.println("label:" + label + "\ndescription:" + description + "\nhot:" + hot + "\nimgUrl:" + imgUrl);
     }
 }

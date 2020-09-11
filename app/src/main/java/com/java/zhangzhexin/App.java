@@ -21,7 +21,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        System.out.println("App start!");
+//        System.out.println("App start!");
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "news-db");
         Database db = helper.getWritableDb();
 
@@ -44,7 +44,7 @@ public class App extends Application {
                     }
 //                        NewsSearchManager.preDownloadNewsList = UrlManager.getNewsList("news", 1, 1000);
                     NewsSearchManager.preDownloadNewsList.addAll(cards);
-                    System.out.println("download page:" + page);
+//                    System.out.println("download page:" + page);
 //                        System.out.println("cards.size:" + cards.size());
                     if (cards.isEmpty()) {
                         if (page > 100) break;
@@ -54,7 +54,7 @@ public class App extends Application {
                 }
                 long endTime = System.currentTimeMillis();
 
-                System.out.println("finish thread run, took " + (endTime - startTime) + " ms");
+//                System.out.println("finish thread run, took " + (endTime - startTime) + " ms");
             }
         }.start();
 

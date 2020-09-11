@@ -36,7 +36,7 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        System.out.println("学者页 : " + type + " onCreateView");
+//        System.out.println("学者页 : " + type + " onCreateView");
 //        if (view == null) {
 //            System.out.println("ListFragment: " + type + " view为空");
 //            view = inflater.inflate(R.layout.detail_entity, container, false);
@@ -72,7 +72,7 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
 
     @Override
     public void onResume() {
-        System.out.println("学者详情页onResume");
+//        System.out.println("学者详情页onResume");
         super.onResume();
     }
 
@@ -87,7 +87,7 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
 
     @Override
     public void setView(ScholarCard scholar) {
-        System.out.println("imgUrl = " + scholar.avatar);
+//        System.out.println("imgUrl = " + scholar.avatar);
         Glide.with(this).load(scholar.avatar).into(image);
         name.setText(scholar.name);
         position.setText(scholar.position);
@@ -102,7 +102,7 @@ public class ScholarDetailFragment extends BaseFragment<ScholarDetailView, Schol
 
         //Clear previous Sections
         while (groupListView.getSectionCount() > 0) {
-            System.out.println(groupListView.getSectionCount());
+//            System.out.println(groupListView.getSectionCount());
 //            if (mGroupListView.getSection(0) != null) {
 //                System.out.println("not null");
 //            }

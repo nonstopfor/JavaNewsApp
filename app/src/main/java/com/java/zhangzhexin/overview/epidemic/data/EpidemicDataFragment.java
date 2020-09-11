@@ -106,7 +106,7 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
 
     @Override
     public void onResume() {
-        System.out.println("疫情数据onResume");
+//        System.out.println("疫情数据onResume");
         super.onResume();
     }
 
@@ -193,7 +193,7 @@ public class EpidemicDataFragment extends BaseFragment<EpidemicDataView, Epidemi
         viewPortHandler.refresh(matrix, provinceBarChart, false);
 
         provinceBarChart.invalidate();
-        System.out.println("finish draw epidemic province data");
+//        System.out.println("finish draw epidemic province data");
 
     }
 

@@ -23,7 +23,7 @@ public class SetChannelActivity extends BaseActivity<SetChannelView, SetChannelP
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        System.out.println("分类列表onCreate");
+//        System.out.println("分类列表onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_channel);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -39,7 +39,7 @@ public class SetChannelActivity extends BaseActivity<SetChannelView, SetChannelP
         data = myPresenter.getData();
         adapter.setData(data);
         channelView.setStyleAdapter(adapter);
-        System.out.println("分类列表getData");
+//        System.out.println("分类列表getData");
     }
 
     //点击返回键
